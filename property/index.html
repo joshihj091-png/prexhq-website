@@ -20,6 +20,7 @@
   --midnight:#0B1426; --night:#121F3A; --night2:#16264A; --moon:#5B8CFF; --deep:#2F5FE0; --silver:#B8C2D1; --pearl:#F4F6FB;
   --white:#FFFFFF; --ink:#0B1426; --muted:#4F5B70; --line:#DDE3EC; --bubble:#E4EBFF;
   --radius:14px; --wrap:1160px;
+  --ground:#0A1326; --glow:#FFC96B; --win-off:#16243F;
 }
 *{box-sizing:border-box}
 html{scroll-behavior:smooth}
@@ -56,9 +57,35 @@ button{font:inherit}
 .nav .btn{color:var(--midnight)}
 
 /* Hero */
-.hero{background:var(--midnight);color:var(--pearl);overflow:hidden}
-.hero .wrap{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,440px);gap:64px;align-items:center;padding-top:64px;padding-bottom:88px}
-.hero h1{font-weight:700;font-size:clamp(46px,6.4vw,84px);line-height:1;letter-spacing:-.04em}
+.hero{position:relative;color:var(--pearl);overflow:hidden;isolation:isolate;
+  background:radial-gradient(900px 520px at 72% -12%,rgba(91,140,255,.20),transparent 62%),linear-gradient(180deg,#0B1426 0%,#0F1C37 62%,#15254A 100%)}
+.hero::before{content:"";position:absolute;inset:0 0 auto 0;height:70%;z-index:-1;pointer-events:none;opacity:.55;
+  background-image:radial-gradient(1.2px 1.2px at 6% 14%,#fff 50%,transparent 51%),radial-gradient(1px 1px at 18% 32%,#fff 50%,transparent 51%),radial-gradient(1.4px 1.4px at 29% 8%,#fff 50%,transparent 51%),radial-gradient(1px 1px at 41% 24%,#fff 50%,transparent 51%),radial-gradient(1.2px 1.2px at 53% 11%,#fff 50%,transparent 51%),radial-gradient(1px 1px at 62% 37%,#fff 50%,transparent 51%),radial-gradient(1.3px 1.3px at 88% 9%,#fff 50%,transparent 51%),radial-gradient(1px 1px at 94% 29%,#fff 50%,transparent 51%),radial-gradient(1px 1px at 12% 48%,#fff 50%,transparent 51%),radial-gradient(1.1px 1.1px at 47% 52%,#fff 50%,transparent 51%),radial-gradient(1px 1px at 79% 44%,#fff 50%,transparent 51%),radial-gradient(1.2px 1.2px at 35% 41%,#fff 50%,transparent 51%)}
+.moon{position:absolute;top:22px;right:max(10px,calc(50% - 700px));width:92px;height:92px;border-radius:50%;z-index:-1;
+  background:radial-gradient(circle at 38% 36%,#FFFFFF 0%,#E7EDFF 55%,#C9D6FF 100%);box-shadow:0 0 60px 12px rgba(91,140,255,.35),0 0 160px 40px rgba(91,140,255,.15)}
+.skyline{position:absolute;left:0;right:0;bottom:0;width:100%;height:210px;z-index:0;display:block}
+.skyline .b{fill:var(--ground)}
+.skyline .w{fill:var(--win-off)}
+.skyline .lit{fill:var(--glow);animation:lightsout .7s ease-in forwards;animation-delay:var(--d)}
+.skyline .late{fill:var(--glow);opacity:.9}
+@keyframes lightsout{to{fill:var(--win-off)}}
+.rooftop{position:absolute;inset:auto 0 0 0;height:330px;z-index:1;pointer-events:none}
+.rooftop .wrap{position:relative;height:100%}
+.ask{position:absolute;display:flex;flex-direction:column;align-items:flex-start;gap:6px;opacity:0;animation:rise .45s ease-out forwards}
+.ask p{background:var(--white);color:var(--ink);font-size:14px;line-height:1.35;padding:8px 12px;border-radius:14px;border-bottom-left-radius:4px;box-shadow:0 8px 24px rgba(0,0,0,.35);max-width:15em}
+.ask p time{display:block;font-size:11px;color:var(--muted);margin-top:2px}
+.ask .done{display:inline-flex;align-items:center;gap:7px;font-size:12.5px;font-weight:600;color:var(--midnight);background:var(--moon);border-radius:999px;padding:4px 10px 4px 8px;opacity:0;animation:rise .35s ease-out forwards}
+.ask .done svg{width:26px;height:auto;fill:var(--midnight)}
+.ask.a1{left:24px;bottom:104px;animation-delay:2.5s}.ask.a1 .done{animation-delay:3.3s}
+.ask.a2{left:250px;bottom:132px;animation-delay:3.1s}.ask.a2 .done{animation-delay:3.9s}
+.ask.a3{left:470px;bottom:92px;animation-delay:3.7s}.ask.a3 .done{animation-delay:4.5s}
+@keyframes rise{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+.now{font-family:Sora,sans-serif;font-weight:600;font-size:clamp(16px,1.5vw,19px);color:var(--silver);margin-bottom:22px;letter-spacing:-.01em}
+.now time{color:var(--glow)}
+.hero>.wrap{position:relative;z-index:2;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,440px);gap:64px;align-items:start;padding-top:48px;padding-bottom:120px}
+.hero h1{font-weight:700;font-size:clamp(44px,5.6vw,76px);line-height:1;letter-spacing:-.04em}
+.hero.long h1{font-size:clamp(40px,4.6vw,62px);line-height:1.04}
+.hero.long>.wrap{padding-bottom:250px}
 .hero .lead{font-size:clamp(18px,1.6vw,21px);color:var(--silver);max-width:33em;margin-top:26px}
 .hero .actions{display:flex;flex-wrap:wrap;gap:12px;margin-top:36px}
 .hero .note{margin-top:18px;font-size:15px;color:var(--silver)}
@@ -72,7 +99,7 @@ button{font:inherit}
 .demo-tabs button{flex:1;min-height:40px;border:0;border-radius:10px;background:transparent;color:var(--silver);font-size:14.5px;font-weight:500;cursor:pointer}
 .demo-tabs button[aria-selected="true"]{background:var(--moon);color:var(--midnight);font-weight:600}
 .phone{background:#0F1A31;border:1px solid rgba(184,194,209,.18);border-radius:40px;padding:11px;box-shadow:0 30px 80px rgba(0,0,0,.45)}
-.screen{background:var(--pearl);border-radius:30px;overflow:hidden;color:var(--ink);display:flex;flex-direction:column;height:560px}
+.screen{background:var(--pearl);border-radius:30px;overflow:hidden;color:var(--ink);display:flex;flex-direction:column;height:480px}
 .chat-head{display:flex;align-items:center;gap:12px;padding:14px 18px;background:var(--white);border-bottom:1px solid var(--line);flex:none}
 .avatar{width:38px;height:38px;border-radius:50%;background:var(--midnight);display:grid;place-items:center;flex:none}
 .avatar svg{width:24px;height:auto}
@@ -97,6 +124,25 @@ button{font:inherit}
 .replies button:hover{background:var(--bubble)}
 .replies .again{background:var(--deep);color:var(--white);border-color:var(--deep)}
 .demo-caption{text-align:center;font-size:13px;color:var(--silver)}
+
+/* After-hours feed */
+.feed{background:var(--ground);color:var(--pearl);padding:24px 0 96px}
+.feed h2{font-weight:600;font-size:clamp(30px,3.6vw,46px);line-height:1.1;letter-spacing:-.03em;max-width:17em}
+.feed .intro{color:var(--silver);font-size:18px;max-width:36em;margin-top:16px}
+.feed-grid{margin-top:44px;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:18px}
+.chatlet{background:#101C36;border:1px solid rgba(184,194,209,.13);border-radius:20px;padding:18px 16px 16px;display:flex;flex-direction:column;gap:10px}
+.chatlet header{display:flex;justify-content:space-between;align-items:baseline;gap:10px;font-size:13.5px;color:var(--silver)}
+.chatlet header b{color:var(--pearl);font-weight:600}
+.chatlet header time{color:var(--glow);font-family:Sora,sans-serif;font-weight:600}
+.chatlet .q,.chatlet .a{font-size:15px;line-height:1.45;padding:9px 12px;border-radius:14px;max-width:92%}
+.chatlet .q{align-self:flex-start;background:var(--white);color:var(--ink);border-top-left-radius:4px}
+.chatlet .a{align-self:flex-end;background:var(--bubble);color:var(--ink);border-top-right-radius:4px}
+.chatlet [dir=rtl].q{align-self:flex-end;border-top-left-radius:14px;border-top-right-radius:4px}
+.chatlet [dir=rtl].a{align-self:flex-start;border-top-right-radius:14px;border-top-left-radius:4px}
+.chatlet footer{margin-top:auto;padding-top:6px;font-size:13px;color:var(--silver)}
+.feed .note{margin-top:22px;font-size:14px;color:var(--silver)}
+.horizon{height:200px;background:radial-gradient(60% 130% at 50% 100%,rgba(255,201,107,.42) 0%,rgba(255,201,107,0) 62%),linear-gradient(180deg,var(--ground) 0%,#22335F 34%,#8D9CC6 70%,var(--pearl) 100%)}
+.handover{padding-top:56px}
 
 /* Sections */
 section{scroll-margin-top:80px}
@@ -202,7 +248,8 @@ section{scroll-margin-top:80px}
 .faq-list details p{color:var(--muted);padding:0 0 22px;max-width:42em}
 
 /* Closing */
-.closing{text-align:center}
+.closing{text-align:center;position:relative;overflow:hidden;padding-bottom:250px;background:linear-gradient(180deg,var(--midnight) 0%,#15254A 100%)}
+.closing .skyline{height:180px}
 .closing h2{margin:0 auto;max-width:14em}
 .closing .intro{margin:16px auto 0}
 .closing .actions{display:flex;flex-wrap:wrap;gap:12px;justify-content:center;margin-top:32px}
@@ -219,7 +266,10 @@ section{scroll-margin-top:80px}
 
 /* Responsive */
 @media (max-width:1000px){
-  .hero .wrap{grid-template-columns:minmax(0,1fr);gap:48px;padding-top:44px;padding-bottom:64px}
+  .hero>.wrap{grid-template-columns:minmax(0,1fr);gap:48px;padding-top:44px;padding-bottom:150px}
+  .rooftop,.moon{display:none}
+  .skyline{height:150px}
+  .feed-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
   .demo{max-width:440px;width:100%;margin:0 auto}
   .calc .wrap,.handover .wrap,.offer .wrap{grid-template-columns:minmax(0,1fr);gap:40px}
   .result{position:static}
@@ -236,11 +286,19 @@ section{scroll-margin-top:80px}
   .hero .actions .btn{width:100%}
   .facts li{grid-template-columns:minmax(0,1fr);gap:2px}
   .lead-card,.result,.offer-card{padding:22px}
+  .feed-grid{grid-template-columns:minmax(0,1fr)}
+  .skyline{height:110px}
+  .hero>.wrap{padding-bottom:110px}
+  .horizon{height:130px}
+  .closing{padding-bottom:150px}
+  .closing .skyline{height:110px}
   .screen{height:520px}
 }
 @media (prefers-reduced-motion:reduce){
   .typing .m{animation:none;opacity:1}
   .msg,.sys{animation:none}
+  .skyline .lit{animation:none;fill:var(--win-off)}
+  .ask,.ask .done{animation:none;opacity:1}
   .chat{scroll-behavior:auto}
 }
 </style>
@@ -262,21 +320,17 @@ section{scroll-margin-top:80px}
 </header>
 
 <main id="main">
-  <section class="hero" id="try" aria-labelledby="hero-title">
+  <section class="hero long" id="try" aria-labelledby="hero-title">
     <div class="wrap">
       <div>
+        <p class="now" id="now">Customers message businesses at every hour.</p>
         <h1 id="hero-title">Every property enquiry, answered in a minute.</h1>
         <p class="lead">Buyers and tenants message several agencies at once, often late at night, and the first one to answer usually gets the viewing. Prex answers every enquiry from your listings and ads on WhatsApp, asks what your agents would ask, books the viewing and hands the lead to the right agent.</p>
         <div class="actions">
           <a class="btn btn-moon" href="mailto:contact@prexhq.com?subject=Free%20pilot%20request&amp;body=Business%20name%3A%0AField%3A%20Property%0ACity%20and%20country%3A%0ARoughly%20how%20many%20enquiries%20you%20get%20each%20week%3A%0A%0APaste%20up%20to%2020%20recent%20customer%20questions%20below.%20Please%20remove%20names%20and%20phone%20numbers%20first.%0A%0A">Get a free pilot</a>
           <a class="btn btn-ghost" href="#calculator">See what slow replies cost you</a>
         </div>
-        <p class="note">Try the demo on the right. Message the real Prex on WhatsApp from <strong>30 November</strong>.</p>
-        <div class="facts-row">
-          <span><b>Under a minute</b>, every reply</span>
-          <span><b>Day and night</b>, every day</span>
-          <span><b>Set up for you</b>, nothing to learn</span>
-        </div>
+        <p class="note">Try the demo here. Message the real Prex on WhatsApp from <strong>30 November</strong>.</p>
       </div>
 
       <div class="demo" id="demo">
@@ -294,6 +348,77 @@ section{scroll-margin-top:80px}
           </div>
         </div>
         <p class="demo-caption">A demo with example details. Your Prex is set up with your own products, prices and team.</p>
+      </div>
+    </div>
+    <div class="moon" aria-hidden="true"></div>
+    <svg class="skyline" viewBox="0 0 1440 220" preserveAspectRatio="xMidYMax slice" aria-hidden="true" focusable="false"><rect class="b" x="0" y="118" width="70" height="102"/><rect class="w lit" style="--d:2.19s" x="9" y="130" width="6" height="8"/><rect class="w lit" style="--d:1.64s" x="23" y="130" width="6" height="8"/><rect class="w lit" style="--d:0.5s" x="51" y="130" width="6" height="8"/><rect class="w lit" style="--d:1.57s" x="23" y="146" width="6" height="8"/><rect class="w lit" style="--d:1.6s" x="37" y="146" width="6" height="8"/><rect class="w lit" style="--d:1.65s" x="37" y="162" width="6" height="8"/><rect class="w lit" style="--d:0.81s" x="51" y="162" width="6" height="8"/><rect class="w lit" style="--d:1.26s" x="23" y="178" width="6" height="8"/><rect class="w lit" style="--d:1.61s" x="37" y="194" width="6" height="8"/><rect class="w lit" style="--d:0.52s" x="51" y="194" width="6" height="8"/><rect class="b" x="78" y="76" width="126" height="144"/><rect class="w lit" style="--d:0.71s" x="115" y="88" width="6" height="8"/><rect class="w lit" style="--d:0.99s" x="143" y="88" width="6" height="8"/><rect class="w late" x="171" y="88" width="6" height="8"/><rect class="w lit" style="--d:1.48s" x="101" y="104" width="6" height="8"/><rect class="w lit" style="--d:1.09s" x="115" y="104" width="6" height="8"/><rect class="w lit" style="--d:1.58s" x="171" y="104" width="6" height="8"/><rect class="w late" x="101" y="120" width="6" height="8"/><rect class="w lit" style="--d:0.52s" x="157" y="120" width="6" height="8"/><rect class="w lit" style="--d:1.9s" x="171" y="120" width="6" height="8"/><rect class="w lit" style="--d:1.98s" x="185" y="120" width="6" height="8"/><rect class="w late" x="87" y="136" width="6" height="8"/><rect class="w lit" style="--d:0.96s" x="129" y="152" width="6" height="8"/><rect class="w lit" style="--d:1.22s" x="87" y="168" width="6" height="8"/><rect class="w lit" style="--d:0.61s" x="101" y="168" width="6" height="8"/><rect class="w lit" style="--d:0.49s" x="87" y="184" width="6" height="8"/><rect class="w lit" style="--d:1.81s" x="101" y="184" width="6" height="8"/><rect class="w lit" style="--d:2.21s" x="115" y="184" width="6" height="8"/><rect class="w lit" style="--d:0.95s" x="129" y="184" width="6" height="8"/><rect class="w lit" style="--d:1.53s" x="143" y="184" width="6" height="8"/><rect class="w late" x="171" y="184" width="6" height="8"/><rect class="w lit" style="--d:2.28s" x="185" y="184" width="6" height="8"/><rect class="b" x="212" y="56" width="84" height="164"/><rect class="b" x="251" y="42" width="6" height="14"/><rect class="w lit" style="--d:0.45s" x="235" y="68" width="6" height="8"/><rect class="w lit" style="--d:0.67s" x="249" y="68" width="6" height="8"/><rect class="w late" x="263" y="68" width="6" height="8"/><rect class="w lit" style="--d:0.3s" x="277" y="68" width="6" height="8"/><rect class="w lit" style="--d:0.53s" x="221" y="84" width="6" height="8"/><rect class="w lit" style="--d:2.31s" x="249" y="84" width="6" height="8"/><rect class="w lit" style="--d:0.88s" x="277" y="84" width="6" height="8"/><rect class="w lit" style="--d:2.25s" x="249" y="100" width="6" height="8"/><rect class="w lit" style="--d:0.54s" x="235" y="116" width="6" height="8"/><rect class="w late" x="249" y="116" width="6" height="8"/><rect class="w lit" style="--d:2.21s" x="263" y="116" width="6" height="8"/><rect class="w lit" style="--d:0.35s" x="277" y="116" width="6" height="8"/><rect class="w lit" style="--d:1.55s" x="249" y="132" width="6" height="8"/><rect class="w lit" style="--d:1.51s" x="263" y="132" width="6" height="8"/><rect class="w lit" style="--d:1.14s" x="249" y="148" width="6" height="8"/><rect class="w lit" style="--d:2.08s" x="263" y="148" width="6" height="8"/><rect class="w late" x="235" y="164" width="6" height="8"/><rect class="w lit" style="--d:2.17s" x="249" y="164" width="6" height="8"/><rect class="w lit" style="--d:1.49s" x="263" y="180" width="6" height="8"/><rect class="w lit" style="--d:0.36s" x="221" y="196" width="6" height="8"/><rect class="w lit" style="--d:0.9s" x="235" y="196" width="6" height="8"/><rect class="w lit" style="--d:0.82s" x="277" y="212" width="6" height="8"/><rect class="b" x="296" y="104" width="70" height="116"/><rect class="w lit" style="--d:2.39s" x="333" y="116" width="6" height="8"/><rect class="w late" x="347" y="116" width="6" height="8"/><rect class="w lit" style="--d:1.19s" x="333" y="132" width="6" height="8"/><rect class="w lit" style="--d:2.34s" x="305" y="148" width="6" height="8"/><rect class="w lit" style="--d:2.48s" x="347" y="148" width="6" height="8"/><rect class="w lit" style="--d:0.67s" x="347" y="164" width="6" height="8"/><rect class="w lit" style="--d:1.66s" x="319" y="180" width="6" height="8"/><rect class="w lit" style="--d:1.56s" x="305" y="212" width="6" height="8"/><rect class="w lit" style="--d:2.14s" x="319" y="212" width="6" height="8"/><rect class="w lit" style="--d:2.02s" x="347" y="212" width="6" height="8"/><rect class="b" x="366" y="107" width="84" height="113"/><rect class="w lit" style="--d:0.88s" x="375" y="119" width="6" height="8"/><rect class="w lit" style="--d:0.85s" x="389" y="119" width="6" height="8"/><rect class="w lit" style="--d:1.26s" x="417" y="119" width="6" height="8"/><rect class="w lit" style="--d:2.39s" x="431" y="119" width="6" height="8"/><rect class="w lit" style="--d:1.31s" x="431" y="151" width="6" height="8"/><rect class="w lit" style="--d:0.31s" x="375" y="167" width="6" height="8"/><rect class="w lit" style="--d:1.39s" x="403" y="167" width="6" height="8"/><rect class="w late" x="375" y="183" width="6" height="8"/><rect class="w lit" style="--d:1.59s" x="431" y="183" width="6" height="8"/><rect class="w lit" style="--d:0.94s" x="375" y="199" width="6" height="8"/><rect class="b" x="450" y="73" width="84" height="147"/><rect class="w lit" style="--d:1.59s" x="459" y="117" width="6" height="8"/><rect class="w lit" style="--d:0.58s" x="501" y="117" width="6" height="8"/><rect class="w lit" style="--d:0.85s" x="459" y="133" width="6" height="8"/><rect class="w lit" style="--d:1.84s" x="473" y="133" width="6" height="8"/><rect class="w lit" style="--d:1.95s" x="515" y="133" width="6" height="8"/><rect class="w lit" style="--d:2.33s" x="473" y="149" width="6" height="8"/><rect class="w lit" style="--d:2.49s" x="501" y="149" width="6" height="8"/><rect class="w lit" style="--d:1.29s" x="501" y="165" width="6" height="8"/><rect class="w late" x="459" y="181" width="6" height="8"/><rect class="w lit" style="--d:1.03s" x="473" y="181" width="6" height="8"/><rect class="w lit" style="--d:1.57s" x="501" y="181" width="6" height="8"/><rect class="w lit" style="--d:1.06s" x="459" y="197" width="6" height="8"/><rect class="w lit" style="--d:2.57s" x="501" y="197" width="6" height="8"/><rect class="w lit" style="--d:0.91s" x="473" y="213" width="6" height="8"/><rect class="w lit" style="--d:2.09s" x="487" y="213" width="6" height="8"/><rect class="w lit" style="--d:0.6s" x="501" y="213" width="6" height="8"/><rect class="b" x="538" y="118" width="84" height="102"/><rect class="w late" x="575" y="130" width="6" height="8"/><rect class="w lit" style="--d:2.14s" x="589" y="130" width="6" height="8"/><rect class="w lit" style="--d:2.36s" x="603" y="130" width="6" height="8"/><rect class="w lit" style="--d:0.34s" x="547" y="146" width="6" height="8"/><rect class="w lit" style="--d:0.9s" x="561" y="146" width="6" height="8"/><rect class="w lit" style="--d:0.91s" x="589" y="146" width="6" height="8"/><rect class="w lit" style="--d:0.33s" x="603" y="146" width="6" height="8"/><rect class="w lit" style="--d:1.93s" x="603" y="162" width="6" height="8"/><rect class="w lit" style="--d:0.72s" x="575" y="178" width="6" height="8"/><rect class="w lit" style="--d:1.33s" x="561" y="194" width="6" height="8"/><rect class="w lit" style="--d:2.15s" x="589" y="194" width="6" height="8"/><rect class="w lit" style="--d:0.34s" x="547" y="210" width="6" height="8"/><rect class="w lit" style="--d:1.33s" x="603" y="210" width="6" height="8"/><rect class="b" x="630" y="30" width="110" height="190"/><rect class="w late" x="667" y="42" width="6" height="8"/><rect class="w lit" style="--d:0.83s" x="681" y="42" width="6" height="8"/><rect class="w lit" style="--d:2.33s" x="695" y="42" width="6" height="8"/><rect class="w lit" style="--d:2.58s" x="723" y="42" width="6" height="8"/><rect class="w lit" style="--d:1.74s" x="667" y="58" width="6" height="8"/><rect class="w lit" style="--d:1.83s" x="709" y="58" width="6" height="8"/><rect class="w lit" style="--d:0.73s" x="695" y="74" width="6" height="8"/><rect class="w lit" style="--d:0.31s" x="709" y="74" width="6" height="8"/><rect class="w late" x="639" y="90" width="6" height="8"/><rect class="w late" x="667" y="90" width="6" height="8"/><rect class="w lit" style="--d:2.33s" x="681" y="90" width="6" height="8"/><rect class="w lit" style="--d:0.72s" x="695" y="90" width="6" height="8"/><rect class="w late" x="709" y="90" width="6" height="8"/><rect class="w lit" style="--d:0.94s" x="723" y="90" width="6" height="8"/><rect class="w lit" style="--d:2.09s" x="653" y="106" width="6" height="8"/><rect class="w lit" style="--d:2.18s" x="667" y="106" width="6" height="8"/><rect class="w lit" style="--d:1.65s" x="681" y="106" width="6" height="8"/><rect class="w lit" style="--d:1.75s" x="709" y="106" width="6" height="8"/><rect class="w lit" style="--d:2.5s" x="723" y="106" width="6" height="8"/><rect class="w lit" style="--d:2.35s" x="653" y="122" width="6" height="8"/><rect class="w lit" style="--d:1.72s" x="639" y="138" width="6" height="8"/><rect class="w lit" style="--d:2.2s" x="653" y="138" width="6" height="8"/><rect class="w lit" style="--d:1.88s" x="695" y="154" width="6" height="8"/><rect class="w lit" style="--d:0.4s" x="667" y="170" width="6" height="8"/><rect class="w lit" style="--d:0.34s" x="639" y="186" width="6" height="8"/><rect class="w lit" style="--d:0.91s" x="667" y="186" width="6" height="8"/><rect class="w lit" style="--d:2.44s" x="695" y="186" width="6" height="8"/><rect class="w lit" style="--d:1.51s" x="723" y="186" width="6" height="8"/><rect class="w lit" style="--d:2.04s" x="695" y="202" width="6" height="8"/><rect class="w lit" style="--d:1.79s" x="709" y="202" width="6" height="8"/><rect class="b" x="748" y="34" width="54" height="186"/><rect class="w lit" style="--d:0.41s" x="757" y="46" width="6" height="8"/><rect class="w lit" style="--d:1.68s" x="785" y="46" width="6" height="8"/><rect class="w late" x="757" y="62" width="6" height="8"/><rect class="w lit" style="--d:1.41s" x="771" y="78" width="6" height="8"/><rect class="w lit" style="--d:0.8s" x="771" y="94" width="6" height="8"/><rect class="w lit" style="--d:1.37s" x="771" y="110" width="6" height="8"/><rect class="w late" x="785" y="126" width="6" height="8"/><rect class="w lit" style="--d:1.39s" x="757" y="142" width="6" height="8"/><rect class="w lit" style="--d:0.48s" x="771" y="142" width="6" height="8"/><rect class="w lit" style="--d:0.51s" x="785" y="174" width="6" height="8"/><rect class="w lit" style="--d:1.13s" x="771" y="190" width="6" height="8"/><rect class="w lit" style="--d:0.56s" x="771" y="206" width="6" height="8"/><rect class="b" x="810" y="56" width="84" height="164"/><rect class="b" x="849" y="42" width="6" height="14"/><rect class="w lit" style="--d:1.43s" x="819" y="68" width="6" height="8"/><rect class="w late" x="847" y="68" width="6" height="8"/><rect class="w lit" style="--d:1.09s" x="861" y="68" width="6" height="8"/><rect class="w late" x="875" y="68" width="6" height="8"/><rect class="w lit" style="--d:2.03s" x="833" y="84" width="6" height="8"/><rect class="w lit" style="--d:2.43s" x="861" y="84" width="6" height="8"/><rect class="w lit" style="--d:1.16s" x="833" y="100" width="6" height="8"/><rect class="w lit" style="--d:0.41s" x="847" y="116" width="6" height="8"/><rect class="w lit" style="--d:2.22s" x="861" y="116" width="6" height="8"/><rect class="w lit" style="--d:2.45s" x="875" y="116" width="6" height="8"/><rect class="w lit" style="--d:0.91s" x="819" y="132" width="6" height="8"/><rect class="w lit" style="--d:1.16s" x="847" y="132" width="6" height="8"/><rect class="w lit" style="--d:1.98s" x="833" y="164" width="6" height="8"/><rect class="w lit" style="--d:0.41s" x="819" y="180" width="6" height="8"/><rect class="w lit" style="--d:1.39s" x="847" y="180" width="6" height="8"/><rect class="w late" x="861" y="180" width="6" height="8"/><rect class="w lit" style="--d:2.0s" x="875" y="180" width="6" height="8"/><rect class="w lit" style="--d:1.81s" x="833" y="196" width="6" height="8"/><rect class="w late" x="847" y="196" width="6" height="8"/><rect class="w lit" style="--d:0.67s" x="819" y="212" width="6" height="8"/><rect class="w lit" style="--d:2.38s" x="833" y="212" width="6" height="8"/><rect class="w lit" style="--d:2.38s" x="861" y="212" width="6" height="8"/><rect class="b" x="902" y="121" width="84" height="99"/><rect class="w lit" style="--d:0.7s" x="911" y="133" width="6" height="8"/><rect class="w late" x="939" y="133" width="6" height="8"/><rect class="w lit" style="--d:0.35s" x="911" y="149" width="6" height="8"/><rect class="w lit" style="--d:0.92s" x="967" y="149" width="6" height="8"/><rect class="w lit" style="--d:2.36s" x="953" y="181" width="6" height="8"/><rect class="w late" x="939" y="197" width="6" height="8"/><rect class="w lit" style="--d:1.28s" x="911" y="213" width="6" height="8"/><rect class="b" x="986" y="37" width="84" height="183"/><rect class="w lit" style="--d:0.55s" x="995" y="49" width="6" height="8"/><rect class="w lit" style="--d:1.5s" x="1009" y="49" width="6" height="8"/><rect class="w lit" style="--d:2.1s" x="1051" y="65" width="6" height="8"/><rect class="w lit" style="--d:2.42s" x="995" y="81" width="6" height="8"/><rect class="w late" x="1023" y="81" width="6" height="8"/><rect class="w lit" style="--d:0.88s" x="1037" y="81" width="6" height="8"/><rect class="w lit" style="--d:0.46s" x="1009" y="97" width="6" height="8"/><rect class="w lit" style="--d:1.68s" x="995" y="113" width="6" height="8"/><rect class="w lit" style="--d:0.99s" x="1009" y="113" width="6" height="8"/><rect class="w lit" style="--d:0.87s" x="1023" y="129" width="6" height="8"/><rect class="w late" x="995" y="145" width="6" height="8"/><rect class="w lit" style="--d:1.45s" x="1009" y="145" width="6" height="8"/><rect class="w lit" style="--d:1.83s" x="1051" y="145" width="6" height="8"/><rect class="w lit" style="--d:0.38s" x="1009" y="161" width="6" height="8"/><rect class="w late" x="1023" y="161" width="6" height="8"/><rect class="w lit" style="--d:2.13s" x="995" y="177" width="6" height="8"/><rect class="w lit" style="--d:2.53s" x="1037" y="177" width="6" height="8"/><rect class="w late" x="1051" y="177" width="6" height="8"/><rect class="w lit" style="--d:0.81s" x="1009" y="193" width="6" height="8"/><rect class="w lit" style="--d:2.49s" x="1037" y="193" width="6" height="8"/><rect class="w lit" style="--d:0.81s" x="995" y="209" width="6" height="8"/><rect class="w lit" style="--d:1.2s" x="1051" y="209" width="6" height="8"/><rect class="b" x="1070" y="120" width="54" height="100"/><rect class="w lit" style="--d:1.33s" x="1093" y="132" width="6" height="8"/><rect class="w late" x="1079" y="148" width="6" height="8"/><rect class="w lit" style="--d:0.48s" x="1093" y="148" width="6" height="8"/><rect class="w lit" style="--d:0.74s" x="1107" y="148" width="6" height="8"/><rect class="w late" x="1079" y="180" width="6" height="8"/><rect class="w lit" style="--d:0.48s" x="1107" y="196" width="6" height="8"/><rect class="w lit" style="--d:1.27s" x="1079" y="212" width="6" height="8"/><rect class="b" x="1124" y="65" width="84" height="155"/><rect class="w late" x="1133" y="77" width="6" height="8"/><rect class="w lit" style="--d:1.92s" x="1161" y="77" width="6" height="8"/><rect class="w lit" style="--d:1.55s" x="1175" y="77" width="6" height="8"/><rect class="w late" x="1133" y="93" width="6" height="8"/><rect class="w lit" style="--d:1.74s" x="1189" y="93" width="6" height="8"/><rect class="w lit" style="--d:0.75s" x="1189" y="109" width="6" height="8"/><rect class="w lit" style="--d:1.69s" x="1133" y="125" width="6" height="8"/><rect class="w late" x="1161" y="125" width="6" height="8"/><rect class="w lit" style="--d:2.02s" x="1189" y="125" width="6" height="8"/><rect class="w lit" style="--d:1.96s" x="1161" y="141" width="6" height="8"/><rect class="w lit" style="--d:2.2s" x="1147" y="157" width="6" height="8"/><rect class="w lit" style="--d:1.95s" x="1161" y="157" width="6" height="8"/><rect class="w lit" style="--d:1.44s" x="1175" y="173" width="6" height="8"/><rect class="w lit" style="--d:2.44s" x="1189" y="173" width="6" height="8"/><rect class="w late" x="1133" y="189" width="6" height="8"/><rect class="w lit" style="--d:0.84s" x="1161" y="189" width="6" height="8"/><rect class="w lit" style="--d:1.24s" x="1189" y="205" width="6" height="8"/><rect class="b" x="1208" y="73" width="84" height="147"/><rect class="b" x="1247" y="59" width="6" height="14"/><rect class="w lit" style="--d:0.47s" x="1231" y="85" width="6" height="8"/><rect class="w lit" style="--d:1.27s" x="1259" y="85" width="6" height="8"/><rect class="w lit" style="--d:0.61s" x="1231" y="101" width="6" height="8"/><rect class="w lit" style="--d:1.54s" x="1273" y="101" width="6" height="8"/><rect class="w lit" style="--d:0.94s" x="1259" y="117" width="6" height="8"/><rect class="w lit" style="--d:0.88s" x="1273" y="117" width="6" height="8"/><rect class="w lit" style="--d:1.31s" x="1217" y="133" width="6" height="8"/><rect class="w lit" style="--d:0.84s" x="1231" y="133" width="6" height="8"/><rect class="w lit" style="--d:2.39s" x="1245" y="133" width="6" height="8"/><rect class="w lit" style="--d:0.45s" x="1259" y="133" width="6" height="8"/><rect class="w lit" style="--d:0.87s" x="1273" y="133" width="6" height="8"/><rect class="w lit" style="--d:1.37s" x="1245" y="149" width="6" height="8"/><rect class="w lit" style="--d:0.31s" x="1259" y="149" width="6" height="8"/><rect class="w lit" style="--d:1.33s" x="1217" y="165" width="6" height="8"/><rect class="w lit" style="--d:0.42s" x="1259" y="165" width="6" height="8"/><rect class="w lit" style="--d:0.47s" x="1231" y="181" width="6" height="8"/><rect class="w lit" style="--d:1.69s" x="1259" y="181" width="6" height="8"/><rect class="w lit" style="--d:1.77s" x="1231" y="197" width="6" height="8"/><rect class="w lit" style="--d:1.08s" x="1273" y="197" width="6" height="8"/><rect class="w lit" style="--d:2.6s" x="1217" y="213" width="6" height="8"/><rect class="w lit" style="--d:1.98s" x="1231" y="213" width="6" height="8"/><rect class="b" x="1300" y="61" width="110" height="159"/><rect class="b" x="1352" y="47" width="6" height="14"/><rect class="w late" x="1309" y="73" width="6" height="8"/><rect class="w lit" style="--d:2.13s" x="1323" y="73" width="6" height="8"/><rect class="w lit" style="--d:0.53s" x="1351" y="73" width="6" height="8"/><rect class="w lit" style="--d:0.68s" x="1309" y="89" width="6" height="8"/><rect class="w lit" style="--d:1.01s" x="1351" y="89" width="6" height="8"/><rect class="w late" x="1379" y="89" width="6" height="8"/><rect class="w lit" style="--d:1.97s" x="1379" y="105" width="6" height="8"/><rect class="w lit" style="--d:0.31s" x="1393" y="105" width="6" height="8"/><rect class="w lit" style="--d:0.33s" x="1393" y="121" width="6" height="8"/><rect class="w lit" style="--d:1.73s" x="1351" y="137" width="6" height="8"/><rect class="w lit" style="--d:0.95s" x="1393" y="137" width="6" height="8"/><rect class="w lit" style="--d:1.43s" x="1337" y="153" width="6" height="8"/><rect class="w lit" style="--d:0.59s" x="1379" y="153" width="6" height="8"/><rect class="w lit" style="--d:2.43s" x="1337" y="169" width="6" height="8"/><rect class="w lit" style="--d:2.11s" x="1309" y="185" width="6" height="8"/><rect class="w lit" style="--d:1.23s" x="1323" y="185" width="6" height="8"/><rect class="w lit" style="--d:0.8s" x="1365" y="185" width="6" height="8"/><rect class="w lit" style="--d:0.87s" x="1323" y="201" width="6" height="8"/><rect class="w lit" style="--d:1.59s" x="1365" y="201" width="6" height="8"/><rect class="w lit" style="--d:2.23s" x="1393" y="201" width="6" height="8"/><rect class="b" x="1410" y="40" width="84" height="180"/><rect class="w late" x="1433" y="52" width="6" height="8"/><rect class="w lit" style="--d:1.72s" x="1461" y="68" width="6" height="8"/><rect class="w lit" style="--d:2.06s" x="1419" y="84" width="6" height="8"/><rect class="w lit" style="--d:1.39s" x="1461" y="84" width="6" height="8"/><rect class="w lit" style="--d:0.6s" x="1475" y="84" width="6" height="8"/><rect class="w lit" style="--d:1.32s" x="1433" y="100" width="6" height="8"/><rect class="w lit" style="--d:1.76s" x="1461" y="100" width="6" height="8"/><rect class="w lit" style="--d:1.99s" x="1475" y="100" width="6" height="8"/><rect class="w lit" style="--d:1.46s" x="1447" y="116" width="6" height="8"/><rect class="w lit" style="--d:2.27s" x="1419" y="132" width="6" height="8"/><rect class="w lit" style="--d:2.56s" x="1475" y="132" width="6" height="8"/><rect class="w lit" style="--d:2.11s" x="1461" y="148" width="6" height="8"/><rect class="w lit" style="--d:1.11s" x="1419" y="164" width="6" height="8"/><rect class="w lit" style="--d:2.36s" x="1447" y="164" width="6" height="8"/><rect class="w lit" style="--d:2.18s" x="1461" y="164" width="6" height="8"/><rect class="w lit" style="--d:1.46s" x="1475" y="164" width="6" height="8"/><rect class="w lit" style="--d:0.9s" x="1433" y="180" width="6" height="8"/><rect class="w late" x="1461" y="180" width="6" height="8"/><rect class="w lit" style="--d:0.72s" x="1475" y="180" width="6" height="8"/><rect class="w lit" style="--d:2.45s" x="1419" y="196" width="6" height="8"/><rect class="w lit" style="--d:2.11s" x="1461" y="196" width="6" height="8"/><rect class="w lit" style="--d:1.52s" x="1475" y="196" width="6" height="8"/></svg>
+    <div class="rooftop" aria-hidden="true">
+      <div class="wrap">
+        <div class="ask a1"><p>Is the flat still available?<time>23:47</time></p><span class="done"><svg viewBox="20 27 80 32" aria-hidden="true" focusable="false"><path class="m m1" d="M27 33A10 10 0 0 1 27 53Z"/><circle class="m m2" cx="60" cy="43" r="14"/><path class="m m3" d="M93 33A10 10 0 0 0 93 53Z"/></svg>Prex replied</span></div>
+        <div class="ask a2"><p>Fee kati ho?<time>23:52</time></p><span class="done"><svg viewBox="20 27 80 32" aria-hidden="true" focusable="false"><path class="m m1" d="M27 33A10 10 0 0 1 27 53Z"/><circle class="m m2" cx="60" cy="43" r="14"/><path class="m m3" d="M93 33A10 10 0 0 0 93 53Z"/></svg>Prex replied</span></div>
+        <div class="ask a3"><p dir="rtl" lang="ar">هل لديكم موعد غداً؟<time>00:12</time></p><span class="done"><svg viewBox="20 27 80 32" aria-hidden="true" focusable="false"><path class="m m1" d="M27 33A10 10 0 0 1 27 53Z"/><circle class="m m2" cx="60" cy="43" r="14"/><path class="m m3" d="M93 33A10 10 0 0 0 93 53Z"/></svg>Prex replied</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="feed" aria-labelledby="feed-title">
+    <div class="wrap">
+      <h2 id="feed-title" class="feed-title">While your team sleeps, Prex answers.</h2>
+      <p class="intro">The kind of questions businesses get after hours, answered in the language each customer writes in.</p>
+      <div class="feed-grid">
+        <article class="chatlet">
+          <header><b>Property agency</b><time>23:47</time></header>
+          <p class="q">Is the 2-bedroom near the metro still available?</p>
+          <p class="a">Yes, it is: 2 bedrooms, 2 bathrooms, 5 minutes from the metro. Are you looking to buy or rent?</p>
+          <footer>English</footer>
+        </article>
+        <article class="chatlet">
+          <header><b>Education consultancy</b><time>22:10</time></header>
+          <p class="q" lang="ne-Latn">Australia ko lagi IELTS kati chahinchha?</p>
+          <p class="a" lang="ne-Latn">University ra course anusar farak parchha. Tapai bachelor ko lagi ho ki master ko lagi?</p>
+          <footer>Romanised Nepali</footer>
+        </article>
+        <article class="chatlet">
+          <header><b>Dental clinic</b><time>00:12</time></header>
+          <p class="q" dir="rtl" lang="ar">هل لديكم موعد متاح غداً؟</p>
+          <p class="a" dir="rtl" lang="ar">نعم، لدينا موعد الساعة 10:30 صباحاً أو 5:00 مساءً. أيهما يناسبك؟</p>
+          <footer>Arabic</footer>
+        </article>
+        <article class="chatlet">
+          <header><b>Car rental</b><time>05:40</time></header>
+          <p class="q" lang="hi">क्या कल सुबह एयरपोर्ट पिकअप मिल सकता है?</p>
+          <p class="a" lang="hi">जी हाँ! आपकी फ्लाइट किस समय पहुँचती है?</p>
+          <footer>Hindi</footer>
+        </article>
+      </div>
+      <p class="note">Example conversations. Every Prex is set up with the business's own details, and answers only what the business has approved.</p>
+    </div>
+  </section>
+  <div class="horizon" aria-hidden="true"></div>
+
+  <section class="band handover" aria-labelledby="handover-title">
+    <div class="wrap">
+      <div>
+        <h2 id="handover-title">By morning, your team knows exactly who to call.</h2>
+        <p class="intro">Prex doesn't replace your people. It makes sure no enquiry waits, then passes each lead on with the details already collected.</p>
+        <ul class="facts">
+          <li><b>Answered</b><span>In under a minute, at any hour, including enquiries from your listings and click-to-WhatsApp ads.</span></li>
+          <li><b>Qualified</b><span>Buy or rent, budget, area, bedrooms, timing and how they plan to pay.</span></li>
+          <li><b>Booked</b><span>A viewing at a time that suits the agent who covers that area.</span></li>
+          <li><b>Handed over</b><span>A short summary goes to the right agent, ready to follow up.</span></li>
+        </ul>
+      </div>
+      <div class="lead-card" aria-label="Example lead summary sent to an agent">
+        <div class="from"><span class="avatar" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="4 10 112 86" aria-hidden="true" focusable="false"><g fill="#5B8CFF"><path fill-rule="evenodd" d="M37 12H83A31 31 0 0 1 83 74H37A31 31 0 0 1 37 12ZM27 33A10 10 0 0 1 27 53ZM46 43A14 14 0 1 0 74 43A14 14 0 1 0 46 43ZM93 33A10 10 0 0 0 93 53Z"/><path d="M22 62Q24 84 10 94Q36 92 50 72Z"/></g></svg></span>New lead from Prex, to Sam</div>
+        <h3>Sara wants to buy a 2-bedroom apartment</h3>
+        <dl>
+          <dt>Looking for</dt><dd>2 bedrooms, close to the city centre</dd>
+          <dt>Budget</dt><dd>Within the listed price</dd>
+          <dt>Timing</dt><dd>Buying, moving this month</dd>
+          <dt>Viewing</dt><dd>Saturday, 11:00</dd>
+          <dt>First message</dt><dd>23:47, answered the same minute</dd>
+        </dl>
+        <p class="foot">The full conversation is attached, so nothing needs to be asked twice.</p>
       </div>
     </div>
   </section>
@@ -349,34 +474,7 @@ section{scroll-margin-top:80px}
     </div>
   </section>
 
-  <section class="band handover" aria-labelledby="handover-title">
-    <div class="wrap">
-      <div>
-        <h2 id="handover-title">By morning, your team knows exactly who to call.</h2>
-        <p class="intro">Prex doesn't replace your people. It makes sure no enquiry waits, then passes each lead on with the details already collected.</p>
-        <ul class="facts">
-          <li><b>Answered</b><span>In under a minute, at any hour, including enquiries from your listings and click-to-WhatsApp ads.</span></li>
-          <li><b>Qualified</b><span>Buy or rent, budget, area, bedrooms, timing and how they plan to pay.</span></li>
-          <li><b>Booked</b><span>A viewing at a time that suits the agent who covers that area.</span></li>
-          <li><b>Handed over</b><span>A short summary goes to the right agent, ready to follow up.</span></li>
-        </ul>
-      </div>
-      <div class="lead-card" aria-label="Example lead summary sent to an agent">
-        <div class="from"><span class="avatar" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="4 10 112 86" aria-hidden="true" focusable="false"><g fill="#5B8CFF"><path fill-rule="evenodd" d="M37 12H83A31 31 0 0 1 83 74H37A31 31 0 0 1 37 12ZM27 33A10 10 0 0 1 27 53ZM46 43A14 14 0 1 0 74 43A14 14 0 1 0 46 43ZM93 33A10 10 0 0 0 93 53Z"/><path d="M22 62Q24 84 10 94Q36 92 50 72Z"/></g></svg></span>New lead from Prex, to Sam</div>
-        <h3>Sara wants to buy a 2-bedroom apartment</h3>
-        <dl>
-          <dt>Looking for</dt><dd>2 bedrooms, close to the city centre</dd>
-          <dt>Budget</dt><dd>Within the listed price</dd>
-          <dt>Timing</dt><dd>Buying, moving this month</dd>
-          <dt>Viewing</dt><dd>Saturday, 11:00</dd>
-          <dt>First message</dt><dd>23:47, answered the same minute</dd>
-        </dl>
-        <p class="foot">The full conversation is attached, so nothing needs to be asked twice.</p>
-      </div>
-    </div>
-  </section>
-
-  <section class="band white" id="how" aria-labelledby="how-title">
+  <section class="band" id="how" aria-labelledby="how-title">
     <div class="wrap">
       <h2 id="how-title">How it works</h2>
       <p class="intro">No software to learn and no one to hire. We set Prex up around your business and keep it running.</p>
@@ -397,7 +495,7 @@ section{scroll-margin-top:80px}
     </div>
   </section>
 
-  <section class="band" id="who" aria-labelledby="who-title">
+  <section class="band white" id="who" aria-labelledby="who-title">
     <div class="wrap">
       <h2 id="who-title">What Prex handles for your agency</h2>
       <div class="trust-grid">
@@ -432,7 +530,7 @@ section{scroll-margin-top:80px}
     </div>
   </section>
 
-  <section class="band white" aria-labelledby="trust-title">
+  <section class="band" aria-labelledby="trust-title">
     <div class="wrap">
       <h2 id="trust-title">Built to be trusted</h2>
       <div class="trust-grid">
@@ -546,6 +644,7 @@ section{scroll-margin-top:80px}
         <a class="btn btn-ghost" href="#try">Try the demo again</a>
       </div>
     </div>
+    <svg class="skyline" viewBox="0 0 1440 220" preserveAspectRatio="xMidYMax slice" aria-hidden="true" focusable="false"><rect class="b" x="0" y="37" width="84" height="183"/><rect class="w" x="23" y="49" width="6" height="8"/><rect class="w" x="9" y="65" width="6" height="8"/><rect class="w" x="37" y="65" width="6" height="8"/><rect class="w" x="51" y="97" width="6" height="8"/><rect class="w" x="65" y="97" width="6" height="8"/><rect class="w" x="9" y="129" width="6" height="8"/><rect class="w" x="23" y="129" width="6" height="8"/><rect class="w" x="37" y="129" width="6" height="8"/><rect class="w late" x="51" y="129" width="6" height="8"/><rect class="w" x="65" y="129" width="6" height="8"/><rect class="w" x="65" y="145" width="6" height="8"/><rect class="w" x="9" y="161" width="6" height="8"/><rect class="w late" x="51" y="161" width="6" height="8"/><rect class="w" x="9" y="177" width="6" height="8"/><rect class="w" x="23" y="177" width="6" height="8"/><rect class="w" x="37" y="177" width="6" height="8"/><rect class="w" x="51" y="177" width="6" height="8"/><rect class="w late" x="65" y="177" width="6" height="8"/><rect class="w" x="23" y="193" width="6" height="8"/><rect class="w" x="51" y="193" width="6" height="8"/><rect class="w" x="51" y="209" width="6" height="8"/><rect class="b" x="88" y="77" width="54" height="143"/><rect class="w" x="125" y="89" width="6" height="8"/><rect class="w" x="97" y="105" width="6" height="8"/><rect class="w" x="111" y="105" width="6" height="8"/><rect class="w" x="125" y="105" width="6" height="8"/><rect class="w" x="111" y="121" width="6" height="8"/><rect class="w" x="111" y="137" width="6" height="8"/><rect class="w" x="97" y="153" width="6" height="8"/><rect class="w" x="125" y="153" width="6" height="8"/><rect class="w" x="111" y="169" width="6" height="8"/><rect class="w" x="125" y="169" width="6" height="8"/><rect class="w" x="111" y="201" width="6" height="8"/><rect class="b" x="142" y="119" width="54" height="101"/><rect class="w" x="151" y="131" width="6" height="8"/><rect class="w" x="151" y="147" width="6" height="8"/><rect class="w" x="165" y="147" width="6" height="8"/><rect class="w" x="179" y="147" width="6" height="8"/><rect class="w" x="165" y="163" width="6" height="8"/><rect class="w" x="151" y="211" width="6" height="8"/><rect class="w" x="165" y="211" width="6" height="8"/><rect class="b" x="196" y="108" width="110" height="112"/><rect class="w" x="275" y="120" width="6" height="8"/><rect class="w" x="289" y="120" width="6" height="8"/><rect class="w" x="205" y="136" width="6" height="8"/><rect class="w" x="233" y="136" width="6" height="8"/><rect class="w" x="261" y="152" width="6" height="8"/><rect class="w" x="219" y="168" width="6" height="8"/><rect class="w" x="233" y="168" width="6" height="8"/><rect class="w" x="275" y="168" width="6" height="8"/><rect class="w" x="205" y="184" width="6" height="8"/><rect class="w" x="219" y="184" width="6" height="8"/><rect class="w" x="233" y="184" width="6" height="8"/><rect class="w" x="275" y="184" width="6" height="8"/><rect class="w" x="289" y="184" width="6" height="8"/><rect class="b" x="314" y="77" width="70" height="143"/><rect class="w late" x="323" y="89" width="6" height="8"/><rect class="w" x="351" y="105" width="6" height="8"/><rect class="w" x="351" y="185" width="6" height="8"/><rect class="b" x="392" y="38" width="84" height="182"/><rect class="w" x="401" y="50" width="6" height="8"/><rect class="w late" x="429" y="50" width="6" height="8"/><rect class="w" x="401" y="66" width="6" height="8"/><rect class="w" x="401" y="82" width="6" height="8"/><rect class="w late" x="415" y="82" width="6" height="8"/><rect class="w" x="457" y="82" width="6" height="8"/><rect class="w" x="401" y="98" width="6" height="8"/><rect class="w" x="429" y="114" width="6" height="8"/><rect class="w" x="401" y="146" width="6" height="8"/><rect class="w" x="415" y="162" width="6" height="8"/><rect class="w" x="429" y="162" width="6" height="8"/><rect class="w" x="457" y="162" width="6" height="8"/><rect class="w" x="401" y="178" width="6" height="8"/><rect class="w" x="443" y="194" width="6" height="8"/><rect class="w late" x="457" y="194" width="6" height="8"/><rect class="w" x="415" y="210" width="6" height="8"/><rect class="b" x="476" y="122" width="110" height="98"/><rect class="w" x="485" y="134" width="6" height="8"/><rect class="w" x="513" y="134" width="6" height="8"/><rect class="w" x="569" y="134" width="6" height="8"/><rect class="w" x="485" y="150" width="6" height="8"/><rect class="w" x="541" y="150" width="6" height="8"/><rect class="w" x="555" y="150" width="6" height="8"/><rect class="w" x="485" y="166" width="6" height="8"/><rect class="w" x="541" y="166" width="6" height="8"/><rect class="w" x="555" y="166" width="6" height="8"/><rect class="w" x="541" y="182" width="6" height="8"/><rect class="w" x="485" y="198" width="6" height="8"/><rect class="w" x="555" y="198" width="6" height="8"/><rect class="b" x="586" y="28" width="84" height="192"/><rect class="w" x="637" y="40" width="6" height="8"/><rect class="w" x="637" y="56" width="6" height="8"/><rect class="w" x="637" y="88" width="6" height="8"/><rect class="w late" x="637" y="104" width="6" height="8"/><rect class="w" x="595" y="120" width="6" height="8"/><rect class="w" x="623" y="120" width="6" height="8"/><rect class="w" x="595" y="136" width="6" height="8"/><rect class="w" x="609" y="136" width="6" height="8"/><rect class="w" x="651" y="152" width="6" height="8"/><rect class="w" x="595" y="168" width="6" height="8"/><rect class="w" x="623" y="168" width="6" height="8"/><rect class="w" x="623" y="200" width="6" height="8"/><rect class="b" x="674" y="29" width="96" height="191"/><rect class="b" x="719" y="15" width="6" height="14"/><rect class="w late" x="725" y="41" width="6" height="8"/><rect class="w" x="753" y="57" width="6" height="8"/><rect class="w" x="739" y="73" width="6" height="8"/><rect class="w" x="683" y="89" width="6" height="8"/><rect class="w" x="683" y="105" width="6" height="8"/><rect class="w" x="725" y="105" width="6" height="8"/><rect class="w late" x="753" y="105" width="6" height="8"/><rect class="w" x="683" y="121" width="6" height="8"/><rect class="w" x="697" y="121" width="6" height="8"/><rect class="w" x="683" y="137" width="6" height="8"/><rect class="w" x="711" y="137" width="6" height="8"/><rect class="w" x="739" y="137" width="6" height="8"/><rect class="w" x="753" y="137" width="6" height="8"/><rect class="w" x="753" y="153" width="6" height="8"/><rect class="w" x="683" y="169" width="6" height="8"/><rect class="w" x="697" y="185" width="6" height="8"/><rect class="w" x="711" y="201" width="6" height="8"/><rect class="w" x="753" y="201" width="6" height="8"/><rect class="b" x="770" y="134" width="62" height="86"/><rect class="w" x="779" y="146" width="6" height="8"/><rect class="w" x="793" y="162" width="6" height="8"/><rect class="w late" x="793" y="178" width="6" height="8"/><rect class="w" x="807" y="178" width="6" height="8"/><rect class="w" x="779" y="210" width="6" height="8"/><rect class="b" x="832" y="138" width="126" height="82"/><rect class="w late" x="841" y="150" width="6" height="8"/><rect class="w" x="911" y="150" width="6" height="8"/><rect class="w" x="925" y="150" width="6" height="8"/><rect class="w" x="939" y="150" width="6" height="8"/><rect class="w" x="841" y="166" width="6" height="8"/><rect class="w" x="855" y="166" width="6" height="8"/><rect class="w" x="897" y="166" width="6" height="8"/><rect class="w" x="925" y="166" width="6" height="8"/><rect class="w" x="939" y="166" width="6" height="8"/><rect class="w" x="883" y="182" width="6" height="8"/><rect class="w" x="925" y="182" width="6" height="8"/><rect class="w" x="939" y="182" width="6" height="8"/><rect class="w" x="911" y="198" width="6" height="8"/><rect class="b" x="958" y="53" width="126" height="167"/><rect class="w" x="967" y="65" width="6" height="8"/><rect class="w" x="1023" y="65" width="6" height="8"/><rect class="w" x="1037" y="65" width="6" height="8"/><rect class="w" x="1065" y="65" width="6" height="8"/><rect class="w" x="981" y="81" width="6" height="8"/><rect class="w" x="1051" y="81" width="6" height="8"/><rect class="w" x="1065" y="81" width="6" height="8"/><rect class="w" x="967" y="97" width="6" height="8"/><rect class="w" x="1009" y="97" width="6" height="8"/><rect class="w" x="1065" y="97" width="6" height="8"/><rect class="w" x="967" y="113" width="6" height="8"/><rect class="w" x="995" y="113" width="6" height="8"/><rect class="w" x="1009" y="113" width="6" height="8"/><rect class="w" x="1037" y="113" width="6" height="8"/><rect class="w" x="1051" y="113" width="6" height="8"/><rect class="w" x="981" y="129" width="6" height="8"/><rect class="w" x="995" y="129" width="6" height="8"/><rect class="w" x="1037" y="129" width="6" height="8"/><rect class="w" x="1051" y="129" width="6" height="8"/><rect class="w" x="1065" y="129" width="6" height="8"/><rect class="w late" x="1023" y="145" width="6" height="8"/><rect class="w" x="1037" y="145" width="6" height="8"/><rect class="w" x="1051" y="145" width="6" height="8"/><rect class="w" x="1023" y="161" width="6" height="8"/><rect class="w" x="1009" y="193" width="6" height="8"/><rect class="w" x="967" y="209" width="6" height="8"/><rect class="w late" x="1023" y="209" width="6" height="8"/><rect class="b" x="1092" y="57" width="126" height="163"/><rect class="b" x="1152" y="43" width="6" height="14"/><rect class="w" x="1185" y="69" width="6" height="8"/><rect class="w" x="1101" y="85" width="6" height="8"/><rect class="w" x="1129" y="85" width="6" height="8"/><rect class="w" x="1143" y="85" width="6" height="8"/><rect class="w" x="1185" y="85" width="6" height="8"/><rect class="w" x="1101" y="101" width="6" height="8"/><rect class="w" x="1129" y="101" width="6" height="8"/><rect class="w" x="1157" y="101" width="6" height="8"/><rect class="w" x="1199" y="101" width="6" height="8"/><rect class="w" x="1115" y="117" width="6" height="8"/><rect class="w" x="1115" y="133" width="6" height="8"/><rect class="w" x="1129" y="133" width="6" height="8"/><rect class="w" x="1143" y="133" width="6" height="8"/><rect class="w" x="1115" y="149" width="6" height="8"/><rect class="w" x="1171" y="149" width="6" height="8"/><rect class="w" x="1185" y="149" width="6" height="8"/><rect class="w" x="1199" y="149" width="6" height="8"/><rect class="w" x="1143" y="165" width="6" height="8"/><rect class="w late" x="1185" y="165" width="6" height="8"/><rect class="w" x="1199" y="165" width="6" height="8"/><rect class="w late" x="1101" y="181" width="6" height="8"/><rect class="w" x="1115" y="181" width="6" height="8"/><rect class="w" x="1129" y="181" width="6" height="8"/><rect class="w" x="1143" y="181" width="6" height="8"/><rect class="w" x="1185" y="181" width="6" height="8"/><rect class="w" x="1199" y="181" width="6" height="8"/><rect class="w" x="1171" y="197" width="6" height="8"/><rect class="w" x="1199" y="213" width="6" height="8"/><rect class="b" x="1218" y="73" width="110" height="147"/><rect class="w" x="1255" y="85" width="6" height="8"/><rect class="w late" x="1311" y="101" width="6" height="8"/><rect class="w" x="1241" y="133" width="6" height="8"/><rect class="w" x="1269" y="149" width="6" height="8"/><rect class="w" x="1227" y="165" width="6" height="8"/><rect class="w" x="1283" y="165" width="6" height="8"/><rect class="w late" x="1311" y="165" width="6" height="8"/><rect class="w" x="1311" y="181" width="6" height="8"/><rect class="w" x="1241" y="197" width="6" height="8"/><rect class="w" x="1255" y="197" width="6" height="8"/><rect class="w" x="1311" y="197" width="6" height="8"/><rect class="w" x="1227" y="213" width="6" height="8"/><rect class="w" x="1241" y="213" width="6" height="8"/><rect class="w" x="1255" y="213" width="6" height="8"/><rect class="w late" x="1269" y="213" width="6" height="8"/><rect class="b" x="1332" y="135" width="126" height="85"/><rect class="w" x="1341" y="147" width="6" height="8"/><rect class="w" x="1355" y="147" width="6" height="8"/><rect class="w late" x="1383" y="147" width="6" height="8"/><rect class="w" x="1411" y="147" width="6" height="8"/><rect class="w" x="1341" y="179" width="6" height="8"/><rect class="w" x="1383" y="179" width="6" height="8"/><rect class="w" x="1411" y="179" width="6" height="8"/><rect class="w late" x="1355" y="195" width="6" height="8"/><rect class="w" x="1383" y="195" width="6" height="8"/><rect class="w late" x="1425" y="195" width="6" height="8"/><rect class="w late" x="1341" y="211" width="6" height="8"/><rect class="w" x="1355" y="211" width="6" height="8"/><rect class="w" x="1397" y="211" width="6" height="8"/><rect class="w" x="1411" y="211" width="6" height="8"/></svg>
   </section>
 </main>
 
@@ -658,6 +757,18 @@ section{scroll-margin-top:80px}
   }
   tabs.forEach(function(t){ t.addEventListener('click', function(){ start(t.dataset.s); }); });
   start('property');
+
+  /* ---------- Local time ---------- */
+  var nowEl = document.getElementById('now');
+  function tick(){
+    var d = new Date(), h = d.getHours(), m = d.getMinutes();
+    var t = (h < 10 ? '0' : '') + h + ':' + (m < 10 ? '0' : '') + m;
+    var tail = (h >= 20 || h < 6) ? 'Customers are still messaging.'
+             : (h < 9) ? "Last night's messages are waiting."
+             : 'Tonight, customers will message after you close.';
+    nowEl.innerHTML = "It's <time>" + t + '</time> where you are. ' + tail;
+  }
+  if (nowEl){ tick(); setInterval(tick, 30000); }
 
   /* ---------- Calculator ---------- */
   var $ = function(id){ return document.getElementById(id); };
