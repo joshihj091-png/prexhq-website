@@ -242,8 +242,6 @@ section{scroll-margin-top:80px}
 .founder blockquote p{font-family:Sora,sans-serif;font-weight:600;font-size:clamp(22px,2.4vw,30px);line-height:1.35;letter-spacing:-.02em}
 .founder footer{margin-top:24px;color:var(--muted);display:flex;flex-direction:column;gap:2px}
 .founder footer b{color:var(--ink);font-family:Sora,sans-serif;font-weight:600;font-size:18px}
-.founder-row{display:grid;grid-template-columns:minmax(0,300px) minmax(0,1fr);gap:56px;align-items:center}
-.founder-row img{display:block;width:100%;height:auto;border-radius:24px;box-shadow:0 24px 60px -24px rgba(11,20,38,.45)}
 
 /* FAQ */
 .faq-list{margin-top:40px;max-width:800px;border-top:1px solid var(--line)}
@@ -287,8 +285,6 @@ section{scroll-margin-top:80px}
   .trust-grid,.markets{grid-template-columns:minmax(0,1fr);gap:24px}
   .nav a:not(.btn){display:none}
   .foot-top{grid-template-columns:minmax(0,1fr)}
-  .founder-row{grid-template-columns:minmax(0,1fr);gap:28px}
-  .founder-row picture{max-width:260px}
   .foot-cols{grid-template-columns:repeat(2,minmax(0,1fr))}
 }
 @media (max-width:520px){
@@ -300,7 +296,12 @@ section{scroll-margin-top:80px}
   .hero .actions .btn{width:100%}
   .facts li{grid-template-columns:minmax(0,1fr);gap:2px}
   .lead-card,.result,.offer-card{padding:22px}
-  .feed-grid{grid-template-columns:minmax(0,1fr)}
+  .feed{padding-bottom:64px}
+  .feed-grid{display:flex;gap:12px;margin:28px -16px 0;padding:0 16px 6px;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none;-webkit-overflow-scrolling:touch}
+  .feed-grid::-webkit-scrollbar{display:none}
+  .chatlet{flex:0 0 80%;scroll-snap-align:start;padding:14px 14px 12px;gap:8px}
+  .chatlet .q,.chatlet .a{font-size:14px;padding:8px 11px}
+  .feed .note::before{content:"Swipe for more languages. "}
   .skyline{height:110px}
   .hero>.wrap{padding-bottom:110px}
   .horizon{height:130px}
@@ -378,34 +379,34 @@ section{scroll-margin-top:80px}
   <section class="feed" aria-labelledby="feed-title">
     <div class="wrap">
       <h2 id="feed-title" class="feed-title">While your team sleeps, Prex answers.</h2>
-      <p class="intro">The kind of questions businesses get after hours, answered in the language each customer writes in.</p>
+      <p class="intro">After-hours questions, answered in the customer's own language.</p>
       <div class="feed-grid">
         <article class="chatlet">
           <header><b>Property agency</b><time>23:47</time></header>
-          <p class="q">Is the 2-bedroom near the metro still available?</p>
-          <p class="a">Yes, it is: 2 bedrooms, 2 bathrooms, 5 minutes from the metro. Are you looking to buy or rent?</p>
+          <p class="q">Is the 2-bed near the metro still available?</p>
+          <p class="a">Yes! 2 bed, 2 bath, 5 minutes from the metro. Buying or renting?</p>
           <footer>English</footer>
         </article>
         <article class="chatlet">
           <header><b>Education consultancy</b><time>22:10</time></header>
           <p class="q" lang="ne-Latn">Australia ko lagi IELTS kati chahinchha?</p>
-          <p class="a" lang="ne-Latn">University ra course anusar farak parchha. Tapai bachelor ko lagi ho ki master ko lagi?</p>
+          <p class="a" lang="ne-Latn">Course anusar farak parchha. Bachelor ki master?</p>
           <footer>Romanised Nepali</footer>
         </article>
         <article class="chatlet">
           <header><b>Dental clinic</b><time>00:12</time></header>
-          <p class="q" dir="rtl" lang="ar">هل لديكم موعد متاح غداً؟</p>
-          <p class="a" dir="rtl" lang="ar">نعم، لدينا موعد الساعة 10:30 صباحاً أو 5:00 مساءً. أيهما يناسبك؟</p>
+          <p class="q" dir="rtl" lang="ar">هل لديكم موعد غداً؟</p>
+          <p class="a" dir="rtl" lang="ar">نعم، 10:30 صباحاً أو 5 مساءً. أيهما يناسبك؟</p>
           <footer>Arabic</footer>
         </article>
         <article class="chatlet">
           <header><b>Car rental</b><time>05:40</time></header>
-          <p class="q" lang="hi">क्या कल सुबह एयरपोर्ट पिकअप मिल सकता है?</p>
-          <p class="a" lang="hi">जी हाँ! आपकी फ्लाइट किस समय पहुँचती है?</p>
+          <p class="q" lang="hi">कल सुबह एयरपोर्ट पिकअप मिलेगा?</p>
+          <p class="a" lang="hi">जी हाँ! फ्लाइट कितने बजे पहुँचती है?</p>
           <footer>Hindi</footer>
         </article>
       </div>
-      <p class="note">Example conversations. Every Prex is set up with the business's own details, and answers only what the business has approved.</p>
+      <p class="note">Example conversations. Each Prex answers only what its business has approved.</p>
     </div>
   </section>
   <div class="horizon" aria-hidden="true"></div>
@@ -597,16 +598,10 @@ section{scroll-margin-top:80px}
   <section class="band founder" aria-labelledby="founder-title">
     <div class="wrap">
       <h2 id="founder-title" class="sr">From the founder</h2>
-      <div class="founder-row">
-        <picture>
-          <source srcset="/assets/harish-joshi-founder.webp" type="image/webp">
-          <img src="/assets/harish-joshi-founder.jpg" width="560" height="560" loading="lazy" alt="Harish Joshi, founder of Prex, working at his laptop">
-        </picture>
-        <blockquote>
-          <p>"Good businesses lose customers for one simple reason: nobody answered in time. I built Prex so every message gets a fast, helpful reply, and every lead reaches your team."</p>
-          <footer><b>Harish Joshi</b><span>Founder, Prex</span></footer>
-        </blockquote>
-      </div>
+      <blockquote>
+        <p>"Good businesses lose customers for one simple reason: nobody answered in time. I built Prex so every message gets a fast, helpful reply, and every lead reaches your team."</p>
+        <footer><b>Harish Joshi</b><span>Founder, Prex</span></footer>
+      </blockquote>
     </div>
   </section>
 
