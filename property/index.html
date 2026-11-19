@@ -9,6 +9,10 @@
 <meta property="og:description" content="Prex answers property enquiries on WhatsApp in under a minute, day and night. It asks buy or rent, budget, area and timing, books viewings and hands every lead to the right agent.">
 <meta property="og:url" content="https://prexhq.com/property/">
 <meta property="og:type" content="website">
+<meta property="og:image" content="https://prexhq.com/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
 <meta name="theme-color" content="#0B1426">
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
 <link rel="canonical" href="https://prexhq.com/property/">
@@ -256,13 +260,16 @@ section{scroll-margin-top:80px}
 .closing .phases{justify-content:center}
 
 /* Footer */
-.site-footer{background:var(--midnight);color:var(--silver);border-top:1px solid rgba(184,194,209,.12);padding:40px 0;font-size:15px}
-.site-footer .wrap{display:flex;flex-wrap:wrap;gap:20px 32px;align-items:center;justify-content:space-between}
-.site-footer .brand{display:flex;align-items:center;gap:14px}
-.site-footer .brand svg{height:24px;width:auto}
-.site-footer nav{display:flex;flex-wrap:wrap;gap:20px}
-.site-footer a{color:var(--silver);text-decoration:none}
-.site-footer a:hover{color:var(--white);text-decoration:underline}
+.site-footer{background:var(--midnight);color:var(--silver);border-top:1px solid rgba(184,194,209,.12);padding:64px 0 28px;font-size:15px}
+.foot-top{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,2fr);gap:48px}
+.foot-brand .brand{display:inline-block;line-height:0}
+.foot-brand .brand svg{height:28px;width:auto}
+.foot-brand p{margin-top:16px;max-width:22em;color:var(--silver)}
+.foot-cols{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:28px}
+.foot-cols h2{font-family:Sora,sans-serif;font-size:14px;font-weight:600;color:var(--pearl);margin:0 0 14px}
+.foot-cols a{display:block;color:var(--silver);text-decoration:none;padding:4px 0}
+.foot-cols a:hover{color:var(--white);text-decoration:underline}
+.foot-bottom{margin-top:48px;padding-top:22px;border-top:1px solid rgba(184,194,209,.12);font-size:14px}
 
 /* Responsive */
 @media (max-width:1000px){
@@ -276,6 +283,8 @@ section{scroll-margin-top:80px}
   .steps,.who-list{grid-template-columns:minmax(0,1fr);gap:44px}
   .trust-grid,.markets{grid-template-columns:minmax(0,1fr);gap:24px}
   .nav a:not(.btn){display:none}
+  .foot-top{grid-template-columns:minmax(0,1fr)}
+  .foot-cols{grid-template-columns:repeat(2,minmax(0,1fr))}
 }
 @media (max-width:520px){
   body{font-size:16px}
@@ -311,9 +320,9 @@ section{scroll-margin-top:80px}
     <a class="logo" href="/" aria-label="Prex home"><svg xmlns="http://www.w3.org/2000/svg" viewBox="-60.5 -708.9 3868.5 1129.8" role="img" aria-label="Prex"><g transform="translate(-73.81 -795.97) scale(12.3016)" fill="#5B8CFF"><path fill-rule="evenodd" d="M37 12H83A31 31 0 0 1 83 74H37A31 31 0 0 1 37 12ZM27 33A10 10 0 0 1 27 53ZM46 43A14 14 0 1 0 74 43A14 14 0 1 0 46 43ZM93 33A10 10 0 0 0 93 53Z"/><path d="M22 62Q24 84 10 94Q36 92 50 72Z"/></g><path fill="#F4F6FB" transform="translate(1517.48 0)" d="M73 200V-548H200V-311L183 -312Q187 -394 217.0 -450.5Q247 -507 298.0 -535.5Q349 -564 413 -564Q470 -564 516.5 -543.0Q563 -522 596.5 -484.5Q630 -447 647.5 -396.5Q665 -346 665 -286V-263Q665 -204 648.0 -152.5Q631 -101 598.5 -63.0Q566 -25 519.5 -3.5Q473 18 413 18Q351 18 301.5 -7.5Q252 -33 222.0 -85.5Q192 -138 189 -219L233 -159V200ZM368 -116Q409 -116 439.5 -136.0Q470 -156 487.0 -192.0Q504 -228 504 -275Q504 -322 487.0 -357.0Q470 -392 440.0 -411.5Q410 -431 368 -431Q332 -431 300.0 -414.0Q268 -397 248.5 -365.5Q229 -334 229 -289V-252Q229 -209 249.5 -178.5Q270 -148 302.0 -132.0Q334 -116 368 -116ZM741 0V-548H868V-313H865Q865 -429 914.5 -492.0Q964 -555 1058 -555H1079V-417H1039Q973 -417 937.0 -381.5Q901 -346 901 -279V0ZM1375 19Q1305 19 1251.5 -5.0Q1198 -29 1162.5 -69.5Q1127 -110 1108.5 -160.5Q1090 -211 1090 -264V-284Q1090 -339 1108.5 -389.5Q1127 -440 1162.0 -480.0Q1197 -520 1249.5 -543.5Q1302 -567 1369 -567Q1457 -567 1517.5 -527.5Q1578 -488 1610.0 -424.5Q1642 -361 1642 -286V-232H1157V-323H1545L1493 -281Q1493 -330 1479.0 -365.0Q1465 -400 1437.5 -418.5Q1410 -437 1369 -437Q1327 -437 1298.0 -418.0Q1269 -399 1254.0 -362.5Q1239 -326 1239 -273Q1239 -224 1253.0 -187.5Q1267 -151 1297.0 -131.0Q1327 -111 1375 -111Q1419 -111 1447.0 -128.0Q1475 -145 1485 -170H1632Q1620 -115 1585.0 -72.0Q1550 -29 1497.0 -5.0Q1444 19 1375 19ZM1649 0 1819 -294 1815 -269 1655 -548H1828L1927 -362H1943L2036 -548H2199L2046 -267L2050 -288L2230 0H2056L1938 -199H1922L1811 0Z"/></svg></a>
     <nav class="nav" aria-label="Main">
       <a href="#try">Try it</a>
-      <a href="#calculator">Missed customers</a>
+      <a href="/#who">Industries</a>
       <a href="#how">How it works</a>
-      <a href="#faq">Questions</a>
+      <a href="/trust/">Trust</a>
       <a class="btn btn-moon btn-small" href="mailto:contact@prexhq.com?subject=Free%20pilot%20request&amp;body=Business%20name%3A%0AField%3A%20Property%0ACity%20and%20country%3A%0ARoughly%20how%20many%20enquiries%20you%20get%20each%20week%3A%0A%0APaste%20up%20to%2020%20recent%20customer%20questions%20below.%20Please%20remove%20names%20and%20phone%20numbers%20first.%0A%0A">Get a free pilot</a>
     </nav>
   </div>
@@ -650,16 +659,19 @@ section{scroll-margin-top:80px}
 
 <footer class="site-footer">
   <div class="wrap">
-    <div class="brand"><svg xmlns="http://www.w3.org/2000/svg" viewBox="-60.5 -708.9 3868.5 1129.8" role="img" aria-label="Prex"><g transform="translate(-73.81 -795.97) scale(12.3016)" fill="#5B8CFF"><path fill-rule="evenodd" d="M37 12H83A31 31 0 0 1 83 74H37A31 31 0 0 1 37 12ZM27 33A10 10 0 0 1 27 53ZM46 43A14 14 0 1 0 74 43A14 14 0 1 0 46 43ZM93 33A10 10 0 0 0 93 53Z"/><path d="M22 62Q24 84 10 94Q36 92 50 72Z"/></g><path fill="#F4F6FB" transform="translate(1517.48 0)" d="M73 200V-548H200V-311L183 -312Q187 -394 217.0 -450.5Q247 -507 298.0 -535.5Q349 -564 413 -564Q470 -564 516.5 -543.0Q563 -522 596.5 -484.5Q630 -447 647.5 -396.5Q665 -346 665 -286V-263Q665 -204 648.0 -152.5Q631 -101 598.5 -63.0Q566 -25 519.5 -3.5Q473 18 413 18Q351 18 301.5 -7.5Q252 -33 222.0 -85.5Q192 -138 189 -219L233 -159V200ZM368 -116Q409 -116 439.5 -136.0Q470 -156 487.0 -192.0Q504 -228 504 -275Q504 -322 487.0 -357.0Q470 -392 440.0 -411.5Q410 -431 368 -431Q332 -431 300.0 -414.0Q268 -397 248.5 -365.5Q229 -334 229 -289V-252Q229 -209 249.5 -178.5Q270 -148 302.0 -132.0Q334 -116 368 -116ZM741 0V-548H868V-313H865Q865 -429 914.5 -492.0Q964 -555 1058 -555H1079V-417H1039Q973 -417 937.0 -381.5Q901 -346 901 -279V0ZM1375 19Q1305 19 1251.5 -5.0Q1198 -29 1162.5 -69.5Q1127 -110 1108.5 -160.5Q1090 -211 1090 -264V-284Q1090 -339 1108.5 -389.5Q1127 -440 1162.0 -480.0Q1197 -520 1249.5 -543.5Q1302 -567 1369 -567Q1457 -567 1517.5 -527.5Q1578 -488 1610.0 -424.5Q1642 -361 1642 -286V-232H1157V-323H1545L1493 -281Q1493 -330 1479.0 -365.0Q1465 -400 1437.5 -418.5Q1410 -437 1369 -437Q1327 -437 1298.0 -418.0Q1269 -399 1254.0 -362.5Q1239 -326 1239 -273Q1239 -224 1253.0 -187.5Q1267 -151 1297.0 -131.0Q1327 -111 1375 -111Q1419 -111 1447.0 -128.0Q1475 -145 1485 -170H1632Q1620 -115 1585.0 -72.0Q1550 -29 1497.0 -5.0Q1444 19 1375 19ZM1649 0 1819 -294 1815 -269 1655 -548H1828L1927 -362H1943L2036 -548H2199L2046 -267L2050 -288L2230 0H2056L1938 -199H1922L1811 0Z"/></svg><span>Every customer, seen.</span></div>
-    <nav aria-label="Footer">
-      <a href="/property/">Property</a>
-      <a href="/clinics/">Clinics</a>
-      <a href="/education/">Education</a>
-      <a href="/privacy.html">Privacy policy</a>
-      <a href="/terms.html">Terms of service</a>
-      <a href="mailto:contact@prexhq.com">contact@prexhq.com</a>
-    </nav>
-    <span>&copy; 2026 Prex</span>
+    <div class="foot-top">
+      <div class="foot-brand">
+        <a class="brand" href="/" aria-label="Prex home"><svg xmlns="http://www.w3.org/2000/svg" viewBox="-60.5 -708.9 3868.5 1129.8" role="img" aria-label="Prex"><g transform="translate(-73.81 -795.97) scale(12.3016)" fill="#5B8CFF"><path fill-rule="evenodd" d="M37 12H83A31 31 0 0 1 83 74H37A31 31 0 0 1 37 12ZM27 33A10 10 0 0 1 27 53ZM46 43A14 14 0 1 0 74 43A14 14 0 1 0 46 43ZM93 33A10 10 0 0 0 93 53Z"/><path d="M22 62Q24 84 10 94Q36 92 50 72Z"/></g><path fill="#F4F6FB" transform="translate(1517.48 0)" d="M73 200V-548H200V-311L183 -312Q187 -394 217.0 -450.5Q247 -507 298.0 -535.5Q349 -564 413 -564Q470 -564 516.5 -543.0Q563 -522 596.5 -484.5Q630 -447 647.5 -396.5Q665 -346 665 -286V-263Q665 -204 648.0 -152.5Q631 -101 598.5 -63.0Q566 -25 519.5 -3.5Q473 18 413 18Q351 18 301.5 -7.5Q252 -33 222.0 -85.5Q192 -138 189 -219L233 -159V200ZM368 -116Q409 -116 439.5 -136.0Q470 -156 487.0 -192.0Q504 -228 504 -275Q504 -322 487.0 -357.0Q470 -392 440.0 -411.5Q410 -431 368 -431Q332 -431 300.0 -414.0Q268 -397 248.5 -365.5Q229 -334 229 -289V-252Q229 -209 249.5 -178.5Q270 -148 302.0 -132.0Q334 -116 368 -116ZM741 0V-548H868V-313H865Q865 -429 914.5 -492.0Q964 -555 1058 -555H1079V-417H1039Q973 -417 937.0 -381.5Q901 -346 901 -279V0ZM1375 19Q1305 19 1251.5 -5.0Q1198 -29 1162.5 -69.5Q1127 -110 1108.5 -160.5Q1090 -211 1090 -264V-284Q1090 -339 1108.5 -389.5Q1127 -440 1162.0 -480.0Q1197 -520 1249.5 -543.5Q1302 -567 1369 -567Q1457 -567 1517.5 -527.5Q1578 -488 1610.0 -424.5Q1642 -361 1642 -286V-232H1157V-323H1545L1493 -281Q1493 -330 1479.0 -365.0Q1465 -400 1437.5 -418.5Q1410 -437 1369 -437Q1327 -437 1298.0 -418.0Q1269 -399 1254.0 -362.5Q1239 -326 1239 -273Q1239 -224 1253.0 -187.5Q1267 -151 1297.0 -131.0Q1327 -111 1375 -111Q1419 -111 1447.0 -128.0Q1475 -145 1485 -170H1632Q1620 -115 1585.0 -72.0Q1550 -29 1497.0 -5.0Q1444 19 1375 19ZM1649 0 1819 -294 1815 -269 1655 -548H1828L1927 -362H1943L2036 -548H2199L2046 -267L2050 -288L2230 0H2056L1938 -199H1922L1811 0Z"/></svg></a>
+        <p>An AI front desk that answers your customers on WhatsApp in under a minute, day and night.</p>
+      </div>
+      <nav class="foot-cols" aria-label="Footer">
+        <div><h2>Product</h2><a href="/#try">Try the demo</a><a href="/#how">How it works</a><a href="/#pilot">Free pilot</a><a href="/#faq">Questions</a></div>
+        <div><h2>Industries</h2><a href="/property/">Property</a><a href="/clinics/">Clinics</a><a href="/education/">Education</a></div>
+        <div><h2>Company</h2><a href="/trust/">Trust</a><a href="/privacy.html">Privacy policy</a><a href="/terms.html">Terms of service</a><a href="mailto:contact@prexhq.com">contact@prexhq.com</a></div>
+        <div><h2>Follow</h2><!--SOCIAL--><a href="https://www.instagram.com/prex.hq/" rel="me noopener" target="_blank">Instagram</a><a href="https://www.youtube.com/@prexhq" rel="me noopener" target="_blank">YouTube</a></div>
+      </nav>
+    </div>
+    <div class="foot-bottom"><span>&copy; 2026 Prex. Built in Nepal for businesses everywhere.</span></div>
   </div>
 </footer>
 
