@@ -1,0 +1,688 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Prex for education · WhatsApp AI assistant for consultancies, colleges and courses</title>
+<meta name="description" content="Prex answers student and parent enquiries on WhatsApp in under a minute, day and night. It asks about level, results and plans, explains intakes and books counselling sessions.">
+<meta property="og:title" content="Prex for education · WhatsApp AI assistant for consultancies, colleges and courses">
+<meta property="og:description" content="Prex answers student and parent enquiries on WhatsApp in under a minute, day and night. It asks about level, results and plans, explains intakes and books counselling sessions.">
+<meta property="og:url" content="https://prexhq.com/education/">
+<meta property="og:type" content="website">
+<meta name="theme-color" content="#0B1426">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="canonical" href="https://prexhq.com/education/">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Sora:wght@600;700&display=swap">
+<style>
+:root{
+  --midnight:#0B1426; --night:#121F3A; --night2:#16264A; --moon:#5B8CFF; --deep:#2F5FE0; --silver:#B8C2D1; --pearl:#F4F6FB;
+  --white:#FFFFFF; --ink:#0B1426; --muted:#4F5B70; --line:#DDE3EC; --bubble:#E4EBFF;
+  --radius:14px; --wrap:1160px;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+body{margin:0;font-family:Inter,system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;font-size:17px;line-height:1.6;color:var(--ink);background:var(--pearl);-webkit-font-smoothing:antialiased}
+h1,h2,h3{font-family:Sora,Inter,system-ui,sans-serif;margin:0;color:inherit}
+p{margin:0}
+a{color:var(--deep)}
+button{font:inherit}
+:focus-visible{outline:3px solid var(--moon);outline-offset:3px;border-radius:6px}
+.wrap{max-width:var(--wrap);margin:0 auto;padding:0 24px}
+.skip{position:absolute;left:-999px;top:8px;background:var(--white);color:var(--ink);padding:8px 12px;border-radius:8px;z-index:20}
+.skip:focus{left:16px}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+
+/* Buttons */
+.btn{display:inline-flex;align-items:center;justify-content:center;min-height:48px;padding:0 22px;border-radius:var(--radius);font-weight:600;font-size:16px;text-decoration:none;border:0;cursor:pointer}
+.btn-moon{background:var(--moon);color:var(--midnight)}
+.btn-moon:hover{background:#7AA2FF}
+.btn-deep{background:var(--deep);color:var(--white)}
+.btn-deep:hover{background:#2552C9}
+.btn-ghost{color:var(--pearl);border:1px solid rgba(184,194,209,.35);background:transparent}
+.btn-ghost:hover{border-color:var(--silver)}
+.btn-small{min-height:40px;padding:0 16px;font-size:15px}
+
+/* Header */
+.site-header{position:sticky;top:0;z-index:10;background:var(--midnight);border-bottom:1px solid rgba(184,194,209,.12)}
+.site-header .wrap{display:flex;align-items:center;justify-content:space-between;height:68px;gap:24px}
+.logo{display:block;line-height:0}
+.logo svg{height:30px;width:auto}
+.nav{display:flex;align-items:center;gap:26px}
+.nav a{color:var(--silver);text-decoration:none;font-size:15px}
+.nav a:hover{color:var(--white)}
+.nav .btn{color:var(--midnight)}
+
+/* Hero */
+.hero{background:var(--midnight);color:var(--pearl);overflow:hidden}
+.hero .wrap{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,440px);gap:64px;align-items:center;padding-top:64px;padding-bottom:88px}
+.hero h1{font-weight:700;font-size:clamp(46px,6.4vw,84px);line-height:1;letter-spacing:-.04em}
+.hero .lead{font-size:clamp(18px,1.6vw,21px);color:var(--silver);max-width:33em;margin-top:26px}
+.hero .actions{display:flex;flex-wrap:wrap;gap:12px;margin-top:36px}
+.hero .note{margin-top:18px;font-size:15px;color:var(--silver)}
+.hero .note strong{color:var(--pearl);font-weight:600}
+.facts-row{display:flex;flex-wrap:wrap;gap:10px 28px;margin-top:44px;padding-top:24px;border-top:1px solid rgba(184,194,209,.15);font-size:15px;color:var(--silver)}
+.facts-row b{color:var(--pearl);font-weight:600;font-family:Sora,sans-serif}
+
+/* Demo */
+.demo{display:flex;flex-direction:column;gap:14px}
+.demo-tabs{display:flex;gap:6px;background:var(--night);border:1px solid rgba(184,194,209,.14);border-radius:var(--radius);padding:5px}
+.demo-tabs button{flex:1;min-height:40px;border:0;border-radius:10px;background:transparent;color:var(--silver);font-size:14.5px;font-weight:500;cursor:pointer}
+.demo-tabs button[aria-selected="true"]{background:var(--moon);color:var(--midnight);font-weight:600}
+.phone{background:#0F1A31;border:1px solid rgba(184,194,209,.18);border-radius:40px;padding:11px;box-shadow:0 30px 80px rgba(0,0,0,.45)}
+.screen{background:var(--pearl);border-radius:30px;overflow:hidden;color:var(--ink);display:flex;flex-direction:column;height:560px}
+.chat-head{display:flex;align-items:center;gap:12px;padding:14px 18px;background:var(--white);border-bottom:1px solid var(--line);flex:none}
+.avatar{width:38px;height:38px;border-radius:50%;background:var(--midnight);display:grid;place-items:center;flex:none}
+.avatar svg{width:24px;height:auto}
+.chat-name{font-weight:600;font-size:15px;line-height:1.2}
+.chat-sub{font-size:13px;color:var(--muted)}
+.chat{list-style:none;margin:0;padding:14px 14px 10px;display:flex;flex-direction:column;gap:8px;overflow-y:auto;flex:1;scroll-behavior:smooth}
+.hint{align-self:center;text-align:center;font-size:12.5px;color:var(--muted);padding:4px 10px;max-width:90%}
+.msg{max-width:84%;padding:9px 12px 6px;border-radius:14px;font-size:14.5px;line-height:1.45;animation:pop .25s ease-out}
+.msg time{display:block;text-align:right;font-size:11px;color:var(--muted);margin-top:2px}
+.in{align-self:flex-start;background:var(--white);border:1px solid var(--line);border-top-left-radius:4px}
+.out{align-self:flex-end;background:var(--bubble);border-top-right-radius:4px}
+.typing{align-self:flex-end;background:var(--bubble);border-radius:14px;border-top-right-radius:4px;padding:10px 14px;line-height:0}
+.typing svg{width:44px;height:auto}
+.typing .m{fill:var(--deep);animation:phase 1.2s ease-in-out infinite}
+.typing .m2{animation-delay:.2s}.typing .m3{animation-delay:.4s}
+.sys{align-self:center;font-size:12.5px;color:var(--deep);background:var(--white);border:1px solid #C9D6FF;border-radius:999px;padding:5px 12px;animation:pop .25s ease-out}
+@keyframes phase{0%,100%{opacity:.35}50%{opacity:1}}
+@keyframes pop{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+.replies{flex:none;display:flex;flex-wrap:wrap;gap:6px;justify-content:flex-start;padding:10px 12px 14px;background:var(--white);border-top:1px solid var(--line);min-height:62px;align-items:center}
+.replies .label{width:100%;font-size:12px;color:var(--muted)}
+.replies button{border:1px solid #C9D6FF;background:var(--white);color:var(--deep);border-radius:999px;padding:7px 12px;font-size:14px;font-weight:500;cursor:pointer;text-align:left}
+.replies button:hover{background:var(--bubble)}
+.replies .again{background:var(--deep);color:var(--white);border-color:var(--deep)}
+.demo-caption{text-align:center;font-size:13px;color:var(--silver)}
+
+/* Sections */
+section{scroll-margin-top:80px}
+.band{padding:104px 0}
+.band h2{font-weight:600;font-size:clamp(30px,3.6vw,46px);line-height:1.1;letter-spacing:-.03em;max-width:17em}
+.band .intro{color:var(--muted);font-size:18px;max-width:36em;margin-top:16px}
+.white{background:var(--white)}
+.night{background:var(--midnight);color:var(--pearl)}
+.night .intro{color:var(--silver)}
+
+/* Calculator */
+.calc .wrap{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:64px;align-items:start}
+.calc-form{display:grid;grid-template-columns:minmax(0,1fr);gap:26px;margin-top:36px}
+.field label{display:flex;justify-content:space-between;align-items:baseline;gap:12px;font-weight:600;font-size:15.5px}
+.field label output{font-family:Sora,sans-serif;font-weight:600;color:var(--deep);font-size:17px}
+.field small{display:block;color:var(--muted);font-size:14px;margin-top:2px}
+.field input[type=range]{width:100%;margin-top:12px;accent-color:var(--deep);height:28px}
+.money{display:flex;gap:8px;margin-top:10px}
+.money select,.money input{min-height:46px;border:1px solid var(--line);border-radius:10px;padding:0 12px;font:inherit;font-size:16px;background:var(--white);color:var(--ink)}
+.money input{flex:1 1 auto;min-width:0;width:0}
+.result{background:var(--midnight);color:var(--pearl);border-radius:var(--radius);padding:36px;position:sticky;top:96px}
+.result .big{font-family:Sora,sans-serif;font-weight:700;font-size:clamp(40px,5vw,60px);letter-spacing:-.035em;line-height:1;color:var(--white);margin-top:10px}
+.result .lbl{color:var(--silver);font-size:15px}
+.result dl{display:grid;grid-template-columns:1fr auto;gap:12px 20px;margin:28px 0 0;padding-top:22px;border-top:1px solid rgba(184,194,209,.18);font-size:15.5px}
+.result dt{color:var(--silver)}
+.result dd{margin:0;font-weight:600;text-align:right}
+.result .small{margin-top:22px;font-size:13.5px;color:var(--silver)}
+.result .btn{margin-top:24px}
+
+/* Handover */
+.handover .wrap{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:64px;align-items:center}
+.facts{list-style:none;margin:36px 0 0;padding:0}
+.facts li{display:grid;grid-template-columns:132px 1fr;gap:16px;padding:16px 0;border-top:1px solid var(--line)}
+.facts li:last-child{border-bottom:1px solid var(--line)}
+.facts b{font-family:Sora,sans-serif;font-weight:600;font-size:15px}
+.facts span{color:var(--muted)}
+.lead-card{background:var(--white);border:1px solid var(--line);border-radius:var(--radius);padding:28px}
+.lead-card .from{display:flex;align-items:center;gap:10px;font-size:14px;color:var(--muted)}
+.lead-card .from .avatar{width:30px;height:30px}
+.lead-card .from .avatar svg{width:19px}
+.lead-card h3{font-weight:600;font-size:22px;letter-spacing:-.01em;margin-top:18px}
+.lead-card dl{margin:18px 0 0;display:grid;grid-template-columns:auto 1fr;gap:10px 20px;font-size:16px}
+.lead-card dt{color:var(--muted)}
+.lead-card dd{margin:0;font-weight:500}
+.lead-card .foot{margin-top:22px;padding-top:16px;border-top:1px solid var(--line);font-size:14px;color:var(--muted)}
+
+/* Steps */
+.steps{list-style:none;margin:56px 0 0;padding:0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:40px;counter-reset:s}
+.steps li{counter-increment:s;padding-top:28px;border-top:2px solid var(--midnight);position:relative}
+.steps li::before{content:counter(s);position:absolute;top:-17px;left:0;width:32px;height:32px;border-radius:50%;background:var(--midnight);color:var(--pearl);font:600 15px/32px Sora,sans-serif;text-align:center}
+.steps h3{font-weight:600;font-size:21px;letter-spacing:-.01em}
+.steps p{color:var(--muted);margin-top:10px}
+
+/* Fields and markets */
+.who-list{margin-top:48px;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:40px}
+.who-item h3{font-weight:600;font-size:21px;letter-spacing:-.01em}
+.who-item .where{font-size:14px;color:var(--deep);font-weight:500;margin-top:6px}
+.who-item p{color:var(--muted);margin-top:10px}
+.who-item ul{margin:14px 0 0;padding:0;list-style:none;display:grid;gap:6px;font-size:15px}
+.who-item li{padding-left:18px;position:relative}
+.who-item li::before{content:"";position:absolute;left:0;top:.6em;width:7px;height:7px;border-radius:50%;background:var(--moon)}
+.markets{margin-top:64px;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:24px}
+.market{border:1px solid var(--line);border-radius:var(--radius);padding:26px 28px;background:var(--white)}
+.market h3{font-weight:600;font-size:19px}
+.market p{color:var(--muted);margin-top:8px;font-size:16px}
+.langs{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
+.langs span{font-size:14px;font-weight:500;background:var(--bubble);color:var(--deep);border-radius:999px;padding:3px 12px}
+.more{margin-top:28px;color:var(--muted)}
+
+/* Trust */
+.trust-grid{margin-top:48px;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:36px 64px}
+.trust-grid h3{font-weight:600;font-size:19px;letter-spacing:-.01em}
+.trust-grid p{color:var(--muted);margin-top:8px}
+.trust-grid ul{margin:12px 0 0;padding:0;list-style:none;display:grid;gap:7px;color:var(--muted)}
+.trust-grid li{padding-left:18px;position:relative}
+.trust-grid li::before{content:"";position:absolute;left:0;top:.62em;width:7px;height:7px;border-radius:50%;background:var(--moon)}
+.who-item .more{display:inline-block;margin-top:16px;font-weight:600;font-size:15px;text-underline-offset:3px}
+
+/* Offer */
+.offer .wrap{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:56px;align-items:start}
+.offer-cards{display:grid;gap:16px}
+.offer-card{background:var(--night);border:1px solid rgba(184,194,209,.16);border-radius:var(--radius);padding:28px}
+.offer-card h3{font-weight:600;font-size:21px;color:var(--white)}
+.offer-card p{color:var(--silver);margin-top:10px}
+.offer-card .btn{margin-top:20px}
+.offer-card ol{margin:14px 0 0;padding-left:20px;color:var(--silver);display:grid;gap:6px}
+.phases{display:flex;gap:10px;margin-bottom:28px;line-height:0}
+.phases svg{height:22px;width:auto}
+
+/* Founder */
+.founder blockquote{margin:0;max-width:40em}
+.founder blockquote p{font-family:Sora,sans-serif;font-weight:600;font-size:clamp(22px,2.4vw,30px);line-height:1.35;letter-spacing:-.02em}
+.founder footer{margin-top:22px;color:var(--muted)}
+.founder footer b{color:var(--ink)}
+
+/* FAQ */
+.faq-list{margin-top:40px;max-width:800px;border-top:1px solid var(--line)}
+.faq-list details{border-bottom:1px solid var(--line)}
+.faq-list summary{cursor:pointer;list-style:none;padding:22px 40px 22px 0;font-family:Sora,sans-serif;font-weight:600;font-size:18px;position:relative}
+.faq-list summary::-webkit-details-marker{display:none}
+.faq-list summary::after{content:"";position:absolute;right:6px;top:50%;width:12px;height:12px;border-right:2px solid var(--deep);border-bottom:2px solid var(--deep);transform:translateY(-70%) rotate(45deg);transition:transform .2s}
+.faq-list details[open] summary::after{transform:translateY(-30%) rotate(225deg)}
+.faq-list details p{color:var(--muted);padding:0 0 22px;max-width:42em}
+
+/* Closing */
+.closing{text-align:center}
+.closing h2{margin:0 auto;max-width:14em}
+.closing .intro{margin:16px auto 0}
+.closing .actions{display:flex;flex-wrap:wrap;gap:12px;justify-content:center;margin-top:32px}
+.closing .phases{justify-content:center}
+
+/* Footer */
+.site-footer{background:var(--midnight);color:var(--silver);border-top:1px solid rgba(184,194,209,.12);padding:40px 0;font-size:15px}
+.site-footer .wrap{display:flex;flex-wrap:wrap;gap:20px 32px;align-items:center;justify-content:space-between}
+.site-footer .brand{display:flex;align-items:center;gap:14px}
+.site-footer .brand svg{height:24px;width:auto}
+.site-footer nav{display:flex;flex-wrap:wrap;gap:20px}
+.site-footer a{color:var(--silver);text-decoration:none}
+.site-footer a:hover{color:var(--white);text-decoration:underline}
+
+/* Responsive */
+@media (max-width:1000px){
+  .hero .wrap{grid-template-columns:minmax(0,1fr);gap:48px;padding-top:44px;padding-bottom:64px}
+  .demo{max-width:440px;width:100%;margin:0 auto}
+  .calc .wrap,.handover .wrap,.offer .wrap{grid-template-columns:minmax(0,1fr);gap:40px}
+  .result{position:static}
+  .steps,.who-list{grid-template-columns:minmax(0,1fr);gap:44px}
+  .trust-grid,.markets{grid-template-columns:minmax(0,1fr);gap:24px}
+  .nav a:not(.btn){display:none}
+}
+@media (max-width:520px){
+  body{font-size:16px}
+  .wrap{padding:0 16px}
+  .band{padding:72px 0}
+  .logo svg{height:26px}
+  .btn-small{min-height:38px;padding:0 12px;font-size:14px}
+  .hero .actions .btn{width:100%}
+  .facts li{grid-template-columns:minmax(0,1fr);gap:2px}
+  .lead-card,.result,.offer-card{padding:22px}
+  .screen{height:520px}
+}
+@media (prefers-reduced-motion:reduce){
+  .typing .m{animation:none;opacity:1}
+  .msg,.sys{animation:none}
+  .chat{scroll-behavior:auto}
+}
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="site-header">
+  <div class="wrap">
+    <a class="logo" href="/" aria-label="Prex home"><svg xmlns="http://www.w3.org/2000/svg" viewBox="-60.5 -708.9 3868.5 1129.8" role="img" aria-label="Prex"><g transform="translate(-73.81 -795.97) scale(12.3016)" fill="#5B8CFF"><path fill-rule="evenodd" d="M37 12H83A31 31 0 0 1 83 74H37A31 31 0 0 1 37 12ZM27 33A10 10 0 0 1 27 53ZM46 43A14 14 0 1 0 74 43A14 14 0 1 0 46 43ZM93 33A10 10 0 0 0 93 53Z"/><path d="M22 62Q24 84 10 94Q36 92 50 72Z"/></g><path fill="#F4F6FB" transform="translate(1517.48 0)" d="M73 200V-548H200V-311L183 -312Q187 -394 217.0 -450.5Q247 -507 298.0 -535.5Q349 -564 413 -564Q470 -564 516.5 -543.0Q563 -522 596.5 -484.5Q630 -447 647.5 -396.5Q665 -346 665 -286V-263Q665 -204 648.0 -152.5Q631 -101 598.5 -63.0Q566 -25 519.5 -3.5Q473 18 413 18Q351 18 301.5 -7.5Q252 -33 222.0 -85.5Q192 -138 189 -219L233 -159V200ZM368 -116Q409 -116 439.5 -136.0Q470 -156 487.0 -192.0Q504 -228 504 -275Q504 -322 487.0 -357.0Q470 -392 440.0 -411.5Q410 -431 368 -431Q332 -431 300.0 -414.0Q268 -397 248.5 -365.5Q229 -334 229 -289V-252Q229 -209 249.5 -178.5Q270 -148 302.0 -132.0Q334 -116 368 -116ZM741 0V-548H868V-313H865Q865 -429 914.5 -492.0Q964 -555 1058 -555H1079V-417H1039Q973 -417 937.0 -381.5Q901 -346 901 -279V0ZM1375 19Q1305 19 1251.5 -5.0Q1198 -29 1162.5 -69.5Q1127 -110 1108.5 -160.5Q1090 -211 1090 -264V-284Q1090 -339 1108.5 -389.5Q1127 -440 1162.0 -480.0Q1197 -520 1249.5 -543.5Q1302 -567 1369 -567Q1457 -567 1517.5 -527.5Q1578 -488 1610.0 -424.5Q1642 -361 1642 -286V-232H1157V-323H1545L1493 -281Q1493 -330 1479.0 -365.0Q1465 -400 1437.5 -418.5Q1410 -437 1369 -437Q1327 -437 1298.0 -418.0Q1269 -399 1254.0 -362.5Q1239 -326 1239 -273Q1239 -224 1253.0 -187.5Q1267 -151 1297.0 -131.0Q1327 -111 1375 -111Q1419 -111 1447.0 -128.0Q1475 -145 1485 -170H1632Q1620 -115 1585.0 -72.0Q1550 -29 1497.0 -5.0Q1444 19 1375 19ZM1649 0 1819 -294 1815 -269 1655 -548H1828L1927 -362H1943L2036 -548H2199L2046 -267L2050 -288L2230 0H2056L1938 -199H1922L1811 0Z"/></svg></a>
+    <nav class="nav" aria-label="Main">
+      <a href="#try">Try it</a>
+      <a href="#calculator">Missed customers</a>
+      <a href="#how">How it works</a>
+      <a href="#faq">Questions</a>
+      <a class="btn btn-moon btn-small" href="mailto:contact@prexhq.com?subject=Free%20pilot%20request&amp;body=Business%20name%3A%0AField%3A%20Education%0ACity%20and%20country%3A%0ARoughly%20how%20many%20enquiries%20you%20get%20each%20week%3A%0A%0APaste%20up%20to%2020%20recent%20customer%20questions%20below.%20Please%20remove%20names%20and%20phone%20numbers%20first.%0A%0A">Get a free pilot</a>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+  <section class="hero" id="try" aria-labelledby="hero-title">
+    <div class="wrap">
+      <div>
+        <h1 id="hero-title">Every student enquiry, answered in a minute.</h1>
+        <p class="lead">Students and parents ask about costs, intakes, scholarships and visas late in the evening, and they ask several places at once. Prex answers on WhatsApp in under a minute, asks about their level, results and plans, and books a counselling session with your team.</p>
+        <div class="actions">
+          <a class="btn btn-moon" href="mailto:contact@prexhq.com?subject=Free%20pilot%20request&amp;body=Business%20name%3A%0AField%3A%20Education%0ACity%20and%20country%3A%0ARoughly%20how%20many%20enquiries%20you%20get%20each%20week%3A%0A%0APaste%20up%20to%2020%20recent%20customer%20questions%20below.%20Please%20remove%20names%20and%20phone%20numbers%20first.%0A%0A">Get a free pilot</a>
+          <a class="btn btn-ghost" href="#calculator">See what slow replies cost you</a>
+        </div>
+        <p class="note">Try the demo on the right. Message the real Prex on WhatsApp from <strong>30 November</strong>.</p>
+        <div class="facts-row">
+          <span><b>Under a minute</b>, every reply</span>
+          <span><b>Day and night</b>, every day</span>
+          <span><b>Set up for you</b>, nothing to learn</span>
+        </div>
+      </div>
+
+      <div class="demo" id="demo">
+        <div class="phone">
+          <div class="screen">
+            <div class="chat-head">
+              <div class="avatar" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="4 10 112 86" aria-hidden="true" focusable="false"><g fill="#5B8CFF"><path fill-rule="evenodd" d="M37 12H83A31 31 0 0 1 83 74H37A31 31 0 0 1 37 12ZM27 33A10 10 0 0 1 27 53ZM46 43A14 14 0 1 0 74 43A14 14 0 1 0 46 43ZM93 33A10 10 0 0 0 93 53Z"/><path d="M22 62Q24 84 10 94Q36 92 50 72Z"/></g></svg></div>
+              <div>
+                <div class="chat-name" id="demo-name">Your business</div>
+                <div class="chat-sub">Answered by Prex in under a minute</div>
+              </div>
+            </div>
+            <ol class="chat" id="chat" aria-live="polite" aria-label="Demo conversation"></ol>
+            <div class="replies" id="replies" aria-label="Messages you can send"></div>
+          </div>
+        </div>
+        <p class="demo-caption">A demo with example details. Your Prex is set up with your own products, prices and team.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="band white calc" id="calculator" aria-labelledby="calc-title">
+    <div class="wrap">
+      <div>
+        <h2 id="calc-title">What are slow replies costing you?</h2>
+        <p class="intro">Move the sliders to match your business. Every number in the result comes from you.</p>
+        <form class="calc-form" id="calc" onsubmit="return false">
+          <div class="field">
+            <label for="c-enq">Enquiries you get each week <output id="o-enq">40</output></label>
+            <input type="range" id="c-enq" min="5" max="300" step="5" value="80">
+          </div>
+          <div class="field">
+            <label for="c-late">Share answered late or not at all <output id="o-late">30%</output></label>
+            <small>Messages at night, on weekends, or while everyone is busy. Your honest guess.</small>
+            <input type="range" id="c-late" min="5" max="80" step="5" value="40">
+          </div>
+          <div class="field">
+            <label for="c-conv">Out of 100 answered enquiries, how many become customers <output id="o-conv">3</output></label>
+            <input type="range" id="c-conv" min="1" max="20" step="1" value="5">
+          </div>
+          <div class="field">
+            <label for="c-val">What one new customer is worth to you</label>
+            <small>The profit from a typical sale, booking or client.</small>
+            <div class="money">
+              <select id="c-cur" aria-label="Currency">
+                <option value="USD">USD</option>
+                <option value="EUR">EUR</option>
+                <option value="GBP">GBP</option>
+                <option value="AED">AED</option>
+                <option value="INR">INR</option>
+                <option value="NPR">NPR</option>
+              </select>
+              <input type="number" id="c-val" min="0" step="50" value="400" inputmode="numeric" aria-label="Value of one new customer">
+            </div>
+          </div>
+        </form>
+      </div>
+      <div class="result" aria-live="polite">
+        <div class="lbl">Each month, about</div>
+        <div class="big" id="r-missed">52</div>
+        <div class="lbl">enquiries wait too long or get no answer.</div>
+        <dl>
+          <dt>Customers you could win back</dt><dd id="r-cust">1.6</dd>
+          <dt>What they are worth each month</dt><dd id="r-val">USD 780</dd>
+          <dt>Over a year</dt><dd id="r-year">USD 9,360</dd>
+        </dl>
+        <p class="small">An estimate from your own numbers, not a promise. It shows what's at stake when a message waits.</p>
+        <a class="btn btn-moon" href="mailto:contact@prexhq.com?subject=Free%20pilot%20request&amp;body=Business%20name%3A%0AField%3A%20Education%0ACity%20and%20country%3A%0ARoughly%20how%20many%20enquiries%20you%20get%20each%20week%3A%0A%0APaste%20up%20to%2020%20recent%20customer%20questions%20below.%20Please%20remove%20names%20and%20phone%20numbers%20first.%0A%0A">Get a free pilot</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="band handover" aria-labelledby="handover-title">
+    <div class="wrap">
+      <div>
+        <h2 id="handover-title">By morning, your counsellors know exactly who to call.</h2>
+        <p class="intro">Prex doesn't replace your people. It makes sure no enquiry waits, then passes each lead on with the details already collected.</p>
+        <ul class="facts">
+          <li><b>Answered</b><span>In under a minute, at any hour, including the late-evening questions from students and parents.</span></li>
+          <li><b>Qualified</b><span>Level, field, countries, last results, English test and the intake they're aiming for.</span></li>
+          <li><b>Booked</b><span>A free counselling session with the right counsellor.</span></li>
+          <li><b>Handed over</b><span>A short student profile goes to your team before the session.</span></li>
+        </ul>
+      </div>
+      <div class="lead-card" aria-label="Example summary sent to the team">
+        <div class="from"><span class="avatar" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="4 10 112 86" aria-hidden="true" focusable="false"><g fill="#5B8CFF"><path fill-rule="evenodd" d="M37 12H83A31 31 0 0 1 83 74H37A31 31 0 0 1 37 12ZM27 33A10 10 0 0 1 27 53ZM46 43A14 14 0 1 0 74 43A14 14 0 1 0 46 43ZM93 33A10 10 0 0 0 93 53Z"/><path d="M22 62Q24 84 10 94Q36 92 50 72Z"/></g></svg></span>New student lead from Prex, to Sita</div>
+        <h3>Rohan wants to study a master's abroad</h3>
+        <dl>
+          <dt>Course</dt><dd>Master's in IT</dd>
+          <dt>Countries</dt><dd>Australia or the UK</dd>
+          <dt>Last result</dt><dd>Strong bachelor's result</dd>
+          <dt>Intake</dt><dd>Next September</dd>
+          <dt>Session</dt><dd>Tomorrow, 11:00</dd>
+          <dt>First message</dt><dd>21:52, answered the same minute</dd>
+        </dl>
+        <p class="foot">The full conversation is attached, so your counsellor starts with the facts.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="band white" id="how" aria-labelledby="how-title">
+    <div class="wrap">
+      <h2 id="how-title">How it works</h2>
+      <p class="intro">No software to learn and no one to hire. We set Prex up around your business and keep it running.</p>
+      <ol class="steps">
+        <li>
+          <h3>We set it up with you</h3>
+          <p>Your products or services, prices, the questions your team always asks, your hours and who takes over. You approve every answer before it goes live.</p>
+        </li>
+        <li>
+          <h3>Prex answers every message</h3>
+          <p>Day and night, in under a minute, on your business's WhatsApp number. It only talks about your business.</p>
+        </li>
+        <li>
+          <h3>Your team takes over</h3>
+          <p>Each lead arrives with a short summary, so your people spend their time on customers who are ready.</p>
+        </li>
+      </ol>
+    </div>
+  </section>
+
+  <section class="band" id="who" aria-labelledby="who-title">
+    <div class="wrap">
+      <h2 id="who-title">What Prex handles for your consultancy</h2>
+      <div class="trust-grid">
+        <div>
+          <h3>Questions it answers</h3>
+          <ul><li>How much does it cost to study in Australia?</li><li>When is the next intake?</li><li>Which English test do I need?</li><li>Which documents should I prepare?</li></ul>
+        </div>
+        <div>
+          <h3>Details it collects</h3>
+          <ul><li>Level and field of study</li><li>Countries they're considering</li><li>Last results and English test</li><li>Intake and budget</li></ul>
+        </div>
+        <div>
+          <h3>What it books</h3>
+          <ul><li>Free counselling sessions</li><li>Calls with parents who want to talk first</li><li>Reminders before every session</li></ul>
+        </div>
+        <div>
+          <h3>What it never does</h3>
+          <ul><li>Promises a visa or an admission</li><li>Gives costs or deadlines you haven't approved</li><li>Pretends to be a counsellor</li></ul>
+        </div>
+      </div>
+      <div class="markets">
+        <div class="market">
+          <h3>Speaks your customers' language</h3>
+          <p>Prex replies in the language your customer writes in. We test every language with you before it goes live.</p>
+          <div class="langs"><span>English</span><span>Arabic</span><span>Hindi</span><span>Nepali</span><span>and more</span></div>
+        </div>
+        <div class="market">
+          <h3>Works wherever your customers are</h3>
+          <p>Prex runs online, so your business can be anywhere. Travel, shops, gyms, restaurants and services: if your customers message you, Prex can help.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="band white" aria-labelledby="trust-title">
+    <div class="wrap">
+      <h2 id="trust-title">Built to be trusted</h2>
+      <div class="trust-grid">
+        <div>
+          <h3>On the official WhatsApp Business Platform</h3>
+          <p>Prex runs on Meta's official platform for businesses, not a workaround that puts your number at risk.</p>
+        </div>
+        <div>
+          <h3>Stays on topic</h3>
+          <p>It answers questions about your business only, from information you approve, and passes anything else to your team.</p>
+        </div>
+        <div>
+          <h3>A person whenever they want one</h3>
+          <p>Prex says it's your assistant. Customers can ask for a person at any time, and the chat goes straight to your team.</p>
+        </div>
+        <div>
+          <h3>Your customers' messages stay private</h3>
+          <p>They're used only to answer your customers and pass leads to your team. Read our <a href="/privacy.html">privacy policy</a>.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="band night offer" id="pilot" aria-labelledby="offer-title">
+    <div class="wrap">
+      <div>
+        <div class="phases" aria-hidden="true"><svg viewBox="20 27 80 32" aria-hidden="true" focusable="false" fill="#5B8CFF"><path d="M27 33A10 10 0 0 1 27 53Z"/><circle cx="60" cy="43" r="14"/><path d="M93 33A10 10 0 0 0 93 53Z"/></svg></div>
+        <h2 id="offer-title">See it on your own customers, free</h2>
+        <p class="intro">Prex launches on 30 November. Before you decide anything, we'll show you how it would have answered your real enquiries.</p>
+      </div>
+      <div class="offer-cards">
+        <div class="offer-card">
+          <h3>Free pilot</h3>
+          <ol>
+            <li>Send us up to 20 recent customer questions, with names and numbers removed.</li>
+            <li>Within two working days, we show you how Prex would have answered each one.</li>
+            <li>You decide. No cost and no commitment.</li>
+          </ol>
+          <a class="btn btn-moon" href="mailto:contact@prexhq.com?subject=Free%20pilot%20request&amp;body=Business%20name%3A%0AField%3A%20Education%0ACity%20and%20country%3A%0ARoughly%20how%20many%20enquiries%20you%20get%20each%20week%3A%0A%0APaste%20up%20to%2020%20recent%20customer%20questions%20below.%20Please%20remove%20names%20and%20phone%20numbers%20first.%0A%0A">Get a free pilot</a>
+        </div>
+        <div class="offer-card">
+          <h3>Founding clients</h3>
+          <p>The first five businesses get setup free and their first month free. After that, a simple monthly plan, agreed with you before anything is charged.</p>
+          <a class="btn btn-ghost" href="mailto:contact@prexhq.com?subject=Founding%20client%20enquiry&amp;body=Business%20name%3A%0AWebsite%20or%20Instagram%3A%0AWhat%20you%20sell%3A%0ACity%3A%0A">Become a founding client</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="band founder" aria-labelledby="founder-title">
+    <div class="wrap">
+      <h2 id="founder-title" class="sr">From the founder</h2>
+      <blockquote>
+        <p>"Good businesses lose customers for one simple reason: nobody answered in time. I built Prex so every message gets a fast, helpful reply, and every lead reaches your team."</p>
+        <footer><b>Harish Joshi</b>, founder of Prex</footer>
+      </blockquote>
+    </div>
+  </section>
+
+  <section class="band white" id="faq" aria-labelledby="faq-title">
+    <div class="wrap">
+      <h2 id="faq-title">Questions</h2>
+      <div class="faq-list">
+        <details>
+          <summary>Will Prex promise visas or admissions?</summary>
+          <p>No. It explains the steps and the information you approve, collects the student's details and books a session. Your counsellors give the advice.</p>
+        </details>
+        <details>
+          <summary>Can it talk to parents as well as students?</summary>
+          <p>Yes. It replies in the language each person writes in and passes every conversation to your team.</p>
+        </details>
+        <details>
+          <summary>Can it share our course and intake details?</summary>
+          <p>Yes, from the information you give us. When intakes or fees change, we update Prex.</p>
+        </details>
+        <details>
+          <summary>Will my customers know they're talking to an assistant?</summary>
+          <p>Yes. Prex introduces itself as your business's assistant, and a customer can ask for a person at any time.</p>
+        </details>
+        <details>
+          <summary>Does Prex replace my team?</summary>
+          <p>No. It answers first, collects the details and books the next step. Your team still talks to the customer and closes the deal.</p>
+        </details>
+        <details>
+          <summary>Which WhatsApp number does it use?</summary>
+          <p>Your business's own number, connected to the official WhatsApp Business Platform. We set it up with you.</p>
+        </details>
+        <details>
+          <summary>Which languages does it speak?</summary>
+          <p>Prex replies in the language your customer writes in, including English, Arabic, Hindi and Nepali. We test every language with you during setup before it goes live.</p>
+        </details>
+        <details>
+          <summary>What if a customer asks something Prex doesn't know?</summary>
+          <p>It says so politely and passes the question to your team. It never makes up prices, availability or advice.</p>
+        </details>
+        <details>
+          <summary>What does it cost?</summary>
+          <p>The pilot is free. Founding clients get setup and their first month free. After that, there's a simple monthly plan, and we agree the price with you before anything is charged.</p>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <section class="band night closing" aria-labelledby="closing-title">
+    <div class="wrap">
+      <div class="phases" aria-hidden="true"><svg viewBox="20 27 80 32" aria-hidden="true" focusable="false" fill="#5B8CFF"><path d="M27 33A10 10 0 0 1 27 53Z"/><circle cx="60" cy="43" r="14"/><path d="M93 33A10 10 0 0 0 93 53Z"/></svg></div>
+      <h2 id="closing-title">Your next customer is already typing.</h2>
+      <p class="intro">Make sure someone answers.</p>
+      <div class="actions">
+        <a class="btn btn-moon" href="mailto:contact@prexhq.com?subject=Free%20pilot%20request&amp;body=Business%20name%3A%0AField%3A%20Education%0ACity%20and%20country%3A%0ARoughly%20how%20many%20enquiries%20you%20get%20each%20week%3A%0A%0APaste%20up%20to%2020%20recent%20customer%20questions%20below.%20Please%20remove%20names%20and%20phone%20numbers%20first.%0A%0A">Get a free pilot</a>
+        <a class="btn btn-ghost" href="#try">Try the demo again</a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="brand"><svg xmlns="http://www.w3.org/2000/svg" viewBox="-60.5 -708.9 3868.5 1129.8" role="img" aria-label="Prex"><g transform="translate(-73.81 -795.97) scale(12.3016)" fill="#5B8CFF"><path fill-rule="evenodd" d="M37 12H83A31 31 0 0 1 83 74H37A31 31 0 0 1 37 12ZM27 33A10 10 0 0 1 27 53ZM46 43A14 14 0 1 0 74 43A14 14 0 1 0 46 43ZM93 33A10 10 0 0 0 93 53Z"/><path d="M22 62Q24 84 10 94Q36 92 50 72Z"/></g><path fill="#F4F6FB" transform="translate(1517.48 0)" d="M73 200V-548H200V-311L183 -312Q187 -394 217.0 -450.5Q247 -507 298.0 -535.5Q349 -564 413 -564Q470 -564 516.5 -543.0Q563 -522 596.5 -484.5Q630 -447 647.5 -396.5Q665 -346 665 -286V-263Q665 -204 648.0 -152.5Q631 -101 598.5 -63.0Q566 -25 519.5 -3.5Q473 18 413 18Q351 18 301.5 -7.5Q252 -33 222.0 -85.5Q192 -138 189 -219L233 -159V200ZM368 -116Q409 -116 439.5 -136.0Q470 -156 487.0 -192.0Q504 -228 504 -275Q504 -322 487.0 -357.0Q470 -392 440.0 -411.5Q410 -431 368 -431Q332 -431 300.0 -414.0Q268 -397 248.5 -365.5Q229 -334 229 -289V-252Q229 -209 249.5 -178.5Q270 -148 302.0 -132.0Q334 -116 368 -116ZM741 0V-548H868V-313H865Q865 -429 914.5 -492.0Q964 -555 1058 -555H1079V-417H1039Q973 -417 937.0 -381.5Q901 -346 901 -279V0ZM1375 19Q1305 19 1251.5 -5.0Q1198 -29 1162.5 -69.5Q1127 -110 1108.5 -160.5Q1090 -211 1090 -264V-284Q1090 -339 1108.5 -389.5Q1127 -440 1162.0 -480.0Q1197 -520 1249.5 -543.5Q1302 -567 1369 -567Q1457 -567 1517.5 -527.5Q1578 -488 1610.0 -424.5Q1642 -361 1642 -286V-232H1157V-323H1545L1493 -281Q1493 -330 1479.0 -365.0Q1465 -400 1437.5 -418.5Q1410 -437 1369 -437Q1327 -437 1298.0 -418.0Q1269 -399 1254.0 -362.5Q1239 -326 1239 -273Q1239 -224 1253.0 -187.5Q1267 -151 1297.0 -131.0Q1327 -111 1375 -111Q1419 -111 1447.0 -128.0Q1475 -145 1485 -170H1632Q1620 -115 1585.0 -72.0Q1550 -29 1497.0 -5.0Q1444 19 1375 19ZM1649 0 1819 -294 1815 -269 1655 -548H1828L1927 -362H1943L2036 -548H2199L2046 -267L2050 -288L2230 0H2056L1938 -199H1922L1811 0Z"/></svg><span>Every customer, seen.</span></div>
+    <nav aria-label="Footer">
+      <a href="/property/">Property</a>
+      <a href="/clinics/">Clinics</a>
+      <a href="/education/">Education</a>
+      <a href="/privacy.html">Privacy policy</a>
+      <a href="/terms.html">Terms of service</a>
+      <a href="mailto:contact@prexhq.com">contact@prexhq.com</a>
+    </nav>
+    <span>&copy; 2026 Prex</span>
+  </div>
+</footer>
+
+<script>
+(function(){
+  /* ---------- Demo ---------- */
+  var TYPING = '<svg viewBox="20 27 80 32" aria-hidden="true" focusable="false"><path class="m m1" d="M27 33A10 10 0 0 1 27 53Z"/><circle class="m m2" cx="60" cy="43" r="14"/><path class="m m3" d="M93 33A10 10 0 0 0 93 53Z"/></svg>';
+  var S = {
+    property: { name: 'Your property business', steps: [
+      [ ['Is the 2-bedroom apartment from your ad still available?', "Hi! Yes, it's available: 2 bedrooms, 2 bathrooms, close to the city centre. Are you looking to buy or rent?"],
+        ['Do you have any 1-bedroom flats?', "Hi! Yes, we have three 1-bedroom flats available right now. Are you looking to buy or rent?"] ],
+      [ ['Buy', "Great. When would you like to move?"],
+        ['Rent', "Great. When would you like to move in?"] ],
+      [ ['This month', "Perfect timing. Can I book you a viewing this weekend: Saturday 11:00 or Sunday 16:00?"],
+        ['In 2 to 3 months', "Good to know. It's worth seeing it now. Saturday 11:00 or Sunday 16:00?"],
+        ['Just looking', "No problem. A quick viewing helps you compare. Saturday 11:00 or Sunday 16:00?"] ],
+      [ ['Saturday 11:00', "You're booked for Saturday at 11:00. Sam from our team will message you in the morning to confirm."],
+        ['Sunday 16:00', "You're booked for Sunday at 16:00. Sam from our team will message you in the morning to confirm."] ]
+    ], done: 'Lead summary sent to Sam' },
+    clinic: { name: 'Your clinic', steps: [
+      [ ['How much is teeth whitening?', "Hi! In-clinic whitening takes about an hour, and we confirm the exact price at a short check first. What would you like to book?"],
+        ['Do you have a slot tomorrow?', "Hi! Yes, tomorrow we have 10:30 and 17:00 free. What would you like to book?"] ],
+      [ ['Check-up', "Noted: a check-up. Have you visited us before?"],
+        ['Whitening', "Noted: whitening. Have you visited us before?"],
+        ['Braces consultation', "Noted: a braces consultation. Have you visited us before?"] ],
+      [ ['Yes', "Welcome back! Which time suits you tomorrow: 10:30 or 17:00?"],
+        ['No, first time', "Welcome! Which time suits you tomorrow: 10:30 or 17:00?"] ],
+      [ ['10:30', "You're booked for tomorrow at 10:30. We'll send a reminder. Any medical questions, our dentist will answer in person."],
+        ['17:00', "You're booked for tomorrow at 17:00. We'll send a reminder. Any medical questions, our dentist will answer in person."] ]
+    ], done: 'Booking sent to the front desk' },
+    study: { name: 'Your education consultancy', steps: [
+      [ ['How much does it cost to study in Australia?', "Hello! It depends on the course and the city, and our counsellor will give you exact costs. Which level are you planning?"],
+        ['When is the next UK intake?', "Hello! The UK has two main intakes, September and January. Which level are you planning?"] ],
+      [ ["Bachelor's", "Great. What was your last result, as a grade or percentage?"],
+        ["Master's", "Great. What was your bachelor's result, as a grade or percentage?"] ],
+      [ ['A strong result', "That opens many good options. Shall I book you a free counselling session?"],
+        ['An average result', "There are still good options, and our counsellor will help you choose. Shall I book you a free counselling session?"] ],
+      [ ['Tomorrow 11:00', "Booked for tomorrow at 11:00. Sita from our team will call you before the session."],
+        ['Tomorrow 15:00', "Booked for tomorrow at 15:00. Sita from our team will call you before the session."] ]
+    ], done: 'Student details sent to Sita' }
+  };
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var chat = document.getElementById('chat'), replies = document.getElementById('replies'), nameEl = document.getElementById('demo-name');
+  var tabs = Array.prototype.slice.call(document.querySelectorAll('.demo-tabs button'));
+  var cur = 'property', step = 0, minute = 47, busy = false, timers = [];
+
+  function clock(advance){ if (advance) minute++; return '23:' + (minute < 10 ? '0' + minute : minute); }
+  function add(cls, html){ var li = document.createElement('li'); li.className = cls; li.innerHTML = html; chat.appendChild(li); chat.scrollTop = chat.scrollHeight; return li; }
+  function esc(t){ return t.replace(/&/g,'&amp;').replace(/</g,'&lt;'); }
+  function clearTimers(){ timers.forEach(clearTimeout); timers = []; }
+
+  function renderReplies(){
+    replies.innerHTML = '';
+    var sc = S[cur];
+    if (step >= sc.steps.length){
+      var b = document.createElement('button'); b.className = 'again'; b.type = 'button'; b.textContent = 'Start again';
+      b.onclick = function(){ start(cur); }; replies.appendChild(b); chat.scrollTop = chat.scrollHeight; return;
+    }
+    var lab = document.createElement('div'); lab.className = 'label'; lab.textContent = 'Tap to send:'; replies.appendChild(lab);
+    sc.steps[step].forEach(function(opt){
+      var b = document.createElement('button'); b.type = 'button'; b.textContent = opt[0];
+      b.onclick = function(){ send(opt); }; replies.appendChild(b);
+    });
+    chat.scrollTop = chat.scrollHeight;
+  }
+  function send(opt){
+    if (busy) return; busy = true;
+    var hint = chat.querySelector('.hint'); if (hint) hint.remove();
+    replies.innerHTML = '';
+    add('msg in', esc(opt[0]) + '<time>' + clock(true) + '</time>');
+    var t = reduce ? 0 : 450;
+    timers.push(setTimeout(function(){
+      var typing = add('typing', TYPING);
+      timers.push(setTimeout(function(){
+        typing.remove();
+        add('msg out', esc(opt[1]) + '<time>' + clock(false) + '</time>');
+        step++; busy = false;
+        if (step >= S[cur].steps.length) add('sys', esc(S[cur].done));
+        renderReplies();
+      }, reduce ? 0 : 1100));
+    }, t));
+  }
+  function start(key){
+    clearTimers(); busy = false; cur = key; step = 0; minute = 47;
+    nameEl.textContent = S[key].name;
+    tabs.forEach(function(t){ t.setAttribute('aria-selected', t.dataset.s === key ? 'true' : 'false'); });
+    chat.innerHTML = '';
+    /* Show the opening exchange straight away, then hand over to the visitor. */
+    var first = S[key].steps[0][0];
+    add('msg in', esc(first[0]) + '<time>' + clock(false) + '</time>');
+    add('msg out', esc(first[1]) + '<time>' + clock(false) + '</time>');
+    add('hint', "You're the customer now. Tap a reply below to carry on.");
+    step = 1;
+    renderReplies();
+  }
+  tabs.forEach(function(t){ t.addEventListener('click', function(){ start(t.dataset.s); }); });
+  start('study');
+
+  /* ---------- Calculator ---------- */
+  var $ = function(id){ return document.getElementById(id); };
+  var enq = $('c-enq'), late = $('c-late'), conv = $('c-conv'), val = $('c-val'), cur$ = $('c-cur');
+  var DEF = { USD: 400, EUR: 400, GBP: 300, AED: 1500, INR: 30000, NPR: 50000 }, lastCur = 'USD';
+  function fmt(n){ return Math.round(n).toLocaleString('en-US'); }
+  function calc(){
+    var perMonth = (+enq.value) * 52 / 12;
+    var missed = perMonth * (+late.value) / 100;
+    var cust = missed * (+conv.value) / 100;
+    var worth = cust * Math.max(0, +val.value || 0);
+    $('o-enq').textContent = enq.value; $('o-late').textContent = late.value + '%'; $('o-conv').textContent = conv.value;
+    $('r-missed').textContent = fmt(missed);
+    $('r-cust').textContent = cust < 10 ? (Math.round(cust * 10) / 10).toString() : fmt(cust);
+    $('r-val').textContent = cur$.value + ' ' + fmt(worth);
+    $('r-year').textContent = cur$.value + ' ' + fmt(worth * 12);
+  }
+  cur$.addEventListener('change', function(){
+    if (+val.value === DEF[lastCur]) val.value = DEF[cur$.value];
+    lastCur = cur$.value; calc();
+  });
+  [enq, late, conv, val].forEach(function(el){ el.addEventListener('input', calc); });
+  calc();
+})();
+</script>
+</body>
+</html>
