@@ -13,6 +13,7 @@
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Organization","name":"Prex","url":"https://prexhq.com/","logo":"https://prexhq.com/assets/prex-logo-512.png","email":"contact@prexhq.com","description":"An AI front desk that answers businesses' customers on WhatsApp in under a minute, day and night.","founder":{"@type":"Person","name":"Harish Joshi"},"sameAs":["https://www.facebook.com/profile.php?id=61596306454672","https://www.instagram.com/prex.hq/","https://www.linkedin.com/company/prexhq/","https://x.com/prex_hq","https://www.youtube.com/@prexhq"]}</script>
 <meta name="theme-color" content="#0B1426">
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
 <link rel="canonical" href="https://prexhq.com/">
@@ -239,8 +240,10 @@ section{scroll-margin-top:80px}
 /* Founder */
 .founder blockquote{margin:0;max-width:40em}
 .founder blockquote p{font-family:Sora,sans-serif;font-weight:600;font-size:clamp(22px,2.4vw,30px);line-height:1.35;letter-spacing:-.02em}
-.founder footer{margin-top:22px;color:var(--muted)}
-.founder footer b{color:var(--ink)}
+.founder footer{margin-top:24px;color:var(--muted);display:flex;flex-direction:column;gap:2px}
+.founder footer b{color:var(--ink);font-family:Sora,sans-serif;font-weight:600;font-size:18px}
+.founder-row{display:grid;grid-template-columns:minmax(0,300px) minmax(0,1fr);gap:56px;align-items:center}
+.founder-row img{display:block;width:100%;height:auto;border-radius:24px;box-shadow:0 24px 60px -24px rgba(11,20,38,.45)}
 
 /* FAQ */
 .faq-list{margin-top:40px;max-width:800px;border-top:1px solid var(--line)}
@@ -284,6 +287,8 @@ section{scroll-margin-top:80px}
   .trust-grid,.markets{grid-template-columns:minmax(0,1fr);gap:24px}
   .nav a:not(.btn){display:none}
   .foot-top{grid-template-columns:minmax(0,1fr)}
+  .founder-row{grid-template-columns:minmax(0,1fr);gap:28px}
+  .founder-row picture{max-width:260px}
   .foot-cols{grid-template-columns:repeat(2,minmax(0,1fr))}
 }
 @media (max-width:520px){
@@ -602,10 +607,16 @@ section{scroll-margin-top:80px}
   <section class="band founder" aria-labelledby="founder-title">
     <div class="wrap">
       <h2 id="founder-title" class="sr">From the founder</h2>
-      <blockquote>
-        <p>"Good businesses lose customers for one simple reason: nobody answered in time. I built Prex so every message gets a fast, helpful reply, and every lead reaches your team."</p>
-        <footer><b>Harish Joshi</b>, founder of Prex</footer>
-      </blockquote>
+      <div class="founder-row">
+        <picture>
+          <source srcset="/assets/harish-joshi-founder.webp" type="image/webp">
+          <img src="/assets/harish-joshi-founder.jpg" width="560" height="560" loading="lazy" alt="Harish Joshi, founder of Prex, working at his laptop">
+        </picture>
+        <blockquote>
+          <p>"Good businesses lose customers for one simple reason: nobody answered in time. I built Prex so every message gets a fast, helpful reply, and every lead reaches your team."</p>
+          <footer><b>Harish Joshi</b><span>Founder, Prex</span></footer>
+        </blockquote>
+      </div>
     </div>
   </section>
 
@@ -666,7 +677,7 @@ section{scroll-margin-top:80px}
         <div><h2>Product</h2><a href="/#try">Try the demo</a><a href="/#how">How it works</a><a href="/#pilot">Free pilot</a><a href="/#faq">Questions</a></div>
         <div><h2>Industries</h2><a href="/property/">Property</a><a href="/clinics/">Clinics</a><a href="/education/">Education</a></div>
         <div><h2>Company</h2><a href="/trust/">Trust</a><a href="/privacy.html">Privacy policy</a><a href="/terms.html">Terms of service</a><a href="mailto:contact@prexhq.com">contact@prexhq.com</a></div>
-        <div><h2>Follow</h2><!--SOCIAL--><a href="https://www.instagram.com/prex.hq/" rel="me noopener" target="_blank">Instagram</a><a href="https://www.youtube.com/@prexhq" rel="me noopener" target="_blank">YouTube</a></div>
+        <div><h2>Follow</h2><a href="https://www.facebook.com/profile.php?id=61596306454672" rel="me noopener" target="_blank">Facebook</a><a href="https://www.instagram.com/prex.hq/" rel="me noopener" target="_blank">Instagram</a><a href="https://www.linkedin.com/company/prexhq/" rel="me noopener" target="_blank">LinkedIn</a><a href="https://x.com/prex_hq" rel="me noopener" target="_blank">X</a><a href="https://www.youtube.com/@prexhq" rel="me noopener" target="_blank">YouTube</a></div>
       </nav>
     </div>
     <div class="foot-bottom"><span>&copy; 2026 Prex. Built in Nepal for businesses everywhere.</span></div>
