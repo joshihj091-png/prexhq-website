@@ -1,0 +1,194 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Example chat · Prex Demo Store</title>
+<meta name="description" content="An example WhatsApp conversation between a buyer abroad and the Prex assistant on a demo export store.">
+<meta name="robots" content="noindex">
+<link rel="canonical" href="https://prexhq.com/export/demo/chat/">
+<meta name="theme-color" content="#1D2A26">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;700;800&family=Inter:wght@400;500;600&display=swap">
+<style>
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:#F4F6F5;color:#1D2A26;font:17px/1.55 Inter,system-ui,sans-serif}
+a{color:#2C5A4B}a:hover{color:#1D2A26}
+:focus-visible{outline:3px solid #2C5A4B;outline-offset:3px}
+h1,h2,h3{margin:0}
+p{margin:0}
+.wrap{max-width:1200px;margin:0 auto;padding:0 32px}
+.demo-bar{background:#1D2A26;color:#F4F6F5;padding:10px 24px;text-align:center;font-size:14px}
+.demo-bar a{color:#E3C58F;font-weight:600;margin-left:6px}
+.top{border-bottom:1px solid #DCE3DF}
+.top .wrap{display:flex;align-items:center;justify-content:space-between;gap:20px;flex-wrap:wrap;padding-top:18px;padding-bottom:18px}
+.brand{display:flex;align-items:center;gap:10px;text-decoration:none;color:#1D2A26}
+.brand span{font:800 24px/1 Archivo,Inter,sans-serif;letter-spacing:.16em}
+.top nav{display:flex;align-items:center;gap:24px;flex-wrap:wrap;font-size:15px}
+.top nav a{color:#1D2A26;text-decoration:none;font-weight:500}
+.pill{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:44px;padding:13px 26px;border-radius:999px;font-weight:600;text-decoration:none;border:1.5px solid #1D2A26;color:#1D2A26;background:transparent;font-size:16px;line-height:1.2;cursor:pointer}
+.pill.dark{background:#1D2A26;color:#F4F6F5}
+.pill.dark:hover{background:#2C5A4B;border-color:#2C5A4B;color:#F4F6F5}
+.pill.small{padding:10px 18px;font-size:15px}
+.pill.sand{background:#E3C58F;border-color:#E3C58F;color:#1D2A26}
+.pill.line-sand{border-color:#E3C58F;color:#F4F6F5}
+.hero{padding:64px 0 88px}
+.hero .wrap{display:flex;gap:56px;align-items:center;flex-wrap:wrap}
+.hero .copy{flex:1 1 500px;min-width:0;display:flex;flex-direction:column;gap:22px}
+.eyebrow{font-size:14px;font-weight:600;letter-spacing:.14em;color:#2C5A4B}
+.hero h1{font:800 clamp(42px,6vw,66px)/1.03 Archivo,Inter,sans-serif;letter-spacing:-.02em}
+.hero .copy>p{font-size:20px;color:#3E4A45;max-width:540px}
+.row{display:flex;gap:14px;flex-wrap:wrap}
+.ticks{margin:8px 0 0;padding:0;list-style:none;display:flex;gap:22px;flex-wrap:wrap;font-size:15px;color:#3E4A45}
+.art{flex:1 1 420px;max-width:540px;height:440px;background:#DCE5E1;border-radius:28px;position:relative;overflow:hidden}
+.art svg{position:absolute;left:0;bottom:0}
+.bar{position:absolute;border-radius:999px;box-shadow:inset 0 -10px 0 rgba(120,84,30,.14)}
+.sec{padding:96px 0}
+.sec.white{background:#FFFFFF}
+.sec h2{font:800 clamp(30px,4vw,42px)/1.1 Archivo,Inter,sans-serif;letter-spacing:-.01em}
+.shop{padding:0 0 96px}
+.shop-head{display:flex;justify-content:space-between;align-items:flex-end;gap:16px;flex-wrap:wrap;margin-bottom:32px}
+.shop-head h2{font:800 clamp(30px,4vw,42px)/1.1 Archivo,Inter,sans-serif;letter-spacing:-.01em}
+.note{font-size:14px;color:#5A6661}
+.cards{display:flex;gap:20px;flex-wrap:wrap}
+.card{flex:1 1 240px;background:#FFFFFF;border:1px solid #DCE3DF;border-radius:20px;padding:20px;text-decoration:none;color:#1D2A26;display:flex;flex-direction:column;gap:14px}
+.card:hover{border-color:#2C5A4B;color:#1D2A26}
+.card .ph{height:150px;background:#EEF2F0;border-radius:14px;display:flex;align-items:center;justify-content:center}
+.card .ph span{border-radius:999px;background:#E3C58F;transform:rotate(-10deg)}
+.card b{font:700 22px/1.2 Archivo,Inter,sans-serif}
+.card small{font-size:15px;color:#4D5955}
+.card em{font-style:normal;font-weight:600}
+.story-head{max-width:680px;display:flex;flex-direction:column;gap:12px;margin-bottom:40px}
+.story-head p{color:#3E4A45}
+.steps{margin:0;padding:0;list-style:none;display:flex;gap:20px;flex-wrap:wrap}
+.steps li{flex:1 1 300px;background:#F4F6F5;border-radius:20px;padding:28px;display:flex;flex-direction:column;gap:10px}
+.steps .n{font:800 38px/1 Archivo,Inter,sans-serif;color:#2C5A4B}
+.steps h3{font-size:20px;font-weight:600}
+.steps p{color:#3E4A45}
+.why .wrap{display:flex;gap:48px;flex-wrap:wrap;align-items:flex-start}
+.why h2{flex:1 1 360px}
+.why ul{flex:1 1 480px;margin:0;padding:0;list-style:none;display:flex;flex-direction:column;gap:16px}
+.why li{display:flex;gap:12px}
+.why svg{flex:none;margin-top:3px}
+.wholesale{background:#1D2A26;color:#F4F6F5;padding:96px 0}
+.wholesale .wrap{display:flex;gap:48px;flex-wrap:wrap;align-items:center}
+.wholesale .copy{flex:1 1 520px;min-width:0;display:flex;flex-direction:column;gap:18px}
+.wholesale h2{font:800 clamp(30px,4vw,44px)/1.1 Archivo,Inter,sans-serif;letter-spacing:-.01em}
+.wholesale p{color:#C5D2CC}
+.wholesale .row{flex:1 1 300px}
+.foot{background:#142019;color:#B4C2BC;padding:36px 0;font-size:15px}
+.foot .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
+.foot a{color:#DCE5E1}
+.foot nav{display:flex;gap:20px;flex-wrap:wrap}
+/* product */
+.pmain{padding-top:28px;padding-bottom:80px;display:flex;flex-direction:column;gap:28px}
+.crumbs{font-size:14px;color:#5A6661}
+.pgrid{display:flex;gap:56px;flex-wrap:wrap;align-items:flex-start}
+.gallery{flex:1 1 480px;min-width:0;display:flex;flex-direction:column;gap:14px}
+.photo{height:480px;background:#DCE5E1;border-radius:24px;position:relative;overflow:hidden}
+.photo .tag{position:absolute;right:18px;bottom:16px;font-size:13px;color:#3E4A45;background:#F4F6F5;padding:4px 10px;border-radius:999px}
+.thumbs{display:flex;gap:12px}
+.thumbs span{flex:1;height:96px;border-radius:14px;background:#E6ECE9}
+.thumbs span:first-child{background:#DCE5E1;border:2px solid #1D2A26}
+.buy{flex:1 1 420px;min-width:0;display:flex;flex-direction:column;gap:20px}
+.buy h1{font:800 clamp(34px,4vw,46px)/1.05 Archivo,Inter,sans-serif;letter-spacing:-.01em}
+.buy .sub{color:#3E4A45;margin-top:8px}
+.price{display:flex;align-items:baseline;gap:12px;flex-wrap:wrap}
+.price strong{font:700 34px/1 Archivo,Inter,sans-serif}
+.price span{font-size:15px;color:#4D5955}
+fieldset{border:0;margin:0;padding:0}
+legend{font-weight:600;font-size:15px;margin-bottom:10px;padding:0}
+.sizes{display:flex;gap:10px;flex-wrap:wrap}
+.sizes button{min-width:118px;min-height:64px;padding:10px 16px;border-radius:14px;text-align:left;cursor:pointer;display:flex;flex-direction:column;gap:2px;border:2px solid #C7D3CE;background:#FFFFFF;color:#1D2A26;font:inherit}
+.sizes button span:first-child{font-weight:600}
+.sizes button span:last-child{font-size:13px}
+.sizes button[aria-pressed=true]{border-color:#1D2A26;background:#1D2A26;color:#F4F6F5}
+.qty-row{display:flex;gap:14px;flex-wrap:wrap;align-items:center}
+.qty{display:flex;align-items:center;border:1.5px solid #C7D3CE;border-radius:999px;background:#FFFFFF}
+.qty button{width:48px;height:48px;border:0;background:transparent;cursor:pointer;font-size:22px;color:#1D2A26;border-radius:999px}
+.qty output{min-width:32px;text-align:center;font-weight:600}
+.add{flex:1 1 220px;min-height:52px;border:0;border-radius:999px;background:#1D2A26;color:#F4F6F5;font:600 16px Inter,sans-serif;cursor:pointer;padding:0 24px}
+.add:hover{background:#2C5A4B}
+.status{background:#E3EFE9;border-radius:12px;padding:12px 16px;font-size:15px}
+.ask{display:inline-flex;align-items:center;gap:10px;font-weight:600;min-height:44px}
+.facts{margin:0;padding:20px 0 0;border-top:1px solid #DCE3DF;list-style:none;display:flex;flex-direction:column;gap:10px;font-size:15px;color:#2E3A35}
+.panels{display:flex;gap:24px;flex-wrap:wrap;margin-top:24px}
+.panel{flex:1 1 460px;min-width:0;background:#FFFFFF;border-radius:20px;padding:28px;display:flex;flex-direction:column;gap:14px}
+.panel h2{font:700 24px/1.2 Archivo,Inter,sans-serif}
+.panel table{width:100%;border-collapse:collapse;font-size:15px}
+.panel th,.panel td{text-align:left;padding:10px 8px}
+.panel th:first-child,.panel td:first-child{padding-left:0}
+.panel thead tr{border-bottom:1px solid #DCE3DF}
+.panel tbody tr+tr{border-top:1px solid #EEF2F0}
+.panel th{font-weight:600}
+.panel .hint{font-size:14px;color:#4D5955}
+.panel p{color:#2E3A35}
+.ph-text{color:#5A6661;font-style:italic}
+/* chat */
+.chat-page{min-height:100vh;display:flex;flex-direction:column}
+.chat-wrap{flex:1;display:flex;justify-content:center;padding:32px 16px 48px;background:#DCE5E1}
+.phone{width:100%;max-width:420px;background:#EEF2F0;border-radius:28px;overflow:hidden;display:flex;flex-direction:column;box-shadow:0 1px 0 #C7D3CE}
+.phone header{background:#1D2A26;color:#F4F6F5;padding:16px 14px 14px;display:flex;align-items:center;gap:12px}
+.phone header a{width:44px;height:44px;display:flex;align-items:center;justify-content:center;border-radius:999px}
+.phone .av{width:40px;height:40px;border-radius:50%;background:#E3C58F;color:#1D2A26;display:flex;align-items:center;justify-content:center;font-weight:700}
+.phone .who{display:flex;flex-direction:column;gap:1px;min-width:0}
+.phone .who b{font-weight:600;font-size:17px}
+.phone .who small{font-size:13px;color:#C5D2CC}
+.thread{padding:16px 14px;display:flex;flex-direction:column;gap:10px}
+.chip{align-self:center;background:#DCE5E1;color:#2E3A35;font-size:12px;font-weight:600;padding:5px 12px;border-radius:999px}
+.b{max-width:80%;border-radius:16px;padding:10px 14px}
+.b p{font-size:15px;line-height:1.4}
+.b time{display:block;margin-top:4px;font-size:11px;color:#4D5955}
+.b.them{align-self:flex-end;background:#D3E7DD;border-bottom-right-radius:4px}
+.b.them time{text-align:right}
+.b.us{align-self:flex-start;background:#FFFFFF;border-bottom-left-radius:4px}
+.sent{align-self:center;display:flex;align-items:center;gap:8px;background:#1D2A26;color:#F4F6F5;font-size:12px;font-weight:600;padding:7px 14px;border-radius:999px}
+.phone footer{padding:14px 16px 18px;border-top:1px solid #DCE3DF;font-size:14px;color:#3E4A45;display:flex;flex-direction:column;gap:12px}
+@media (max-width:620px){
+  .wrap{padding:0 16px}
+  .top .wrap{gap:12px}
+  .top nav{gap:16px}
+  .hero{padding:40px 0 64px}
+  .art{height:260px;flex-basis:100%}
+  .sec,.wholesale{padding:72px 0}
+  .photo{height:320px}
+  .thumbs span{height:64px}
+  .panel{padding:22px}
+  .chat-wrap{padding:0;background:#EEF2F0}
+  .phone{border-radius:0;max-width:none}
+}
+@media (prefers-reduced-motion:reduce){*{scroll-behavior:auto}}
+</style>
+</head>
+<body>
+<div class="chat-page">
+<div class="demo-bar">This is a demo store built by Prex to show exporters what's possible. Nothing here is for sale.<a href="/export/">See Prex Export Desk</a></div>
+<main class="chat-wrap">
+  <div class="phone" aria-label="Example WhatsApp conversation">
+    <header>
+      <a href="/export/demo/" aria-label="Back to the demo store"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#F4F6F5" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 18l-6-6 6-6"/></svg></a>
+      <span class="av" aria-hidden="true">P</span>
+      <div class="who"><b>Prex Demo Store</b><small>Assistant by Prex, replies in seconds</small></div>
+    </header>
+    <div class="thread">
+      <span class="chip">Example conversation, Kathmandu time</span>
+        <div class="b them"><p>Hi! I run a pet shop in Oregon. Do you sell wholesale?</p><time>11:42 pm</time></div>
+        <div class="b us"><p>Hello! Yes, we supply pet shops and distributors. Which sizes are you interested in, and about how many packs a month?</p><time>11:42 pm</time></div>
+        <div class="b them"><p>Medium and large. Maybe 200 of each to start.</p><time>11:43 pm</time></div>
+        <div class="b us"><p>Great. Our sales team will send you a wholesale price list. What's your shop name and the best email to reach you?</p><time>11:43 pm</time></div>
+        <div class="b them"><p>Pine Street Pets, sam@example.com</p><time>11:44 pm</time></div>
+        <div class="b us"><p>Thanks, Sam! You'll get the price list by email within one working day. Anything else I can help with?</p><time>11:44 pm</time></div>
+      <div class="sent"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#E3C58F" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12l5 5L20 7"/></svg>Lead sent to the sales team</div>
+    </div>
+    <footer>
+      <p>On your own store, buyers chat with your assistant on your WhatsApp number, and every lead reaches your team with a short summary.</p>
+      <div class="row"><a class="pill dark small" href="/export/demo/">Back to the store</a><a class="pill small" href="/export/#pricing">See Export Desk pricing</a></div>
+    </footer>
+  </div>
+</main>
+</div>
+</body>
+</html>
