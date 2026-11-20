@@ -53,13 +53,32 @@ button{font:inherit}
 
 /* Header */
 .site-header{position:sticky;top:0;z-index:10;background:var(--midnight);border-bottom:1px solid rgba(184,194,209,.12)}
-.site-header .wrap{display:flex;align-items:center;justify-content:space-between;height:68px;gap:24px}
-.logo{display:block;line-height:0}
+.site-header .wrap{display:flex;align-items:center;height:68px;gap:24px}
+.logo{display:block;line-height:0;flex:none}
 .logo svg{height:30px;width:auto}
-.nav{display:flex;align-items:center;gap:26px}
-.nav a{color:var(--silver);text-decoration:none;font-size:15px}
-.nav a:hover{color:var(--white)}
-.nav .btn{color:var(--midnight)}
+.nav{display:flex;align-items:center;gap:6px;margin-left:auto}
+.nav-link,.dd-btn{display:inline-flex;align-items:center;gap:6px;min-height:44px;padding:0 12px;border-radius:10px;color:var(--silver);text-decoration:none;font-size:15px;background:none;border:0;cursor:pointer}
+.nav-link:hover,.dd-btn:hover,.dd.open .dd-btn,.nav-link[aria-current=page]{color:var(--white)}
+.dd-btn::after{content:"";width:7px;height:7px;border-right:1.5px solid currentColor;border-bottom:1.5px solid currentColor;transform:translateY(-2px) rotate(45deg);transition:transform .15s}
+.dd.open .dd-btn::after{transform:translateY(1px) rotate(225deg)}
+.dd{position:relative}
+.dd-panel{display:none;position:absolute;top:calc(100% + 10px);left:-8px;width:310px;padding:8px;background:var(--night);border:1px solid rgba(184,194,209,.16);border-radius:16px;box-shadow:0 18px 40px rgba(4,8,20,.45)}
+.dd.open .dd-panel{display:block}
+.dd-panel a{display:block;padding:11px 14px;border-radius:10px;text-decoration:none;color:var(--pearl)}
+.dd-panel a:hover,.dd-panel a[aria-current=page]{background:rgba(91,140,255,.12)}
+.dd-panel b{display:block;font-weight:600;font-size:15px}
+.dd-panel span{display:block;font-size:13.5px;line-height:1.4;color:var(--silver);margin-top:2px}
+.dd-panel .all{border-top:1px solid rgba(184,194,209,.12);border-radius:0 0 10px 10px;margin-top:4px;font-size:14px;color:var(--moon);font-weight:600}
+.head-actions{display:flex;align-items:center;gap:10px;flex:none}
+.head-actions .btn{color:var(--midnight)}
+.menu-btn{display:none;min-height:40px;padding:0 14px;border-radius:10px;border:1px solid rgba(184,194,209,.35);background:none;color:var(--pearl);font-size:15px;font-weight:600;cursor:pointer}
+
+/* Inner pages */
+.page-hero{position:relative;overflow:hidden;color:var(--pearl);background:linear-gradient(180deg,#0B1426 0%,#15254A 100%);padding:72px 0 200px}
+.page-hero h1{font-weight:700;font-size:clamp(36px,4.8vw,62px);letter-spacing:-.035em;line-height:1.04;max-width:14em}
+.page-hero .lead-in{color:var(--silver);font-size:clamp(17px,1.5vw,19px);max-width:36em;margin-top:20px}
+.page-hero .skyline{height:150px}
+.page-hero .actions{display:flex;flex-wrap:wrap;gap:12px;margin-top:30px}
 
 /* Hero */
 .hero{position:relative;color:var(--pearl);overflow:hidden;isolation:isolate;
@@ -283,7 +302,18 @@ section{scroll-margin-top:80px}
   .result{position:static}
   .steps,.who-list{grid-template-columns:minmax(0,1fr);gap:44px}
   .trust-grid,.markets{grid-template-columns:minmax(0,1fr);gap:24px}
-  .nav a:not(.btn){display:none}
+  .menu-btn{display:inline-flex;align-items:center}
+  .head-actions{margin-left:auto}
+  .dd-panel span{display:none}
+  .nav{display:none;position:absolute;top:68px;left:0;right:0;margin:0;flex-direction:column;align-items:stretch;gap:4px;padding:12px 24px 28px;background:var(--midnight);border-bottom:1px solid rgba(184,194,209,.16);max-height:calc(100vh - 68px);overflow-y:auto}
+  .site-header.menu-open .nav{display:flex}
+  .dd-btn{pointer-events:none;padding:14px 0 6px;min-height:0;font-family:Sora,sans-serif;font-weight:600;font-size:13px;color:var(--silver)}
+  .dd-btn::after{display:none}
+  .dd-panel{display:block;position:static;width:auto;padding:0;background:none;border:0;box-shadow:none}
+  .dd-panel a{padding:10px 0}
+  .dd-panel .all{border:0;margin:0}
+  .nav-link{padding:14px 0;min-height:0;font-size:17px;color:var(--pearl);border-top:1px solid rgba(184,194,209,.12);border-radius:0}
+  .page-hero{padding:48px 0 150px}
   .foot-top{grid-template-columns:minmax(0,1fr)}
   .foot-cols{grid-template-columns:repeat(2,minmax(0,1fr))}
 }
@@ -292,6 +322,10 @@ section{scroll-margin-top:80px}
   .wrap{padding:0 16px}
   .band{padding:72px 0}
   .logo svg{height:26px}
+  .site-header .wrap{gap:12px}
+  .head-actions{gap:8px}
+  .page-hero{padding:44px 0 140px}
+  .page-hero .skyline{height:100px}
   .btn-small{min-height:38px;padding:0 12px;font-size:14px}
   .hero .actions .btn{width:100%}
   .facts li{grid-template-columns:minmax(0,1fr);gap:2px}
@@ -316,6 +350,62 @@ section{scroll-margin-top:80px}
   .ask,.ask .done{animation:none;opacity:1}
   .chat{scroll-behavior:auto}
 }
+
+.flow{list-style:none;margin:52px 0 0;padding:0;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:28px;position:relative}
+.flow li:not(:last-child)::after{content:"";position:absolute;top:22px;left:52px;right:-22px;height:2px;background:var(--moon);opacity:.7}
+.flow li{position:relative;padding-top:66px}
+.flow .dot{position:absolute;top:0;left:0;width:46px;height:46px;border-radius:50%;background:var(--midnight);color:var(--pearl);border:2px solid var(--moon);display:grid;place-items:center;font:600 16px/1 Sora,sans-serif}
+.flow h3{font-weight:600;font-size:19px;letter-spacing:-.01em}
+.flow p{color:var(--muted);margin-top:8px}
+.more-link{display:inline-block;margin-top:36px;font-weight:600}
+main.inner .handover{padding-top:104px}
+.plans{margin-top:48px;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px;align-items:stretch}
+.plan{background:var(--white);border:1px solid var(--line);border-radius:20px;padding:30px 28px;display:flex;flex-direction:column;gap:14px}
+.plan.main{border:2px solid var(--deep)}
+.plan .who{font-size:14px;color:var(--deep);font-weight:600}
+.plan h3{font-weight:600;font-size:22px;letter-spacing:-.01em}
+.plan .price{font:700 clamp(26px,2.4vw,32px)/1.15 Sora,sans-serif;letter-spacing:-.03em}
+.plan .price small{display:block;font:500 15px/1.4 Inter,sans-serif;letter-spacing:0;color:var(--muted);margin-top:6px}
+.plan ul{margin:6px 0 0;padding:0;list-style:none;display:grid;gap:8px;color:#1F2A3D;font-size:16px}
+.plan li{padding-left:20px;position:relative}
+.plan li::before{content:"";position:absolute;left:0;top:.62em;width:8px;height:8px;border-radius:50%;background:var(--moon)}
+.plan .btn{margin-top:auto;align-self:flex-start}
+.plan .note{font-size:14px;color:var(--muted)}
+.costs{margin-top:40px;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:36px}
+.costs h3{font-weight:600;font-size:19px;letter-spacing:-.01em}
+.costs p{color:var(--muted);margin-top:8px}
+.tiles{margin-top:48px;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:20px}
+.tile{display:flex;flex-direction:column;gap:10px;background:var(--white);border:1px solid var(--line);border-radius:20px;padding:28px}
+.tile h3{font-weight:600;font-size:21px;letter-spacing:-.01em}
+.tile p{color:var(--muted)}
+.tile .btn{margin-top:auto;align-self:flex-start}
+.tile .where{font-size:14px;color:var(--deep);font-weight:600}
+.tile ul{margin:4px 0 0;padding:0;list-style:none;display:grid;gap:6px;font-size:15px}
+.tile li{padding-left:18px;position:relative}
+.tile li::before{content:"";position:absolute;left:0;top:.6em;width:7px;height:7px;border-radius:50%;background:var(--moon)}
+a.tile{text-decoration:none;color:var(--ink)}
+a.tile:hover{border-color:var(--deep)}
+a.tile .go{margin-top:auto;font-weight:600;color:var(--deep);font-size:15px}
+.facts-list{margin:32px 0 0;padding:0;list-style:none;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0 48px;max-width:900px}
+.facts-list li{display:grid;grid-template-columns:150px minmax(0,1fr);gap:16px;padding:16px 0;border-top:1px solid var(--line)}
+.facts-list b{font-family:Sora,sans-serif;font-weight:600;font-size:15px}
+.facts-list span{color:var(--muted)}
+.social{display:flex;flex-wrap:wrap;gap:10px;margin-top:28px}
+.social a{display:inline-flex;align-items:center;min-height:44px;padding:0 18px;border:1px solid var(--line);border-radius:999px;background:var(--white);color:var(--ink);text-decoration:none;font-weight:500;font-size:15px}
+.social a:hover{border-color:var(--deep)}
+@media (max-width:1000px){
+  .flow{grid-template-columns:minmax(0,1fr);gap:30px}
+  .flow li:not(:last-child)::after{top:52px;bottom:-24px;left:22px;right:auto;width:2px;height:auto}
+  .flow li{padding:0 0 0 70px;min-height:46px}
+  .plans,.costs{grid-template-columns:minmax(0,1fr)}
+  .facts-list{grid-template-columns:minmax(0,1fr)}
+}
+@media (max-width:720px){.tiles{grid-template-columns:minmax(0,1fr)}}
+@media (max-width:520px){
+  main.inner .handover{padding-top:72px}
+  .plan,.tile{padding:24px 22px}
+  .facts-list li{grid-template-columns:minmax(0,1fr);gap:2px}
+}
 </style>
 </head>
 <body>
@@ -324,14 +414,53 @@ section{scroll-margin-top:80px}
 <header class="site-header">
   <div class="wrap">
     <a class="logo" href="/" aria-label="Prex home"><svg xmlns="http://www.w3.org/2000/svg" viewBox="-60.5 -708.9 3868.5 1129.8" role="img" aria-label="Prex"><g transform="translate(-73.81 -795.97) scale(12.3016)" fill="#5B8CFF"><path fill-rule="evenodd" d="M37 12H83A31 31 0 0 1 83 74H37A31 31 0 0 1 37 12ZM27 33A10 10 0 0 1 27 53ZM46 43A14 14 0 1 0 74 43A14 14 0 1 0 46 43ZM93 33A10 10 0 0 0 93 53Z"/><path d="M22 62Q24 84 10 94Q36 92 50 72Z"/></g><path fill="#F4F6FB" transform="translate(1517.48 0)" d="M73 200V-548H200V-311L183 -312Q187 -394 217.0 -450.5Q247 -507 298.0 -535.5Q349 -564 413 -564Q470 -564 516.5 -543.0Q563 -522 596.5 -484.5Q630 -447 647.5 -396.5Q665 -346 665 -286V-263Q665 -204 648.0 -152.5Q631 -101 598.5 -63.0Q566 -25 519.5 -3.5Q473 18 413 18Q351 18 301.5 -7.5Q252 -33 222.0 -85.5Q192 -138 189 -219L233 -159V200ZM368 -116Q409 -116 439.5 -136.0Q470 -156 487.0 -192.0Q504 -228 504 -275Q504 -322 487.0 -357.0Q470 -392 440.0 -411.5Q410 -431 368 -431Q332 -431 300.0 -414.0Q268 -397 248.5 -365.5Q229 -334 229 -289V-252Q229 -209 249.5 -178.5Q270 -148 302.0 -132.0Q334 -116 368 -116ZM741 0V-548H868V-313H865Q865 -429 914.5 -492.0Q964 -555 1058 -555H1079V-417H1039Q973 -417 937.0 -381.5Q901 -346 901 -279V0ZM1375 19Q1305 19 1251.5 -5.0Q1198 -29 1162.5 -69.5Q1127 -110 1108.5 -160.5Q1090 -211 1090 -264V-284Q1090 -339 1108.5 -389.5Q1127 -440 1162.0 -480.0Q1197 -520 1249.5 -543.5Q1302 -567 1369 -567Q1457 -567 1517.5 -527.5Q1578 -488 1610.0 -424.5Q1642 -361 1642 -286V-232H1157V-323H1545L1493 -281Q1493 -330 1479.0 -365.0Q1465 -400 1437.5 -418.5Q1410 -437 1369 -437Q1327 -437 1298.0 -418.0Q1269 -399 1254.0 -362.5Q1239 -326 1239 -273Q1239 -224 1253.0 -187.5Q1267 -151 1297.0 -131.0Q1327 -111 1375 -111Q1419 -111 1447.0 -128.0Q1475 -145 1485 -170H1632Q1620 -115 1585.0 -72.0Q1550 -29 1497.0 -5.0Q1444 19 1375 19ZM1649 0 1819 -294 1815 -269 1655 -548H1828L1927 -362H1943L2036 -548H2199L2046 -267L2050 -288L2230 0H2056L1938 -199H1922L1811 0Z"/></svg></a>
-    <nav class="nav" aria-label="Main">
-      <a href="/#try">Try it</a>
-      <a href="/#who">Industries</a>
-      <a href="/#how">How it works</a>
-      <a href="/trust/">Trust</a>
-      <a class="btn btn-moon btn-small" href="mailto:contact@prexhq.com?subject=Free%20pilot%20request&amp;body=Business%20name%3A%0AField%20%28property%2C%20clinic%2C%20consultancy%20or%20other%29%3A%0ACity%20and%20country%3A%0ARoughly%20how%20many%20enquiries%20you%20get%20each%20week%3A%0A%0APaste%20up%20to%2020%20recent%20customer%20questions%20below.%20Please%20remove%20names%20and%20phone%20numbers%20first.%0A%0A">Get a free pilot</a>
+    <nav class="nav" id="site-nav" aria-label="Main">
+      <div class="dd">
+        <button class="dd-btn" type="button" aria-expanded="false" aria-controls="dd-product">Product</button>
+        <div class="dd-panel" id="dd-product">
+          <a href="/how-it-works/"><b>How it works</b><span>From first message to booked visit</span></a>
+          <a href="/#try"><b>Try the demo</b><span>Be the customer and see Prex reply</span></a>
+          <a href="/trust/"><b>Trust and security</b><span>How Prex decides, and what we keep</span></a>
+        </div>
+      </div>
+      <div class="dd">
+        <button class="dd-btn" type="button" aria-expanded="false" aria-controls="dd-industries">Industries</button>
+        <div class="dd-panel" id="dd-industries">
+          <a href="/property/"><b>Property</b><span>Agencies and developers</span></a>
+          <a href="/clinics/"><b>Clinics</b><span>Dental, skin and wellness</span></a>
+          <a href="/education/"><b>Education</b><span>Consultancies, schools and courses</span></a>
+          <a href="/export/"><b>Exporters</b><span>Prex Export Desk for Nepali makers</span></a>
+          <a class="all" href="/industries/">All industries</a>
+        </div>
+      </div>
+      <a class="nav-link" href="/pricing/">Pricing</a>
+      <a class="nav-link" href="/about/">About</a>
+      <a class="nav-link" href="/contact/">Contact</a>
     </nav>
+    <div class="head-actions">
+      <a class="btn btn-moon btn-small" href="mailto:contact@prexhq.com?subject=Free%20pilot%20request&amp;body=Business%20name%3A%0AField%20%28property%2C%20clinic%2C%20consultancy%20or%20other%29%3A%0ACity%20and%20country%3A%0ARoughly%20how%20many%20enquiries%20you%20get%20each%20week%3A%0A%0APaste%20up%20to%2020%20recent%20customer%20questions%20below.%20Please%20remove%20names%20and%20phone%20numbers%20first.%0A%0A">Get a free pilot</a>
+      <button class="menu-btn" type="button" aria-expanded="false" aria-controls="site-nav">Menu</button>
+    </div>
   </div>
+  <script>
+  (function(){
+    var h = document.currentScript.parentNode, menu = h.querySelector('.menu-btn'), dds = [].slice.call(h.querySelectorAll('.dd'));
+    function shut(keep){ dds.forEach(function(d){ if (d !== keep){ d.classList.remove('open'); d.querySelector('.dd-btn').setAttribute('aria-expanded', 'false'); } }); }
+    function setMenu(open){ h.classList.toggle('menu-open', open); menu.setAttribute('aria-expanded', open ? 'true' : 'false'); menu.textContent = open ? 'Close' : 'Menu'; }
+    dds.forEach(function(d){
+      var b = d.querySelector('.dd-btn');
+      b.addEventListener('click', function(){ var open = !d.classList.contains('open'); shut(d); d.classList.toggle('open', open); b.setAttribute('aria-expanded', open ? 'true' : 'false'); });
+    });
+    menu.addEventListener('click', function(){ setMenu(!h.classList.contains('menu-open')); });
+    document.addEventListener('click', function(e){ if (!h.contains(e.target)) { shut(); setMenu(false); } });
+    document.addEventListener('keydown', function(e){ if (e.key === 'Escape') { shut(); setMenu(false); } });
+    [].forEach.call(h.querySelectorAll('.nav a'), function(a){
+      var href = a.getAttribute('href');
+      if (href.charAt(0) === '/' && href.indexOf('#') < 0 && href === location.pathname) a.setAttribute('aria-current', 'page');
+      a.addEventListener('click', function(){ shut(); setMenu(false); });
+    });
+  })();
+  </script>
 </header>
 
 <main id="main">
@@ -343,7 +472,7 @@ section{scroll-margin-top:80px}
         <p class="lead">Customers message at midnight, on weekends and in your busiest hour. Prex answers every one on WhatsApp in under a minute, books the next step and hands the lead to your team, ready to close.</p>
         <div class="actions">
           <a class="btn btn-moon" href="mailto:contact@prexhq.com?subject=Free%20pilot%20request&amp;body=Business%20name%3A%0AField%20%28property%2C%20clinic%2C%20consultancy%20or%20other%29%3A%0ACity%20and%20country%3A%0ARoughly%20how%20many%20enquiries%20you%20get%20each%20week%3A%0A%0APaste%20up%20to%2020%20recent%20customer%20questions%20below.%20Please%20remove%20names%20and%20phone%20numbers%20first.%0A%0A">Get a free pilot</a>
-          <a class="btn btn-ghost" href="#calculator">See what slow replies cost you</a>
+          <a class="btn btn-ghost" href="/how-it-works/#calculator">See what slow replies cost you</a>
         </div>
         <p class="note">Try the demo here. Message the real Prex on WhatsApp from <strong>30 November</strong>.</p>
       </div>
@@ -443,77 +572,9 @@ section{scroll-margin-top:80px}
     </div>
   </section>
 
-  <section class="band white calc" id="calculator" aria-labelledby="calc-title">
-    <div class="wrap">
-      <div>
-        <h2 id="calc-title">What are slow replies costing you?</h2>
-        <p class="intro">Move the sliders to match your business. Every number in the result comes from you.</p>
-        <form class="calc-form" id="calc" onsubmit="return false">
-          <div class="field">
-            <label for="c-enq">Enquiries you get each week <output id="o-enq">40</output></label>
-            <input type="range" id="c-enq" min="5" max="300" step="5" value="40">
-          </div>
-          <div class="field">
-            <label for="c-late">Share answered late or not at all <output id="o-late">30%</output></label>
-            <small>Messages at night, on weekends, or while everyone is busy. Your honest guess.</small>
-            <input type="range" id="c-late" min="5" max="80" step="5" value="30">
-          </div>
-          <div class="field">
-            <label for="c-conv">Out of 100 answered enquiries, how many become customers <output id="o-conv">3</output></label>
-            <input type="range" id="c-conv" min="1" max="20" step="1" value="3">
-          </div>
-          <div class="field">
-            <label for="c-val">What one new customer is worth to you</label>
-            <small>The profit from a typical sale, booking or client.</small>
-            <div class="money">
-              <select id="c-cur" aria-label="Currency">
-                <option value="USD">USD</option>
-                <option value="EUR">EUR</option>
-                <option value="GBP">GBP</option>
-                <option value="AED">AED</option>
-                <option value="INR">INR</option>
-                <option value="NPR">NPR</option>
-              </select>
-              <input type="number" id="c-val" min="0" step="50" value="500" inputmode="numeric" aria-label="Value of one new customer">
-            </div>
-          </div>
-        </form>
-      </div>
-      <div class="result" aria-live="polite">
-        <div class="lbl">Each month, about</div>
-        <div class="big" id="r-missed">52</div>
-        <div class="lbl">enquiries wait too long or get no answer.</div>
-        <dl>
-          <dt>Customers you could win back</dt><dd id="r-cust">1.6</dd>
-          <dt>What they are worth each month</dt><dd id="r-val">USD 780</dd>
-          <dt>Over a year</dt><dd id="r-year">USD 9,360</dd>
-        </dl>
-        <p class="small">An estimate from your own numbers, not a promise. It shows what's at stake when a message waits.</p>
-        <a class="btn btn-moon" href="mailto:contact@prexhq.com?subject=Free%20pilot%20request&amp;body=Business%20name%3A%0AField%20%28property%2C%20clinic%2C%20consultancy%20or%20other%29%3A%0ACity%20and%20country%3A%0ARoughly%20how%20many%20enquiries%20you%20get%20each%20week%3A%0A%0APaste%20up%20to%2020%20recent%20customer%20questions%20below.%20Please%20remove%20names%20and%20phone%20numbers%20first.%0A%0A">Get a free pilot</a>
-      </div>
-    </div>
-  </section>
+  
 
-  <section class="band" id="how" aria-labelledby="how-title">
-    <div class="wrap">
-      <h2 id="how-title">How it works</h2>
-      <p class="intro">No software to learn and no one to hire. We set Prex up around your business and keep it running.</p>
-      <ol class="steps">
-        <li>
-          <h3>We set it up with you</h3>
-          <p>Your products or services, prices, the questions your team always asks, your hours and who takes over. You approve every answer before it goes live.</p>
-        </li>
-        <li>
-          <h3>Prex answers every message</h3>
-          <p>Day and night, in under a minute, on your business's WhatsApp number. It only talks about your business.</p>
-        </li>
-        <li>
-          <h3>Your team takes over</h3>
-          <p>Each lead arrives with a short summary, so your people spend their time on customers who are ready.</p>
-        </li>
-      </ol>
-    </div>
-  </section>
+  
 
   <section class="band white" id="who" aria-labelledby="who-title">
     <div class="wrap">
@@ -555,31 +616,21 @@ section{scroll-margin-top:80px}
     </div>
   </section>
 
-  <section class="band" aria-labelledby="trust-title">
+  
+
+    <section class="band" aria-labelledby="explore-title">
     <div class="wrap">
-      <h2 id="trust-title">Built to be trusted</h2>
-      <div class="trust-grid">
-        <div>
-          <h3>On the official WhatsApp Business Platform</h3>
-          <p>Prex runs on Meta's official platform for businesses, not a workaround that puts your number at risk.</p>
-        </div>
-        <div>
-          <h3>Stays on topic</h3>
-          <p>It answers questions about your business only, from information you approve, and passes anything else to your team.</p>
-        </div>
-        <div>
-          <h3>A person whenever they want one</h3>
-          <p>Prex says it's your assistant. Customers can ask for a person at any time, and the chat goes straight to your team.</p>
-        </div>
-        <div>
-          <h3>Your customers' messages stay private</h3>
-          <p>They're used only to answer your customers and pass leads to your team. Read our <a href="/privacy.html">privacy policy</a>.</p>
-        </div>
+      <h2 id="explore-title">See how Prex fits your business</h2>
+      <div class="tiles">
+        <a class="tile" href="/how-it-works/"><h3>How it works</h3><p>Live in days, answers in seconds, and every lead handed to your team with a summary.</p><span class="go">How Prex works</span></a>
+        <a class="tile" href="/pricing/"><h3>Pricing</h3><p>Start with a free pilot on your own customers. Founding clients get setup and their first month free.</p><span class="go">See pricing</span></a>
+        <a class="tile" href="/trust/"><h3>Trust and security</h3><p>Approved answers only, a person whenever the customer asks, and clear rules on data.</p><span class="go">How we look after customers</span></a>
+        <a class="tile" href="/about/"><h3>About Prex</h3><p>An AI studio in Kathmandu, built by Harish Joshi to make sure no customer waits.</p><span class="go">Meet Prex</span></a>
       </div>
     </div>
   </section>
 
-  <section class="band night offer" id="pilot" aria-labelledby="offer-title">
+<section class="band night offer" id="pilot" aria-labelledby="offer-title">
     <div class="wrap">
       <div>
         <div class="phases" aria-hidden="true"><svg viewBox="20 27 80 32" aria-hidden="true" focusable="false" fill="#5B8CFF"><path d="M27 33A10 10 0 0 1 27 53Z"/><circle cx="60" cy="43" r="14"/><path d="M93 33A10 10 0 0 0 93 53Z"/></svg></div>
@@ -605,47 +656,9 @@ section{scroll-margin-top:80px}
     </div>
   </section>
 
-  <section class="band founder" aria-labelledby="founder-title">
-    <div class="wrap">
-      <h2 id="founder-title" class="sr">From the founder</h2>
-      <blockquote>
-        <p>"Good businesses lose customers for one simple reason: nobody answered in time. I built Prex so every message gets a fast, helpful reply, and every lead reaches your team."</p>
-        <footer><b>Harish Joshi</b><span>Founder, Prex</span></footer>
-      </blockquote>
-    </div>
-  </section>
+  
 
-  <section class="band white" id="faq" aria-labelledby="faq-title">
-    <div class="wrap">
-      <h2 id="faq-title">Questions</h2>
-      <div class="faq-list">
-        <details>
-          <summary>Will my customers know they're talking to an assistant?</summary>
-          <p>Yes. Prex introduces itself as your business's assistant, and a customer can ask for a person at any time.</p>
-        </details>
-        <details>
-          <summary>Does Prex replace my team?</summary>
-          <p>No. It answers first, collects the details and books the next step. Your team still talks to the customer and closes the deal.</p>
-        </details>
-        <details>
-          <summary>Which WhatsApp number does it use?</summary>
-          <p>Your business's own number, connected to the official WhatsApp Business Platform. We set it up with you.</p>
-        </details>
-        <details>
-          <summary>Which languages does it speak?</summary>
-          <p>Prex replies in the language your customer writes in, including English, Arabic, Hindi and Nepali. We test every language with you during setup before it goes live.</p>
-        </details>
-        <details>
-          <summary>What if a customer asks something Prex doesn't know?</summary>
-          <p>It says so politely and passes the question to your team. It never makes up prices, availability or advice.</p>
-        </details>
-        <details>
-          <summary>What does it cost?</summary>
-          <p>The pilot is free. Founding clients get setup and their first month free. After that, there's a simple monthly plan, and we agree the price with you before anything is charged.</p>
-        </details>
-      </div>
-    </div>
-  </section>
+  
 
   <section class="band night closing" aria-labelledby="closing-title">
     <div class="wrap">
@@ -669,9 +682,9 @@ section{scroll-margin-top:80px}
         <p>An AI front desk that answers your customers on WhatsApp in under a minute, day and night.</p>
       </div>
       <nav class="foot-cols" aria-label="Footer">
-        <div><h2>Product</h2><a href="/#try">Try the demo</a><a href="/#how">How it works</a><a href="/#pilot">Free pilot</a><a href="/#faq">Questions</a></div>
-        <div><h2>Industries</h2><a href="/property/">Property</a><a href="/clinics/">Clinics</a><a href="/education/">Education</a><a href="/export/">Exporters</a></div>
-        <div><h2>Company</h2><a href="/trust/">Trust</a><a href="/privacy.html">Privacy policy</a><a href="/terms.html">Terms of service</a><a href="mailto:contact@prexhq.com">contact@prexhq.com</a></div>
+        <div><h2>Product</h2><a href="/how-it-works/">How it works</a><a href="/#try">Try the demo</a><a href="/pricing/">Pricing</a><a href="/trust/">Trust and security</a></div>
+        <div><h2>Industries</h2><a href="/property/">Property</a><a href="/clinics/">Clinics</a><a href="/education/">Education</a><a href="/export/">Exporters</a><a href="/industries/">All industries</a></div>
+        <div><h2>Company</h2><a href="/about/">About</a><a href="/contact/">Contact</a><a href="/privacy.html">Privacy policy</a><a href="/terms.html">Terms of service</a><a href="mailto:contact@prexhq.com">contact@prexhq.com</a></div>
         <div><h2>Follow</h2><a href="https://www.facebook.com/profile.php?id=61596306454672" rel="me noopener" target="_blank">Facebook</a><a href="https://www.instagram.com/prex.hq/" rel="me noopener" target="_blank">Instagram</a><a href="https://www.linkedin.com/company/prexhq/" rel="me noopener" target="_blank">LinkedIn</a><a href="https://x.com/prex_hq" rel="me noopener" target="_blank">X</a><a href="https://www.youtube.com/@prexhq" rel="me noopener" target="_blank">YouTube</a></div>
       </nav>
     </div>
@@ -789,6 +802,7 @@ section{scroll-margin-top:80px}
   /* ---------- Calculator ---------- */
   var $ = function(id){ return document.getElementById(id); };
   var enq = $('c-enq'), late = $('c-late'), conv = $('c-conv'), val = $('c-val'), cur$ = $('c-cur');
+  if (!enq) return;
   var DEF = { USD: 500, EUR: 500, GBP: 400, AED: 2000, INR: 40000, NPR: 60000 }, lastCur = 'USD';
   function fmt(n){ return Math.round(n).toLocaleString('en-US'); }
   function calc(){
