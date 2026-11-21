@@ -403,6 +403,30 @@ a.tile .go{margin-top:auto;font-weight:600;color:var(--deep);font-size:15px}
   .plan,.tile{padding:24px 22px}
   .facts-list li{grid-template-columns:minmax(0,1fr);gap:2px}
 }
+
+.pause-btn{display:inline-flex;align-items:center;gap:8px;min-height:36px;padding:0 14px;border-radius:999px;border:1px solid var(--line);background:none;color:var(--muted);font-size:13px;cursor:pointer}
+.pause-btn:hover{color:var(--ink);border-color:var(--muted)}
+.pause-btn i{width:10px;height:10px;display:inline-block;border-left:3px solid currentColor;border-right:3px solid currentColor}
+.pause-btn[aria-pressed=true] i{width:0;height:0;border-left:9px solid currentColor;border-right:0;border-top:5px solid transparent;border-bottom:5px solid transparent}
+.night .pause-btn{border-color:rgba(184,194,209,.3);color:var(--silver)}
+.night .pause-btn:hover{color:var(--white);border-color:var(--silver)}
+.flow.live li{opacity:.42;transition:opacity .4s}
+.flow.live li.lit{opacity:1}
+.flow.live li:not(:last-child)::after{opacity:.2;transition:opacity .4s}
+.flow.live li.passed::after{opacity:1}
+.flow.live .dot{transition:background .3s,color .3s,box-shadow .3s}
+.flow.live li.lit .dot{background:var(--moon);color:var(--midnight)}
+.flow.live li.cur .dot{box-shadow:0 0 0 7px rgba(91,140,255,.22)}
+.flow-now{margin-top:44px;min-height:118px}
+.fn-card{display:none;background:var(--white);border:1px solid var(--line);border-radius:18px;padding:22px 26px;max-width:680px}
+.fn-card.on{display:block;animation:pop .35s ease-out}
+.fn-when{display:block;font-size:14px;font-weight:600;color:var(--deep)}
+.fn-card p{font-size:18px;line-height:1.5;margin-top:6px;color:var(--ink)}
+.flow-now.static .fn-card{display:block;margin-bottom:12px}
+.flow-ctrl{display:flex;align-items:center;gap:22px;margin-top:22px;flex-wrap:wrap}
+.flow-ctrl .more-link{margin-top:0}
+@keyframes pop{from{opacity:0;transform:translateY(8px) scale(.98)}to{opacity:1;transform:none}}
+@media (prefers-reduced-motion:reduce){.fn-card.on{animation:none}}
 </style>
 </head>
 <body>
@@ -467,7 +491,27 @@ a.tile .go{margin-top:auto;font-weight:600;color:var(--deep);font-size:15px}
     </div>
     <svg class="skyline" viewBox="0 0 1440 220" preserveAspectRatio="xMidYMax slice" aria-hidden="true" focusable="false"><rect class="b" x="0" y="37" width="84" height="183"/><rect class="w" x="23" y="49" width="6" height="8"/><rect class="w" x="9" y="65" width="6" height="8"/><rect class="w" x="37" y="65" width="6" height="8"/><rect class="w" x="51" y="97" width="6" height="8"/><rect class="w" x="65" y="97" width="6" height="8"/><rect class="w" x="9" y="129" width="6" height="8"/><rect class="w" x="23" y="129" width="6" height="8"/><rect class="w" x="37" y="129" width="6" height="8"/><rect class="w late" x="51" y="129" width="6" height="8"/><rect class="w" x="65" y="129" width="6" height="8"/><rect class="w" x="65" y="145" width="6" height="8"/><rect class="w" x="9" y="161" width="6" height="8"/><rect class="w late" x="51" y="161" width="6" height="8"/><rect class="w" x="9" y="177" width="6" height="8"/><rect class="w" x="23" y="177" width="6" height="8"/><rect class="w" x="37" y="177" width="6" height="8"/><rect class="w" x="51" y="177" width="6" height="8"/><rect class="w late" x="65" y="177" width="6" height="8"/><rect class="w" x="23" y="193" width="6" height="8"/><rect class="w" x="51" y="193" width="6" height="8"/><rect class="w" x="51" y="209" width="6" height="8"/><rect class="b" x="88" y="77" width="54" height="143"/><rect class="w" x="125" y="89" width="6" height="8"/><rect class="w" x="97" y="105" width="6" height="8"/><rect class="w" x="111" y="105" width="6" height="8"/><rect class="w" x="125" y="105" width="6" height="8"/><rect class="w" x="111" y="121" width="6" height="8"/><rect class="w" x="111" y="137" width="6" height="8"/><rect class="w" x="97" y="153" width="6" height="8"/><rect class="w" x="125" y="153" width="6" height="8"/><rect class="w" x="111" y="169" width="6" height="8"/><rect class="w" x="125" y="169" width="6" height="8"/><rect class="w" x="111" y="201" width="6" height="8"/><rect class="b" x="142" y="119" width="54" height="101"/><rect class="w" x="151" y="131" width="6" height="8"/><rect class="w" x="151" y="147" width="6" height="8"/><rect class="w" x="165" y="147" width="6" height="8"/><rect class="w" x="179" y="147" width="6" height="8"/><rect class="w" x="165" y="163" width="6" height="8"/><rect class="w" x="151" y="211" width="6" height="8"/><rect class="w" x="165" y="211" width="6" height="8"/><rect class="b" x="196" y="108" width="110" height="112"/><rect class="w" x="275" y="120" width="6" height="8"/><rect class="w" x="289" y="120" width="6" height="8"/><rect class="w" x="205" y="136" width="6" height="8"/><rect class="w" x="233" y="136" width="6" height="8"/><rect class="w" x="261" y="152" width="6" height="8"/><rect class="w" x="219" y="168" width="6" height="8"/><rect class="w" x="233" y="168" width="6" height="8"/><rect class="w" x="275" y="168" width="6" height="8"/><rect class="w" x="205" y="184" width="6" height="8"/><rect class="w" x="219" y="184" width="6" height="8"/><rect class="w" x="233" y="184" width="6" height="8"/><rect class="w" x="275" y="184" width="6" height="8"/><rect class="w" x="289" y="184" width="6" height="8"/><rect class="b" x="314" y="77" width="70" height="143"/><rect class="w late" x="323" y="89" width="6" height="8"/><rect class="w" x="351" y="105" width="6" height="8"/><rect class="w" x="351" y="185" width="6" height="8"/><rect class="b" x="392" y="38" width="84" height="182"/><rect class="w" x="401" y="50" width="6" height="8"/><rect class="w late" x="429" y="50" width="6" height="8"/><rect class="w" x="401" y="66" width="6" height="8"/><rect class="w" x="401" y="82" width="6" height="8"/><rect class="w late" x="415" y="82" width="6" height="8"/><rect class="w" x="457" y="82" width="6" height="8"/><rect class="w" x="401" y="98" width="6" height="8"/><rect class="w" x="429" y="114" width="6" height="8"/><rect class="w" x="401" y="146" width="6" height="8"/><rect class="w" x="415" y="162" width="6" height="8"/><rect class="w" x="429" y="162" width="6" height="8"/><rect class="w" x="457" y="162" width="6" height="8"/><rect class="w" x="401" y="178" width="6" height="8"/><rect class="w" x="443" y="194" width="6" height="8"/><rect class="w late" x="457" y="194" width="6" height="8"/><rect class="w" x="415" y="210" width="6" height="8"/><rect class="b" x="476" y="122" width="110" height="98"/><rect class="w" x="485" y="134" width="6" height="8"/><rect class="w" x="513" y="134" width="6" height="8"/><rect class="w" x="569" y="134" width="6" height="8"/><rect class="w" x="485" y="150" width="6" height="8"/><rect class="w" x="541" y="150" width="6" height="8"/><rect class="w" x="555" y="150" width="6" height="8"/><rect class="w" x="485" y="166" width="6" height="8"/><rect class="w" x="541" y="166" width="6" height="8"/><rect class="w" x="555" y="166" width="6" height="8"/><rect class="w" x="541" y="182" width="6" height="8"/><rect class="w" x="485" y="198" width="6" height="8"/><rect class="w" x="555" y="198" width="6" height="8"/><rect class="b" x="586" y="28" width="84" height="192"/><rect class="w" x="637" y="40" width="6" height="8"/><rect class="w" x="637" y="56" width="6" height="8"/><rect class="w" x="637" y="88" width="6" height="8"/><rect class="w late" x="637" y="104" width="6" height="8"/><rect class="w" x="595" y="120" width="6" height="8"/><rect class="w" x="623" y="120" width="6" height="8"/><rect class="w" x="595" y="136" width="6" height="8"/><rect class="w" x="609" y="136" width="6" height="8"/><rect class="w" x="651" y="152" width="6" height="8"/><rect class="w" x="595" y="168" width="6" height="8"/><rect class="w" x="623" y="168" width="6" height="8"/><rect class="w" x="623" y="200" width="6" height="8"/><rect class="b" x="674" y="29" width="96" height="191"/><rect class="b" x="719" y="15" width="6" height="14"/><rect class="w late" x="725" y="41" width="6" height="8"/><rect class="w" x="753" y="57" width="6" height="8"/><rect class="w" x="739" y="73" width="6" height="8"/><rect class="w" x="683" y="89" width="6" height="8"/><rect class="w" x="683" y="105" width="6" height="8"/><rect class="w" x="725" y="105" width="6" height="8"/><rect class="w late" x="753" y="105" width="6" height="8"/><rect class="w" x="683" y="121" width="6" height="8"/><rect class="w" x="697" y="121" width="6" height="8"/><rect class="w" x="683" y="137" width="6" height="8"/><rect class="w" x="711" y="137" width="6" height="8"/><rect class="w" x="739" y="137" width="6" height="8"/><rect class="w" x="753" y="137" width="6" height="8"/><rect class="w" x="753" y="153" width="6" height="8"/><rect class="w" x="683" y="169" width="6" height="8"/><rect class="w" x="697" y="185" width="6" height="8"/><rect class="w" x="711" y="201" width="6" height="8"/><rect class="w" x="753" y="201" width="6" height="8"/><rect class="b" x="770" y="134" width="62" height="86"/><rect class="w" x="779" y="146" width="6" height="8"/><rect class="w" x="793" y="162" width="6" height="8"/><rect class="w late" x="793" y="178" width="6" height="8"/><rect class="w" x="807" y="178" width="6" height="8"/><rect class="w" x="779" y="210" width="6" height="8"/><rect class="b" x="832" y="138" width="126" height="82"/><rect class="w late" x="841" y="150" width="6" height="8"/><rect class="w" x="911" y="150" width="6" height="8"/><rect class="w" x="925" y="150" width="6" height="8"/><rect class="w" x="939" y="150" width="6" height="8"/><rect class="w" x="841" y="166" width="6" height="8"/><rect class="w" x="855" y="166" width="6" height="8"/><rect class="w" x="897" y="166" width="6" height="8"/><rect class="w" x="925" y="166" width="6" height="8"/><rect class="w" x="939" y="166" width="6" height="8"/><rect class="w" x="883" y="182" width="6" height="8"/><rect class="w" x="925" y="182" width="6" height="8"/><rect class="w" x="939" y="182" width="6" height="8"/><rect class="w" x="911" y="198" width="6" height="8"/><rect class="b" x="958" y="53" width="126" height="167"/><rect class="w" x="967" y="65" width="6" height="8"/><rect class="w" x="1023" y="65" width="6" height="8"/><rect class="w" x="1037" y="65" width="6" height="8"/><rect class="w" x="1065" y="65" width="6" height="8"/><rect class="w" x="981" y="81" width="6" height="8"/><rect class="w" x="1051" y="81" width="6" height="8"/><rect class="w" x="1065" y="81" width="6" height="8"/><rect class="w" x="967" y="97" width="6" height="8"/><rect class="w" x="1009" y="97" width="6" height="8"/><rect class="w" x="1065" y="97" width="6" height="8"/><rect class="w" x="967" y="113" width="6" height="8"/><rect class="w" x="995" y="113" width="6" height="8"/><rect class="w" x="1009" y="113" width="6" height="8"/><rect class="w" x="1037" y="113" width="6" height="8"/><rect class="w" x="1051" y="113" width="6" height="8"/><rect class="w" x="981" y="129" width="6" height="8"/><rect class="w" x="995" y="129" width="6" height="8"/><rect class="w" x="1037" y="129" width="6" height="8"/><rect class="w" x="1051" y="129" width="6" height="8"/><rect class="w" x="1065" y="129" width="6" height="8"/><rect class="w late" x="1023" y="145" width="6" height="8"/><rect class="w" x="1037" y="145" width="6" height="8"/><rect class="w" x="1051" y="145" width="6" height="8"/><rect class="w" x="1023" y="161" width="6" height="8"/><rect class="w" x="1009" y="193" width="6" height="8"/><rect class="w" x="967" y="209" width="6" height="8"/><rect class="w late" x="1023" y="209" width="6" height="8"/><rect class="b" x="1092" y="57" width="126" height="163"/><rect class="b" x="1152" y="43" width="6" height="14"/><rect class="w" x="1185" y="69" width="6" height="8"/><rect class="w" x="1101" y="85" width="6" height="8"/><rect class="w" x="1129" y="85" width="6" height="8"/><rect class="w" x="1143" y="85" width="6" height="8"/><rect class="w" x="1185" y="85" width="6" height="8"/><rect class="w" x="1101" y="101" width="6" height="8"/><rect class="w" x="1129" y="101" width="6" height="8"/><rect class="w" x="1157" y="101" width="6" height="8"/><rect class="w" x="1199" y="101" width="6" height="8"/><rect class="w" x="1115" y="117" width="6" height="8"/><rect class="w" x="1115" y="133" width="6" height="8"/><rect class="w" x="1129" y="133" width="6" height="8"/><rect class="w" x="1143" y="133" width="6" height="8"/><rect class="w" x="1115" y="149" width="6" height="8"/><rect class="w" x="1171" y="149" width="6" height="8"/><rect class="w" x="1185" y="149" width="6" height="8"/><rect class="w" x="1199" y="149" width="6" height="8"/><rect class="w" x="1143" y="165" width="6" height="8"/><rect class="w late" x="1185" y="165" width="6" height="8"/><rect class="w" x="1199" y="165" width="6" height="8"/><rect class="w late" x="1101" y="181" width="6" height="8"/><rect class="w" x="1115" y="181" width="6" height="8"/><rect class="w" x="1129" y="181" width="6" height="8"/><rect class="w" x="1143" y="181" width="6" height="8"/><rect class="w" x="1185" y="181" width="6" height="8"/><rect class="w" x="1199" y="181" width="6" height="8"/><rect class="w" x="1171" y="197" width="6" height="8"/><rect class="w" x="1199" y="213" width="6" height="8"/><rect class="b" x="1218" y="73" width="110" height="147"/><rect class="w" x="1255" y="85" width="6" height="8"/><rect class="w late" x="1311" y="101" width="6" height="8"/><rect class="w" x="1241" y="133" width="6" height="8"/><rect class="w" x="1269" y="149" width="6" height="8"/><rect class="w" x="1227" y="165" width="6" height="8"/><rect class="w" x="1283" y="165" width="6" height="8"/><rect class="w late" x="1311" y="165" width="6" height="8"/><rect class="w" x="1311" y="181" width="6" height="8"/><rect class="w" x="1241" y="197" width="6" height="8"/><rect class="w" x="1255" y="197" width="6" height="8"/><rect class="w" x="1311" y="197" width="6" height="8"/><rect class="w" x="1227" y="213" width="6" height="8"/><rect class="w" x="1241" y="213" width="6" height="8"/><rect class="w" x="1255" y="213" width="6" height="8"/><rect class="w late" x="1269" y="213" width="6" height="8"/><rect class="b" x="1332" y="135" width="126" height="85"/><rect class="w" x="1341" y="147" width="6" height="8"/><rect class="w" x="1355" y="147" width="6" height="8"/><rect class="w late" x="1383" y="147" width="6" height="8"/><rect class="w" x="1411" y="147" width="6" height="8"/><rect class="w" x="1341" y="179" width="6" height="8"/><rect class="w" x="1383" y="179" width="6" height="8"/><rect class="w" x="1411" y="179" width="6" height="8"/><rect class="w late" x="1355" y="195" width="6" height="8"/><rect class="w" x="1383" y="195" width="6" height="8"/><rect class="w late" x="1425" y="195" width="6" height="8"/><rect class="w late" x="1341" y="211" width="6" height="8"/><rect class="w" x="1355" y="211" width="6" height="8"/><rect class="w" x="1397" y="211" width="6" height="8"/><rect class="w" x="1411" y="211" width="6" height="8"/></svg>
   </section>
-<section class="band" id="how" aria-labelledby="how-title">
+
+  <section class="band" aria-labelledby="decides-title">
+    <div class="wrap">
+      <h2 id="decides-title">Follow one message</h2>
+      <p class="intro">Every message goes through the same four steps, in the same order. Here is one that arrived at 11:47 pm.</p>
+      <ol class="flow live" id="flow">
+        <li><span class="dot" aria-hidden="true">1</span><h3>A message arrives</h3><p>On your business's WhatsApp number, through Meta's official WhatsApp Business Platform.</p></li>
+        <li><span class="dot" aria-hidden="true">2</span><h3>Checked against your facts</h3><p>Prex looks only at the information you approved: services, prices, hours, listings or courses.</p></li>
+        <li><span class="dot" aria-hidden="true">3</span><h3>Answers, books or asks</h3><p>If the answer is in your facts, Prex replies or books. If it isn't, Prex says it will check with your team. It never guesses.</p></li>
+        <li><span class="dot" aria-hidden="true">4</span><h3>Handed over, with a record</h3><p>The lead reaches the right person with a short summary, and the whole conversation is saved for you to review.</p></li>
+      </ol>
+      <div class="flow-now">
+        <div class="fn-card"><span class="fn-when">23:47, on your WhatsApp number</span><p>"Hi! Is the 2-bedroom flat from your ad still available?"</p></div>
+        <div class="fn-card"><span class="fn-when">Checked against the facts you approved</span><p>2-bedroom flat near the city centre: available. Viewings: Saturday 11:00 or Sunday 16:00.</p></div>
+        <div class="fn-card"><span class="fn-when">23:47, three seconds later</span><p>"Hi! Yes, it's available. Are you buying or renting?" Two messages later, the viewing is booked for Saturday at 11:00.</p></div>
+        <div class="fn-card"><span class="fn-when">To Sam, with the whole chat attached</span><p>New lead: Sara, buying this month. Viewing on Saturday at 11:00.</p></div>
+      </div>
+      <div class="flow-ctrl"><button class="pause-btn" type="button" aria-pressed="false"><i aria-hidden="true"></i><span>Pause</span></button><a class="more-link" href="/trust/">Read the rules Prex follows on our Trust page</a></div>
+    </div>
+  </section>
+<section class="band white" id="how" aria-labelledby="how-title">
     <div class="wrap">
       <h2 id="how-title">Live in three steps</h2>
       <p class="intro">No software to learn and no one to hire. We set Prex up around your business and keep it running.</p>
@@ -486,21 +530,7 @@ a.tile .go{margin-top:auto;font-weight:600;color:var(--deep);font-size:15px}
         </li>
       </ol>
     </div>
-  </section>
-  <section class="band white" aria-labelledby="decides-title">
-    <div class="wrap">
-      <h2 id="decides-title">How Prex decides what to say</h2>
-      <p class="intro">Every message goes through the same four steps, in the same order.</p>
-      <ol class="flow">
-        <li><span class="dot" aria-hidden="true">1</span><h3>A message arrives</h3><p>On your business's WhatsApp number, through Meta's official WhatsApp Business Platform.</p></li>
-        <li><span class="dot" aria-hidden="true">2</span><h3>Checked against your facts</h3><p>Prex looks only at the information you approved: services, prices, hours, listings or courses.</p></li>
-        <li><span class="dot" aria-hidden="true">3</span><h3>Answers, books or asks</h3><p>If the answer is in your facts, Prex replies or books. If it isn't, Prex says it will check with your team. It never guesses.</p></li>
-        <li><span class="dot" aria-hidden="true">4</span><h3>Handed over, with a record</h3><p>The lead reaches the right person with a short summary, and the whole conversation is saved for you to review.</p></li>
-      </ol>
-      <a class="more-link" href="/trust/">Read the rules Prex follows on our Trust page</a>
-    </div>
-  </section>
-<section class="band handover" aria-labelledby="handover-title">
+  </section><section class="band handover" aria-labelledby="handover-title">
     <div class="wrap">
       <div>
         <h2 id="handover-title">By morning, your team knows exactly who to call.</h2>
@@ -637,6 +667,25 @@ a.tile .go{margin-top:auto;font-weight:600;color:var(--deep);font-size:15px}
 </footer>
 <script>
 (function(){
+
+(function(){
+  var flow = document.getElementById('flow'); if (!flow) return;
+  var lis = [].slice.call(flow.children), cards = [].slice.call(document.querySelectorAll('.fn-card'));
+  var btn = document.querySelector('.flow-ctrl .pause-btn'), step = 0, playing = true, onScreen = false, timer = null;
+  function show(){
+    lis.forEach(function(li, i){ li.classList.toggle('lit', i <= step); li.classList.toggle('passed', i < step); li.classList.toggle('cur', i === step); });
+    cards.forEach(function(c, i){ c.classList.toggle('on', i === step); });
+  }
+  function schedule(){ clearTimeout(timer); if (playing && onScreen) timer = setTimeout(function(){ step = step >= 3 ? 0 : step + 1; show(); schedule(); }, step === 3 ? 5200 : 2900); }
+  if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches){
+    lis.forEach(function(li){ li.classList.add('lit'); }); cards.forEach(function(c){ c.classList.add('on'); });
+    document.querySelector('.flow-now').classList.add('static'); btn.hidden = true; return;
+  }
+  btn.addEventListener('click', function(){ playing = !playing; btn.setAttribute('aria-pressed', playing ? 'false' : 'true'); btn.querySelector('span').textContent = playing ? 'Pause' : 'Play'; schedule(); });
+  if ('IntersectionObserver' in window) new IntersectionObserver(function(es){ onScreen = es[0].isIntersecting; schedule(); }, { threshold: .3 }).observe(flow);
+  else onScreen = true;
+  show(); schedule();
+})();
 /* ---------- Calculator ---------- */
   var $ = function(id){ return document.getElementById(id); };
   var enq = $('c-enq'), late = $('c-late'), conv = $('c-conv'), val = $('c-val'), cur$ = $('c-cur');
